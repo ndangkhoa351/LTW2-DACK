@@ -1,50 +1,39 @@
     
-    const {Sequelize} = require('sequelize');
+    const { DataTypes } = require('sequelize');
     const db = require('../../config/database');
-const Booking = require('../Booking/Booking');
+    //const Booking = require('../Booking/Booking');
     const Cinema = require('../Cinema/Cinema');
     const Film = require('../Film/Film');
 
     db.authenticate();
 
-    const ShowTime = db.define('ShowTime', {
-        id: {
-            type: Sequelize.INTERGER,
-            autoIncrement: true,
-            primaryKey: true,
+    const ShowTime = db.define('ShowTime', {       
+        startTime: {
+            type: DataTypes.TIME,
             allowNull: false,
         },
-        idCinema: {
-            type: Sequelize.INTERGER,
-            allowNull: false,
-            references: {
-                model: Cinema,
-                key: 'id',
-            }
-        },
-        idFilm: {
-            type: Sequelize.INTERGER,
-            allowNull: false,
-            references: {
-                model: Film,
-                key: 'id',
-            }
-        },
-        cinemaType: {
-            type: Sequelize.STRING,
+        endTime: {
+            type: DataTypes.TIME,
             allowNull: false,
         },
-        horizontalSize: {
-            type: Sequelize.INTERGER,
-            allowNull: false,
-        },
-        verticleSize: {
-            type: Sequelize.STRING,
+        ticketPrice: {
+            type: DataTypes.DOUBLE,
             allowNull: false,
         }
     });
 
-    Cinema.belongsToMany(Film, {through: ShowTime});
-    ShowTime.belongsToMany(User, {through: Booking});
+    //ShowTime.removeAttribute('id');
+
+    ShowTime.belongsTo(Film);
+    Film.hasMany(ShowTime);
+
+    ShowTime.belongsTo(Cinema);
+    Cinema.hasMany(ShowTime);
+
+    //Film.belongsToMany(Cinema, { through: ShowTime });
+    //Cinema.belongsToMany(Film, { through: ShowTime });
+    
+
+    //ShowTime.addConstraint()
 
     module.exports = ShowTime;

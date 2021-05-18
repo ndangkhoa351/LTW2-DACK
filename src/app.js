@@ -23,11 +23,14 @@ app.use(expressLayout);
 // USE ROUTER MODULES 
 // Authentication
 app.use('/login', loginRouter);
+const a = require('./models/Booking/Booking'); //gọi ra để nó hoàn thành cái db thôi
 
 databaseConfig.sync()
     .then(function() {
         console.log("Everything has synced");
         console.log(`Server is listen from port ${port}...`);
         app.listen(port);
+
+        
     })
     .catch(err => console.log("Error: " + err));

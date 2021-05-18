@@ -1,44 +1,45 @@
     
-    const {Sequelize} = require('sequelize');
+    const { DataTypes } = require('sequelize');
     const db = require('../../config/database');
-const Booking = require('../Booking/Booking');
-const ShowTime = require('../ShowTime/Showtime');
+    //const { sequelize } = require('../CinemaCluster/CinemaCluster');
+    //const Booking = require('../Booking/Booking');
+    //const ShowTime = require('../ShowTime/Showtime');
     const Permission = require('./Permission');
 
+    const a = require('../CinemaCluster/CinemaCluster'); //gọi để nó chạy để hoàn thành db
+    const b = require('../Film/Film');
+    const c = require('../ShowTime/ShowTime');
+    
 
     db.authenticate();
 
     const User = db.define('User', {
         id: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
             allowNull: false,
         },
         email: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
             unique: true,
         },
         password: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
         },
         displayName: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
         },
-        permission_id: {
-            type: Sequelize.STRING,
-            allowNull: false,
-            references: {
-                model: Permission,
-                key: 'id'
-            }
-        }
+        phoneNumber:{
+            type: DataTypes.STRING,
+            allowNull: false
+        },
     })
 
-    User.hasOne(Permission);
-    User.belongsToMany(ShowTime, {through: Booking});
+    User.belongsTo(Permission);
+    Permission.hasMany(User);
 
     module.exports = User;

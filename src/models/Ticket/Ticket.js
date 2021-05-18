@@ -1,5 +1,5 @@
 
-    const {Sequelize} = require('sequelize');
+    /*const { DataTypes } = require('sequelize');
     const db = require('../../config/database');
     const Booking = require('../Booking/Booking');
 
@@ -8,37 +8,27 @@
 
     const Ticket = db.define('Ticket', {
         id: {
-            type: Sequelize.INTERGER,
-            autoIncrement: true,
+            type: DataTypes.UUID,
             primaryKey: true,
             allowNull: false,
         },
-        idBooking: {
-            type: Sequelize.INTERGER,
-            allowNull: false,
-            references: {
-                model: Booking,
-                key: 'id',
-            }
-        },
         chairCode: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
         },
         horizontalAddress: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
         },
         verticleAddress: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
         },
         price: {
-            type: Sequelize.INTERGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
         }
     })
     
-    Ticket.belongsTo(Booking);
 
-    module.exports = Ticket;
+    module.exports = Ticket;*/

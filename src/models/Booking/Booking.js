@@ -1,41 +1,32 @@
     
-    const { Sequelize } = require('sequelize');
+    const { DataTypes } = require('sequelize');
     const db = require('../../config/database');
-    const Ticket = require('../Ticket/Ticket');
-
+    const ShowTime = require('../ShowTime/ShowTime');
+    const Users = require('../User/User');
 
     db.authenticate();
 
     const Booking = db.define('Booking', {
-        idBooking: {
-            type: Sequelize.INTEGER,
-            autoIncrement: true,
+        id: {
+            type: DataTypes.UUID,
             primaryKey: true,
             allowNull: false,
         },
-        idUser: {
-            type: Sequelize.INTEGER,
-            
-        },
-        email: {
-            type: Sequelize.STRING,
-            allowNull: false,
-            unique: true,
-        },
-        password: {
-            type: Sequelize.STRING,
+        timeBooking: {
+            type: DataTypes.TIME,
             allowNull: false,
         },
-        displayName: {
-            type: Sequelize.STRING,
+        total: {
+            type: DataTypes.DOUBLE,
             allowNull: false,
         },
-        role: {
-            type: Sequelize.STRING,
-            allowNull: false,
-        }
+        
     });
 
-    Booking.hasMany(Ticket);
+    Booking.belongsTo(Users);
+    Users.hasMany(Booking);
+
+    Booking.belongsTo(ShowTime);
+    ShowTime.hasMany(Booking);
 
     module.exports = Booking;

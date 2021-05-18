@@ -3,6 +3,8 @@ const express = require('express');
 const UserRepo = require('../../../repositories/User/UserRepo');
 const router = express.Router();
 
+
+
 router.get('/', (req, res) => {
     res.render('User/auth/login');
 });

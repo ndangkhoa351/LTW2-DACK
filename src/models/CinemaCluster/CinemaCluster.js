@@ -1,5 +1,4 @@
-    
-    const {Sequelize} = require('sequelize');
+    const { DataTypes } = require('sequelize');
     const db = require('../../config/database');
     const Cinema = require('../Cinema/Cinema');
 
@@ -7,21 +6,23 @@
 
     const CinemaCluster = db.define('CinemaCluster', {
         id: {
-            type: Sequelize.INTERGER,
+            type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
             allowNull: false,
         },
         displayName: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
         },
         address: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
         },
     });
     
+    Cinema.belongsTo(CinemaCluster);
     CinemaCluster.hasMany(Cinema);
+    //CinemaCluster.hasMany(Cinema);
 
     module.exports = CinemaCluster;
