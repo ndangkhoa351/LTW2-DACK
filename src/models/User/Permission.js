@@ -1,23 +1,17 @@
-    
-    const { DataTypes } = require('sequelize');
-    const db = require('../../config/database');
-    //const User = require('../User/User');
+const {Sequelize} = require('sequelize');
+const db = require('../../config/database');
 
-    db.authenticate();
+const Permission = db.define('Permission', {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false,
+    },
+    role: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    }
+});
 
-    const Permission = db.define('Permission', {
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true,
-            allowNull: false,
-        },
-        role: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        }
-    })
-
-    //Permission.belongsTo(User);
-
-    module.exports = Permission;
+module.exports = Permission;

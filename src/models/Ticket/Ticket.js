@@ -1,34 +1,33 @@
-
-    /*const { DataTypes } = require('sequelize');
+    
+    const {Sequelize, DataTypes} = require('sequelize');
     const db = require('../../config/database');
     const Booking = require('../Booking/Booking');
-
 
     db.authenticate();
 
     const Ticket = db.define('Ticket', {
-        id: {
-            type: DataTypes.UUID,
+        uuid: {
+            type: Sequelize.UUID,
+            defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
             allowNull: false,
         },
         chairCode: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false,
         },
         horizontalAddress: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false,
         },
         verticleAddress: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false,
         },
         price: {
-            type: DataTypes.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false,
         }
-    })
-    
+    });
 
-    module.exports = Ticket;*/
+    module.exports = Ticket;

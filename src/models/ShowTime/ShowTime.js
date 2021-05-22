@@ -1,39 +1,28 @@
     
-    const { DataTypes } = require('sequelize');
+    const {Sequelize, DataTypes} = require('sequelize');
     const db = require('../../config/database');
-    //const Booking = require('../Booking/Booking');
-    const Cinema = require('../Cinema/Cinema');
-    const Film = require('../Film/Film');
 
     db.authenticate();
 
-    const ShowTime = db.define('ShowTime', {       
+    const ShowTime = db.define('ShowTime', {
+        uuid: {
+            type: Sequelize.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            primaryKey: true,
+            allowNull: false,
+        },
         startTime: {
-            type: DataTypes.TIME,
+            type: Sequelize.DATE,
             allowNull: false,
         },
         endTime: {
-            type: DataTypes.TIME,
+            type: Sequelize.DATE,
             allowNull: false,
         },
-        ticketPrice: {
-            type: DataTypes.DOUBLE,
+        price: {
+            type: Sequelize.INTEGER,
             allowNull: false,
-        }
+        },
     });
-
-    //ShowTime.removeAttribute('id');
-
-    ShowTime.belongsTo(Film);
-    Film.hasMany(ShowTime);
-
-    ShowTime.belongsTo(Cinema);
-    Cinema.hasMany(ShowTime);
-
-    //Film.belongsToMany(Cinema, { through: ShowTime });
-    //Cinema.belongsToMany(Film, { through: ShowTime });
-    
-
-    //ShowTime.addConstraint()
 
     module.exports = ShowTime;

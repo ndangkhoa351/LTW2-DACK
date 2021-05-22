@@ -1,34 +1,34 @@
     
-    const { DataTypes } = require('sequelize');
+    const {Sequelize, DataTypes} = require('sequelize');
     const db = require('../../config/database');
+    const Cinema = require('../Cinema/Cinema');
+    const ShowTime = require('../ShowTime/Showtime');
 
     db.authenticate();
 
     const Film = db.define('Film', {
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
+        uuid: {
+            type: Sequelize.UUID,
+            defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
             allowNull: false,
         },
         displayName: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false,
         },
-        premiereDate: {
-            type: DataTypes.DATE,
+        publishDay: {
+            type: Sequelize.DATE,
             allowNull: false,
         },
-        poster: {
+        horizontalSize: {
             type: DataTypes.BLOB,
             allowNull: false,
         },
-        movieDuration: {
-            type: DataTypes.INTEGER,
+        time: {
+            type: Sequelize.INTEGER,
             allowNull: false,
-        }
+        },
     });
-
-    //Film.belongsToMany(Cinema, {through: ShowTime});
-
+    
     module.exports = Film;

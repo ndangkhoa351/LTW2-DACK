@@ -1,45 +1,53 @@
-    
-    const { DataTypes } = require('sequelize');
-    const db = require('../../config/database');
-    //const { sequelize } = require('../CinemaCluster/CinemaCluster');
-    //const Booking = require('../Booking/Booking');
-    //const ShowTime = require('../ShowTime/Showtime');
-    const Permission = require('./Permission');
 
-    const a = require('../CinemaCluster/CinemaCluster'); //gọi để nó chạy để hoàn thành db
-    const b = require('../Film/Film');
-    const c = require('../ShowTime/ShowTime');
-    
+    const {Sequelize, UUID, DataTypes} = require('sequelize');
+    const Booking = require('../Booking/Booking');
+    const Cinema = require('../Cinema/Cinema');
+    const Film = require('../Film/Film');
+    const ShowTime = require('../ShowTime/ShowTime');
+    const db = require('../../config/database');
+    const Permission = require('./Permission');
+    const Ticket = require('../Ticket/Ticket');
 
     db.authenticate();
 
     const User = db.define('User', {
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
+        uuid: {
+            type: Sequelize.UUID,
+            defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
             allowNull: false,
         },
         email: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false,
-            unique: true,
         },
         password: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false,
         },
         displayName: {
-            type: DataTypes.STRING,
+            type: Sequelize.INTEGER,
+            defaultValue: 2,
             allowNull: false,
-        },
-        phoneNumber:{
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-    })
+        }
+    });
 
-    User.belongsTo(Permission);
-    Permission.hasMany(User);
+    User.belongsTo(Permission, {
+        foreignKey: "permission_id",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+    });
+    
+    Cinema.belongsToMany(Film, {through: ShowTime, foreignKey: "film_id"});
+    Film.belongsToMany(Cinema, {through: ShowTime, foreignKey: "cinema_id"});
+
+    User.belongsToMany(ShowTime, {through: Booking, foreignKey: "showtime_id" });
+    ShowTime.belongsToMany(User, {through: Booking, foreignKey: "user_id" });   
+    
+    Booking.hasMany(Ticket, {
+        foreignKey: "booking_id",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+    })
 
     module.exports = User;

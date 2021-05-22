@@ -2,18 +2,18 @@
 const express = require('express');
 const UserRepo = require('../../../repositories/User/UserRepo');
 const router = express.Router();
-
-
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 router.get('/', (req, res) => {
     res.render('User/auth/login');
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     const {user_email, user_password} = req.body;
 
     UserRepo.getByEmail(user_email).then((result) => {
-        if(result.password === user_password) {
+        if(bcrypt.compareSync(user_password, result.password)) {
             //nav to home page
             res.send("okie nhoaa");
         }
