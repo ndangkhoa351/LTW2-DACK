@@ -17,6 +17,14 @@
             primaryKey: true,
             allowNull: false,
         },
+        facebookID:{ //facebook id
+            type:Sequelize.STRING,
+            allowNull:true
+        },
+        accessToken:{ // mã truy cập cá nhân
+            type:Sequelize.STRING,
+            allowNull:true
+        },
         email: {
             type: Sequelize.STRING,
             allowNull: false,

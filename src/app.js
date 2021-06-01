@@ -2,6 +2,7 @@
 const express = require('express');
 const expressLayout = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
+//const authMiddleware = require('./middlewares/auth'); // xử lí trạng thái đăng nhập
 const loginRouter = require('./routers/User/auth/login');
 const signupRouter = require('./routers/User/auth/signup');
 const reEnterEmailRouter = require('./routers/User/auth/forgot-password/re-enter-email');
@@ -16,9 +17,9 @@ const port = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
 
-app.use(express.static('public'))
+app.use(express.static('public'));
 app.use(express.static('css/style.css'));
-
+//app.use(authMiddleware); //use middleware 
 
 // USE BODY PARSER
 app.use(bodyParser.urlencoded({ extended: false}));
@@ -31,6 +32,9 @@ app.use('/signup', signupRouter);
 app.use('/forgot-password/re-enter-email', reEnterEmailRouter);
 app.use('/forgot-password/set-new-password', enterNewPassRouter);
 
+app.get('/',function (req,res) {
+   res.render("index");
+});
 
 databaseConfig.sync()
     .then(function() {
