@@ -1,0 +1,29 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<div>
+    <h2><%= filmChoosen.displayName %></h2>
+    <p>Publish Date: <%= dateFormat_publishDate %></p>
+    <p>Time: <%= filmChoosen.time %> minute</p>
+
+    <button id="watch-cinema-available_btn">Show Available Cinema</button>
+
+    <button id="trailer">Trailer</button>
+    
+    <script>
+
+        $(function() {  
+            $("#watch-cinema-available_btn").click(function() {
+                window.location.href = "/cinema?filmID=<%= filmChoosen.uuid %>";
+            });
+        })
+
+        $(function() {
+            $("#trailer").click(function() {
+                window.location.href = "/film/trailer?filmID=<%= filmChoosen.uuid %>";
+            });
+        })
+        
+
+    </script>
+    
+</div>

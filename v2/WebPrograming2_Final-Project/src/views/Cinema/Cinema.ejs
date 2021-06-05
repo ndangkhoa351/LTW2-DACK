@@ -1,0 +1,42 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<h1>Choose the Cinema You want to go</h1>
+
+<% cinemas.forEach(element => { %>
+<button
+  class="item"
+  data-id="<%= element.uuid %>"
+  style="
+    display: block;
+    cursor: pointer;
+    width: 200px;
+    height: 100px;
+    border: 1px solid black;
+    margin-top: 12px;
+    text-align: center;
+  "
+>
+  <h2><%= element.displayName %></h2>
+</button>
+<% }) %>
+
+<script>
+  function getParameterURLByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return "";
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
+
+  const filmID = getParameterURLByName("filmID");
+
+  $(function () {
+    $(".item").click(function () {
+      window.location.href = `/showtime?cinema_id=${$(this).data(
+        "id"
+      )}&film_id=${filmID}`;
+    });
+  });
+</script>
