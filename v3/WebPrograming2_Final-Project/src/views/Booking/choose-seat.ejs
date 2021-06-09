@@ -1,0 +1,52 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<!-- Plus 65 mean increase it to specify ascii value from 'A' -> 'Z' -->
+<% for(let row = 0; row < 26; ++row) { %>
+<%      for(let col = 0; col < 12; ++col) { %>
+<%          if(seatUnavailable && seatUnavailable.find(seat => seat.horizontalAddress === (row).toString() && seat.verticleAddress === (col).toString())) { %>
+                <button style="width: 35px; height: 20px; background-color: rgb(26, 187, 53); cursor: pointer;" disabled="true">
+                    <%=String.fromCharCode(row + 65)%><%=col + 1%>
+                </button>
+<%          } else { %>
+                <button style="width: 35px; height: 20px; background-color: transparent; cursor: pointer;" class="seat" value="<%=String.fromCharCode(row + 65)%><%=col + 1%>" data-id="<%=row%>,<%=col%>">
+                    <%=String.fromCharCode(row + 65)%><%=col + 1%>
+                </button>
+<%          }           %>
+<%      }               %>
+<br/>
+<%} %>
+
+<br>
+<button style="width: 35px; height: 20px; background-color: rgb(26, 187, 53); cursor: pointer;" disabled="true"></button>
+<label>: Unavailable</label> 
+
+<br/>
+
+<button style="width: 35px; height: 20px; background-color: transparent; cursor: pointer;" disabled="true"></button>
+<label>: Available</label>
+
+
+<script>
+    $(function() {
+        function getParameterURLByName(name, url = window.location.href) {
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return "";
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        const showtimeID = getParameterURLByName("showtimeID");
+
+        const seat = document.getElementsByClassName("seat");
+        $(".seat").click(function() {
+            const chairInfo = $(this).data("id").split(",");
+            const horizontalAddress = chairInfo[0];
+            const verticleAddress = chairInfo[1];
+            const chairCode = $(this).val();        //value
+
+            window.location.href = `/booking/confirm-booking?showtimeID=${showtimeID}&chairCode=${chairCode}&h_address=${horizontalAddress}&v_address=${verticleAddress}`;
+        })
+    });
+</script>

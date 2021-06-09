@@ -1,0 +1,20 @@
+<h1>Booking History</h1>
+
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Film Name</th>
+        <th>Cinema Name</th>
+        <th>Chair</th><br>
+    </tr>
+    <% bookingHistory.forEach(booking => { %> 
+        <tr>
+            <td><%= booking.date %></td>
+            <td><%= booking.film_name %></td>
+            <td><%= booking.cinema_name %></td>
+            <td><%= booking.chair %></td>
+        </tr>
+    <% }) %>
+</table>
+
+
