@@ -1,3 +1,9 @@
+## Web Template ❄️
+> [Cinema-Web-Template.zip](https://github.com/TriDev24/WebPrograming2_Final-Project/files/6600259/Cinema-Web-Template.zip)
 
-## Download File Template:
-> [Cinema-Template.zip](https://github.com/ndangkhoa351/LTW2-DACK/files/6602348/Cinema-Template.zip)
+## Download Project Description ☘️
+> [Final_Project.pdf](https://github.com/TriDev24/WebPrograming2_Final-Project/files/6591830/Final_Project.pdf)
+
+**Last version**: v3
+
+
