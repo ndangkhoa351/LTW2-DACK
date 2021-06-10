@@ -1,20 +1,34 @@
-<h1>Booking History</h1>
-
-<table>
-    <tr>
-        <th>Date</th>
-        <th>Film Name</th>
-        <th>Cinema Name</th>
-        <th>Chair</th><br>
-    </tr>
-    <% bookingHistory.forEach(booking => { %> 
-        <tr>
-            <td><%= booking.date %></td>
-            <td><%= booking.film_name %></td>
-            <td><%= booking.cinema_name %></td>
-            <td><%= booking.chair %></td>
-        </tr>
-    <% }) %>
-</table>
-
+<div class="hero common-hero">
+    <div class="hero-ct">
+      <h1>My tickets</h1>
+    </div>
+  </div>
+  <!-- blog list section-->
+  <div class="page-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <% bookingHistory.forEach(booking => { %> 
+                <div class="blog-item-style-1 blog-item-style-3">
+                    <img src="/Film/poster/<%- booking.id %>" alt="poster-film"/>
+                    <div class="blog-it-infor">
+                      <h3>
+                        <a href="#"><%= booking.film_name %></a>
+                      </h3>
+                      <div class="title-hd">
+                          <h3 ><%= booking.date %></h3>
+                      </div>
+                      <div class="title-hd">
+                        <h3 ><%= booking.cinema_name %></h3>
+                      </div>
+                      <div class="title-hd">
+                        <h3 ><%= booking.chair %></h3>
+                      </div>
+                    </div>
+                  </div>
+            <% }) %>
+        </div>
+      </div>
+    </div>
+  </div>
 

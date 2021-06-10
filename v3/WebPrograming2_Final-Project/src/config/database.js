@@ -2,7 +2,7 @@ const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize(
   process.env.DATABASE_URL ||
-    "postgres://postgres:1234@localhost:5432/final_project",
+    "postgres://postgres:postgres@localhost:5432/final_project", // Đổi lại mật khẩu cho phù hợp với máy
   {
     dialect: "postgres",
     dialectOptions: {},
