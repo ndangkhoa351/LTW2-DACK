@@ -30,6 +30,23 @@ User.add = async function(new_user) {
     return newUser;
 }
 
+User.authFacebook = async function(id) {
+    return User.findOne({where: {password: id}});
+}
+
+User.addFacebook = async function(id, email, displayName){
+    const newUser = await User.create({
+        password: id,
+        email: email,
+        displayName: displayName,
+        phone: "facebook",
+        permission_id: 2,          
+    });
+
+    await newUser.save();
+    return newUser;
+}
+
 User.delete = async function(uid_delete) {
     await User.destroy({
         where: {id: uid_delete}
