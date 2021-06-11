@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
   }
   // get Film ID booking.
   BookingRepo.getAllWithUserID(currentUser.uuid).then((bookingHistory) => {
-      console.log(bookingHistory);
+      //console.log(bookingHistory);
     res.render("Booking/booking-history", { bookingHistory });
   });
 });

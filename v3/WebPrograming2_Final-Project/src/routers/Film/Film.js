@@ -1,6 +1,5 @@
 const express = require("express");
 const FilmRepo = require("../../repositories/Film/FilmRepo");
-const asyncHandler = require('express-async-handler');
 const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
 const router = express.Router();
@@ -20,15 +19,5 @@ router.get("/", (req, res) => {
       res.render("error/error");
     });
 });
-
-router.get('/poster/:id/',asyncHandler (async function (req,res) {
-  const film = await FilmRepo.getByID(req.params.id);
-  if(!film || !film.poster){
-      res.status(404).send('')
-  }
-  else{
-      res.header('Content-Type','image/jpeg').send(film.poster);
-  }
-}));
 
 module.exports = router;

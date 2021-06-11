@@ -18,6 +18,10 @@ const Film = db.define(
       type: Sequelize.STRING,
       allowNull: false,
     },
+    overview: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
     publishDate: {
       type: Sequelize.DATE,
       allowNull: false,
