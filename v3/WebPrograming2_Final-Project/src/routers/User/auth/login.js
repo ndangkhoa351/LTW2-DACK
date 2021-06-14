@@ -15,9 +15,12 @@ router.post("/", async (req, res) => {
         req.session.userID = result.uuid;
 
         //nav to home page
-        authUtils.isAdmin(req.currentUser)
-          ? res.redirect("/admin/manage-film")
-          : res.redirect("/");
+        if(authUtils.isAdmin(req.currentUser)){
+          res.render("dashboard/layout")
+        }
+        else{
+          res.redirect("/");
+        }
       } else {
         res.send("Not Correct Password, Please Try Again");
       }

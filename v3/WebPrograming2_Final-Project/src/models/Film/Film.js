@@ -22,6 +22,10 @@ const Film = db.define(
       type: Sequelize.STRING,
       allowNull: true,
     },
+    trailer: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
     publishDate: {
       type: Sequelize.DATE,
       allowNull: false,

@@ -20,7 +20,8 @@ router.get('/', (req, res) => {
             res.render('error/error');
         });
     }
-})
+});
+
 
 router.post('/', (req, res) => {
     

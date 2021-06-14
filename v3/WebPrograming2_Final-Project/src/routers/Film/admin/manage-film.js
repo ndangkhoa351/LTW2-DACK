@@ -38,11 +38,13 @@ router.get("/add-film", (req, res) => {
 });
 
 router.post("/add-film", upload.single("film_poster"), async (req, res) => {
-  const { film_name, film_pdate, film_time } = req.body;
+  const { film_name, film_pdate,film_overview,film_trailer, film_time } = req.body;
 
   const oNewFilm = {
     displayName: film_name,
     publishDate: film_pdate,
+    overview: film_overview,
+    trailer: film_trailer,
     time: film_time,
     poster: req.file.buffer,
   };

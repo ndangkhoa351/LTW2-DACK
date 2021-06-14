@@ -267,22 +267,6 @@
             <div class="movie-img sticky-sb">
               <img src="/admin/manage-film/poster/<%- filmChoosen.uuid %>" alt="" />
               <div class="movie-btn">
-                <div class="btn-transform transform-vertical red">
-                  <div>
-                    <a id="watchTrailer"
-                      class="item item-1 redbtn"
-                    >
-                      <i class="ion-play"></i> Watch Trailer</a
-                    >
-                  </div>
-                  <div>
-                    <a
-                      href="#"
-                      class="item item-2 redbtn"
-                      ><i class="ion-play"></i
-                    ></a>
-                  </div>
-                </div>
                 <div class="btn-transform transform-vertical">
                   <div>
                     <a href="#" class="item item-1 yellowbtn">
@@ -299,6 +283,7 @@
             </div>
           </div>
           <div class="col-md-8 col-sm-12 col-xs-12">
+            <iframe width="560" height="315" src="<%= filmChoosen.trailer %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <div class="movie-single-ct main-content">
               <h1 class="bd-hd"><%= filmChoosen.displayName %></h1>
               <div class="social-btn">
@@ -327,7 +312,6 @@
                           </div>
                           <div class="sb-it">
                             <h6>Run Time: <p> <%= filmChoosen.time %> min</p></h6>
-                            
                           </div>
                         </div>
                       </div>

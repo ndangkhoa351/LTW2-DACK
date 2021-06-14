@@ -17,6 +17,8 @@ Film.add = async function (new_film) {
   const newFilm = await Film.create({
     displayName: new_film.displayName,
     publishDate: new_film.publishDate,
+    overview : new_film.overview,
+    trailer: new_film.trailer,
     time: new_film.time,
     poster: new_film.poster,
   });
