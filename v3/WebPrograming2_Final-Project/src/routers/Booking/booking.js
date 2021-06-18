@@ -11,7 +11,7 @@ router.get("/choose-seat", (req, res) => {
   TicketRepo.getAllSeatUnvailable(qFilmID)
     .then((seatUnavailable) => {
         console.log(seatUnavailable);
-      res.render("Booking/choose-seat", { seatUnavailable });
+      res.render("Booking/choose-seat", { seatUnavailable});
     })
     .catch((err) => {
       console.log(err);

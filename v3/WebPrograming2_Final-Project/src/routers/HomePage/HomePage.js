@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
               res.render("HomePage/HomePage", {
                 mostViewedFilms,
                 films,
-                newestFilms,
+                newestFilms, layout:'./layout'
               });
             })
             .catch((err) => {

@@ -1,31 +1,56 @@
+<style>
+    .button_seat {
+      width: 40px; 
+      height: 40px;
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 8px;
+      
+    }
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-<!-- Plus 65 mean increase it to specify ascii value from 'A' -> 'Z' -->
-<% for(let row = 0; row < 26; ++row) { %>
-<%      for(let col = 0; col < 12; ++col) { %>
-<%          if(seatUnavailable && seatUnavailable.find(seat => seat.horizontalAddress === (row).toString() && seat.verticleAddress === (col).toString())) { %>
-                <button style="width: 35px; height: 20px; background-color: rgb(26, 187, 53); cursor: pointer;" disabled="true">
-                    <%=String.fromCharCode(row + 65)%><%=col + 1%>
-                </button>
-<%          } else { %>
-                <button style="width: 35px; height: 20px; background-color: transparent; cursor: pointer;" class="seat" value="<%=String.fromCharCode(row + 65)%><%=col + 1%>" data-id="<%=row%>,<%=col%>">
-                    <%=String.fromCharCode(row + 65)%><%=col + 1%>
-                </button>
-<%          }           %>
-<%      }               %>
-<br/>
-<%} %>
-
-<br>
-<button style="width: 35px; height: 20px; background-color: rgb(26, 187, 53); cursor: pointer;" disabled="true"></button>
-<label>: Unavailable</label> 
-
-<br/>
-
-<button style="width: 35px; height: 20px; background-color: transparent; cursor: pointer;" disabled="true"></button>
-<label>: Available</label>
-
-
+    <div class="slider movie-items">
+        <div class="movie-items">
+            <div class="container">
+              <div class="title-hd">
+                <h2>Choose Seat for You</h2>
+                <button style="background-color: rgb(139, 18, 29);" class="button_seat" disabled="true"></button>
+                <label style="color: white; font-size: 16px;">: Unavailable</label> 
+                <button style="background-color: transparent; border: white; border-style:solid;" class="button_seat" disabled="true"></button>
+                <label style="color: white; font-size: 16px;">: Available</label>
+              </div>
+            </div>
+            
+          </div>
+          
+    </div>
+    <div style="background-image: url('/images/uploads/slider-bg.jpg');">
+        <div class="movie-item" style="margin-left: 50vh;">
+            <!-- Plus 65 mean increase it to specify ascii value from 'A' -> 'Z' -->
+            <% for(let row = 0; row < 26; ++row) { %>
+            <%      for(let col = 0; col < 12; ++col) { %>
+            <%          if(seatUnavailable && seatUnavailable.find(seat => seat.horizontalAddress === (row).toString() && seat.verticleAddress === (col).toString())) { %>
+                            <button style=" background-color: rgb(139, 18, 29); cursor: pointer;" class="button_seat" disabled="true">
+                                <%=String.fromCharCode(row + 65)%><%=col + 1%>
+                            </button>
+            <%          } else { %>
+                            <button style="background-color: transparent; cursor: pointer;"   class="seat button_seat" value="<%=String.fromCharCode(row + 65)%><%=col + 1%>" data-id="<%=row%>,<%=col%>">
+                                <%=String.fromCharCode(row + 65)%><%=col + 1%>
+                            </button>
+            <%          }           %>
+            <%      }               %>
+            <br/>
+            <%} %>
+            <br>
+            
+        </div>
+    </div>
 <script>
     $(function() {
         function getParameterURLByName(name, url = window.location.href) {

@@ -1,7 +1,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-<h1>Book The Time You Can Go</h1>
-
+<div style="background-image: url('images/uploads/slider-bg.jpg');height: 100vh;">
+<div class="slider movie-items">
+    <div class="title-hd">
+      <h1 class="bd-hd">Book The Time You Can Go</h1>
+    </div>
+  </div>
+<div class="movie-item" style="margin-left: 50vh;">
 <% showtimes.forEach(element => { %>
 <button
   class="item"
@@ -14,12 +18,14 @@
     border: 1px solid black;
     margin-top: 12px;
     text-align: center;
+    border-radius:20px;
   "
 >
   <h2><%= element.startTime %> - <%= element.endTime %></h2>
 </button>
+</div>
 <% }) %>
-
+</div>
 <script>
   $(function () {
     function getParameterURLByName(name, url = window.location.href) {
