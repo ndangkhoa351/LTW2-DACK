@@ -1,0 +1,32 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<h1>Manage Booking</h1>
+
+<button>Add</button>
+
+<% bookings.forEach(element => { %>
+    <div>
+        <label style="min-width: 300px; display: inline-block;"><%= element.uuid %></label>
+        <button class="delete-btn" data-id="<%= element.uuid %>">Delete</button>
+        <button class="update-btn" data-id="<%= element.uuid %>">Update</button>
+    </div>
+<% }) %>
+
+
+<script>
+
+    // Get data-id field by using $(this).data("id");
+
+    $(function() {
+        $(".delete-btn").click(function() {
+            window.location.href = `/admin/manage-booking?bookingID=${$(this).data("id")}&action=delete`;
+        });
+    });
+
+    $(function() {
+        $(".update-btn").click(function() {
+            window.location.href = `/admin/manage-booking/update-film?bookingID=${$(this).data("id")}`;
+        });
+    });
+
+</script>

@@ -1,0 +1,100 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<div>
+ 
+  <script>
+    $(function () {
+      $("#watchTrailer").click(function () {
+        //window.location.href = "/cinema?filmID=<%= filmChoosen.uuid %>";
+      });
+    });
+
+    $(function () {
+      $("#trailer").click(function () {
+        //window.location.href = "/film/trailer?filmID=<%= filmChoosen.uuid %>";
+      });
+    });
+  </script>
+</div>
+
+    
+    <!-- END | Header -->
+
+    <div class="hero mv-single-hero">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- <h1> movie listing - list</h1>
+				<ul class="breadcumb">
+					<li class="active"><a href="#">Home</a></li>
+					<li> <span class="ion-ios-arrow-right"></span> movie listing</li>
+				</ul> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-single movie-single movie_single">
+      <div class="container">
+        <div class="row ipad-width2">
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="movie-img sticky-sb">
+              <img src="/admin/manage-film/poster/<%- filmChoosen.uuid %>" alt="" />
+              <div class="movie-btn">
+                <div class="btn-transform transform-vertical">
+                  <div>
+                    <a href="#" class="item item-1 yellowbtn">
+                      <i class="ion-card"></i> Buy ticket</a
+                    >
+                  </div>
+                  <div>
+                    <a href="/cinema?filmID=<%= filmChoosen.uuid %>" class="item item-2 yellowbtn"
+                      ><i class="ion-card"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8 col-sm-12 col-xs-12">
+            <iframe width="560" height="315" src="<%= filmChoosen.trailer %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="movie-single-ct main-content">
+              <h1 class="bd-hd"><%= filmChoosen.displayName %></h1>
+              <div class="social-btn">
+                <a href="#" class="parent-btn"
+                  ><i class="ion-heart"></i> Add to Favorite</a
+                >
+              </div>
+              <div class="movie-tabs">
+                <div class="tabs">
+                  <ul class="tab-links tabs-mv">
+                    <li class="active"><a href="#overview">Overview</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <div id="overview" class="tab active">
+                      <div class="row">
+                        <div class="col-md-8 col-sm-12 col-xs-12">
+                          <p>
+                            <%= filmChoosen.overview %>
+                          </p>
+                        </div>
+                        <div class="col-md-4 col-xs-12 col-sm-12">
+
+                          <div class="sb-it">
+                            <h6>Release Date:  <p> <%= dateFormat_publishDate %></p></h6>
+                           
+                          </div>
+                          <div class="sb-it">
+                            <h6>Run Time: <p> <%= filmChoosen.time %> min</p></h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
