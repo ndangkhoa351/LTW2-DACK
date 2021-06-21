@@ -1,0 +1,158 @@
+
+    <div class="slider movie-items">
+      <div class="container">
+        <div class="row">
+          <div class="slick-multiItemSlider">
+            <% films.forEach(film => { %>
+            <div class="movie-item">
+              <div class="mv-img">
+                <a href="#"
+                  ><img
+                    src="/admin/manage-film/poster/<%= film.uuid %>"
+                    alt=""
+                    max-width="285"
+                    max-height="437"
+                    width="auto"
+                    height="auto"
+                /></a>
+              </div>
+              <div class="title-in">
+                <h6><a href="/film?filmID=<%= film.uuid %>"><%= film.displayName %></a></h6>
+                <p>
+                  <% let date = film.publishDate.toString().split(" "); %>
+                  <%=`${date[1]} ${date[2]} ${date[3]}`%>
+                </p>
+              </div>
+            </div>
+            <% }); %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="movie-items">
+      <div class="container">
+        <div class="title-hd">
+          <h2>in theater</h2>
+        </div>
+        <div class="row ipad-width">
+          <div class="col-md-10">
+            <div class="tabs">
+              <ul class="tab-links">
+                <li class="active"><a href="#tab1">#Newest</a></li>
+                <li><a href="#tab2"> #All Film</a></li>
+                <li><a href="#tab3"> #Most Viewed</a></li>
+              </ul>
+              <br />
+              <div class="tab-content">
+                <div id="tab1" class="tab active">
+                  <div class="row">
+                    <div class="slick-multiItem">
+                      <% newestFilms.forEach(newFilm => { %>
+                      <div class="slide-it">
+                        <div class="movie-item">
+                          <div class="mv-img">
+                            <img
+                              src="/admin/manage-film/poster/<%= newFilm.uuid %>"
+                              alt=""
+                              width="185"
+                              height="284"
+                            />
+                          </div>
+                          <div class="hvr-inner">
+                            <a href="/film?filmID=<%= newFilm.uuid %>">
+                              Read more
+                              <i class="ion-android-arrow-dropright"></i>
+                            </a>
+                          </div>
+                          <div class="title-in">
+                            <h6><a href="#"><%= newFilm.displayName %></a></h6>
+                          </div>
+                        </div>
+                      </div>
+                      <% }); %>
+                    </div>
+                  </div>
+                </div>
+                <div id="tab2" class="tab">
+                  <div class="row">
+                    <div class="slick-multiItem">
+                      <% films.forEach(film => { %>
+                      <div class="slide-it">
+                        <div class="movie-item">
+                          <div class="mv-img">
+                            <img
+                              src="/admin/manage-film/poster/<%= film.uuid %>"
+                              alt=""
+                              width="185"
+                              height="284"
+                            />
+                          </div>
+                          <div class="hvr-inner">
+                            <a href="/film?filmID=<%= film.uuid %>">
+                              Read more
+                              <i class="ion-android-arrow-dropright"></i>
+                            </a>
+                          </div>
+                          <div class="title-in">
+                            <h6>
+                              <a href="#"
+                                ><%= film.displayName ||
+                                "comingsoon.displayName" %></a
+                              >
+                            </h6>
+                          </div>
+                        </div>
+                      </div>
+                      <% }); %>
+                    </div>
+                  </div>
+                </div>
+                <div id="tab3" class="tab">
+                  <div class="row">
+                    <div class="slick-multiItem">
+                      <% mostViewedFilms.forEach(film => { %>
+                      <div class="slide-it">
+                        <div class="movie-item">
+                          <div class="mv-img">
+                            <img
+                              src="/admin/manage-film/poster/<%= film.uuid %>"
+                              alt=""
+                              width="185"
+                              height="284"
+                            />
+                          </div>
+                          <div class="hvr-inner">
+                            <a href="/film?filmID=<%= film.uuid %>">
+                              Read more
+                              <i class="ion-android-arrow-dropright"></i>
+                            </a>
+                          </div>
+                          <div class="title-in">
+                            <h6>
+                              <a href="#"
+                                ><%= film.displayName ||
+                                "comingsoon.displayName" %></a
+                              >
+                            </h6>
+                          </div>
+                        </div>
+                      </div>
+                      <% }); %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      $(function () {
+        $(".search-params").keydown(function () {
+          window.location.href = `/film`;
+        });
+      });
+    </script>

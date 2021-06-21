@@ -1,0 +1,103 @@
+<style>
+    .button_seat {
+      width: 40px; 
+      height: 40px;
+      background-color: #4CAF50; /* Green */
+      border: 1px solid gray;
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    .button_title {
+      width: 40px; 
+      height: 40px;
+      background-color: #4CAF50; /* Green */
+      border: 1px solid gray;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    #screen {
+        width: auto;
+        height: 35px;
+        background-color: red;
+        margin-left: 50vh;
+        margin-right: 50vh;
+        font-weight: bold;
+        font-size: 25px;
+        text-align: center;
+        color: white;
+        margin-bottom: 20px;
+    }
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <div class="slider movie-items">
+        <div class="movie-items">
+            <div class="container">
+              <div class="title-hd">
+                <h2>Choose Your Seat</h2>
+                <button style="background-color: rgb(139, 18, 29);" class="button_title" disabled="true"></button>
+                <label style="color: white; font-size: 16px;">: Unavailable</label> 
+                <button style="background-color: transparent; border: white; border-style:solid;" class="button_title" disabled="true"></button>
+                <label style="color: white; font-size: 16px;">: Available</label>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div style="background-image: url('/images/uploads/slider-bg.jpg');">
+        <div id="screen" class="movie-item">
+            SCREEN
+        </div>
+        <div class="movie-item" style="margin-left: 50vh;">
+            <!-- Plus 65 mean increase it to specify ascii value from 'A' -> 'Z' -->
+            <% for(let row = 0; row < 26; ++row) { %>
+            <%      for(let col = 0; col < 12; ++col) { %>
+            <%          if(seatUnavailable && seatUnavailable.find(seat => seat.horizontalAddress === (row).toString() && seat.verticleAddress === (col).toString())) { %>
+                            <button style=" background-color: rgb(139, 18, 29); cursor: pointer;" class="button_seat" disabled="true">
+                                <%=String.fromCharCode(row + 65)%><%=col + 1%>
+                            </button>
+            <%          } else { %>
+                            <button style="background-color: transparent; cursor: pointer;"   class="seat button_seat" value="<%=String.fromCharCode(row + 65)%><%=col + 1%>" data-id="<%=row%>,<%=col%>">
+                                <%=String.fromCharCode(row + 65)%><%=col + 1%>
+                            </button>
+            <%          }           %>
+            <%      }               %>
+            <br/>
+            <%} %>
+            <br>
+            
+        </div>
+    </div>
+<script>
+    $(function() {
+        function getParameterURLByName(name, url = window.location.href) {
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return "";
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        const showtimeID = getParameterURLByName("showtimeID");
+
+        const seat = document.getElementsByClassName("seat");
+        $(".seat").click(function() {
+            const chairInfo = $(this).data("id").split(",");
+            const horizontalAddress = chairInfo[0];
+            const verticleAddress = chairInfo[1];
+            const chairCode = $(this).val();        //value
+
+            window.location.href = `/booking/confirm-booking?showtimeID=${showtimeID}&chairCode=${chairCode}&h_address=${horizontalAddress}&v_address=${verticleAddress}`;
+        })
+    });
+</script>

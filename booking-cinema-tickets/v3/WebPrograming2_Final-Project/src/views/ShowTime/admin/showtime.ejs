@@ -1,0 +1,41 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<h1>Manage Showtime</h1>
+
+<button id="add-btn">Add</button>
+
+<% showtimes.forEach(showtime => { %>
+    <div>
+        <label style="min-width: 300px; display: inline-block;"><%= showtime.uuid %></label>
+        <label style="min-width: 300px; display: inline-block;"><%= showtime.startTime %></label>
+        <label style="min-width: 300px; display: inline-block; margin-left: 12px;"><%= showtime.endTime %></label>
+
+        <button class="delete-btn" data-id="<%= showtime.uuid %>">Delete</button>
+        <button class="update-btn" data-id="<%= showtime.uuid %>">Update</button>
+    </div>
+<% }) %>
+
+
+<script>
+
+    // Get data-id field by using $(this).data("id");
+
+    $(function() {
+        $("#add-btn").click(function() {
+            window.location.href = `/admin/manage-showtime/add-showtime`;
+        });
+    });
+
+    $(function() {
+        $(".delete-btn").click(function() {
+            window.location.href = `/admin/manage-showtime?showtimeID=${$(this).data("id")}&action=delete`;
+        });
+    });
+
+    $(function() {
+        $(".update-btn").click(function() {
+            window.location.href = `/admin/manage-showtime/update-showtime?showtimeID=${$(this).data("id")}`;
+        });
+    });
+
+</script>

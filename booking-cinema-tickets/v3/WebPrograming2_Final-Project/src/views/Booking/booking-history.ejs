@@ -1,0 +1,35 @@
+<div class="hero common-hero">
+    <div class="hero-ct">
+        <h1>My tickets</h1>
+    </div>
+</div>
+<!-- blog list section-->
+<div class="page-single">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <% if(bookingHistory) { %> <% bookingHistory.forEach(booking =>
+                { %>
+                <div class="blog-item-style-1 blog-item-style-3">
+                    <img
+                        src="/admin/manage-film/poster/<%- booking.id_Film %>"
+                        alt=""
+                    />
+                    <div class="blog-it-infor">
+                        <div class="container">
+                            <h3>
+                                <a href="#" aria-disabled="true"
+                                    ><%= booking.film_name %></a
+                                >
+                            </h3>
+                            <p>Ngày đặt: <%= booking.date %></p>
+                            <p>Rạp: <%= booking.cinema_name %></p>
+                            <p>Ghế: <%= booking.chair %></p>
+                        </div>
+                    </div>
+                </div>
+                <% })}%>
+            </div>
+        </div>
+    </div>
+</div>

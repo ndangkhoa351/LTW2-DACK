@@ -1,0 +1,25 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<h1>Manage User</h1>
+
+<% users.forEach(element => { %>
+<div>
+  <label style="min-width: 300px; display: inline-block"
+    ><%= element.email %></label
+  >
+  <button class="delete-btn" data-id="<%= element.uuid %>">Delete</button>
+  <button class="update-btn" data-id="<%= element.uuid %>">Update</button>
+</div>
+<% }) %>
+
+<script>
+  // Get data-id field by using $(this).data("id");
+
+  $(function () {
+    $(".delete-btn").click(function () {
+      window.location.href = `/admin/manage-user?userID=${$(this).data(
+        "id"
+      )}&action=delete`;
+    });
+  });
+</script>
