@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const dateUtils = require('../../utils/date');
 const ShowTimeRepo = require("../../repositories/ShowTime/ShowTimeRepo");
 let FILM_ID_CHOOSEN;
 let CINEMA_ID_CHOOSEN;
@@ -12,8 +13,16 @@ router.get("/", (req, res) => {
 
   ShowTimeRepo.getAllWithCinemaAndFilm(CINEMA_ID_CHOOSEN, FILM_ID_CHOOSEN)
     .then((showtimes) => {
-      console.log(showtimes);
-      res.render("ShowTime/ShowTime", { showtimes });
+      const showTimeAfterFormatDate = showtimes.map((showtime) => {
+        const showtimeCopy = {};
+
+        showtimeCopy.uuid = showtime.uuid;
+        showtimeCopy.time = dateUtils.reduceDateFormat(showtime.startTime, showtime.endTime);
+
+        return showtimeCopy;
+      });
+      console.log(showTimeAfterFormatDate);
+      res.render("ShowTime/ShowTime", { showTimeAfterFormatDate });
     })
     .catch((err) => {
       console.log(err);

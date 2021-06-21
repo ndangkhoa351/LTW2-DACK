@@ -29,6 +29,12 @@ router.get("/confirm-booking", (req, res) => {
 });
 
 router.post("/confirm-booking", (req, res) => {
+
+  //if user not login yet.
+  if(!req.currentUser) {
+    res.render('error/check-login');
+  }
+
   const qShowtimeID = req.query.showtimeID;
   const qChairCode = req.query.chairCode;
   const qHAddress = req.query.h_address;

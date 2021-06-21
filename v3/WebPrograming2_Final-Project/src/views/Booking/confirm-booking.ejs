@@ -1,8 +1,39 @@
-<h1>1 more step, Confirm</h1>
-<form method="POST">
-
-    <label>Chair Code: <%= chairInfo.chairCode %></label><br>
-
-    <label>Price: 45000</label><br>
-    <button type="submit">Confirm Booking</button>
-</form>
+<div class="hero user-hero">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="hero-ct">
+            <h1 >1 More Step</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-single">
+    <div class="container">
+        <div class="col-md-9 col-sm-12 col-xs-12">
+          <div class="form-style-1 user-pro" style="width: 400px; margin-left: 150px;" action="#">
+            <form method="POST" class="user">
+              <div class="row">
+                <div class="col-md-12 form-it">
+                  <label>Chair Code</label>
+                  <input style="background-color: gray; color: white;" type="text" value="<%= chairInfo.chairCode %>" readonly/>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 form-it">
+                  <label>Price</label>
+                  <input style="background-color: gray; color: white;" type="text"value="45000" readonly/>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 form-it">
+                  <input style="margin-top: 10px;" class="submit" type="submit" value="save" />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

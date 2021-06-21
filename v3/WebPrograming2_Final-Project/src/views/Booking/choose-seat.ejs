@@ -3,7 +3,7 @@
       width: 40px; 
       height: 40px;
       background-color: #4CAF50; /* Green */
-      border: none;
+      border: 1px solid gray;
       color: white;
       text-decoration: none;
       display: inline-block;
@@ -11,26 +11,52 @@
       margin: 4px 2px;
       cursor: pointer;
       border-radius: 8px;
-      
     }
+
+    .button_title {
+      width: 40px; 
+      height: 40px;
+      background-color: #4CAF50; /* Green */
+      border: 1px solid gray;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    #screen {
+        width: auto;
+        height: 35px;
+        background-color: red;
+        margin-left: 50vh;
+        margin-right: 50vh;
+        font-weight: bold;
+        font-size: 25px;
+        text-align: center;
+        color: white;
+        margin-bottom: 20px;
+    }
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <div class="slider movie-items">
         <div class="movie-items">
             <div class="container">
               <div class="title-hd">
-                <h2>Choose Seat for You</h2>
-                <button style="background-color: rgb(139, 18, 29);" class="button_seat" disabled="true"></button>
+                <h2>Choose Your Seat</h2>
+                <button style="background-color: rgb(139, 18, 29);" class="button_title" disabled="true"></button>
                 <label style="color: white; font-size: 16px;">: Unavailable</label> 
-                <button style="background-color: transparent; border: white; border-style:solid;" class="button_seat" disabled="true"></button>
+                <button style="background-color: transparent; border: white; border-style:solid;" class="button_title" disabled="true"></button>
                 <label style="color: white; font-size: 16px;">: Available</label>
               </div>
             </div>
-            
           </div>
-          
     </div>
     <div style="background-image: url('/images/uploads/slider-bg.jpg');">
+        <div id="screen" class="movie-item">
+            SCREEN
+        </div>
         <div class="movie-item" style="margin-left: 50vh;">
             <!-- Plus 65 mean increase it to specify ascii value from 'A' -> 'Z' -->
             <% for(let row = 0; row < 26; ++row) { %>
