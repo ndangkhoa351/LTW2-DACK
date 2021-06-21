@@ -13,7 +13,7 @@
                     <img src="/admin/manage-film/poster/<%- booking.id_Film %>" alt="" />
                     <div class="blog-it-infor">
                       <h3>
-                        <a href="blogdetail.html"><%= booking.film_name %></a>
+                        <a href="/film?filmID=<%= booking.id_Film %>"><%= booking.film_name %></a>
                       </h3>
                       <div class="container">
                         <p>Ngày đặt: <%= booking.date %></p>

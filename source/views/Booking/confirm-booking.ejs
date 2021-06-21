@@ -1,8 +1,33 @@
-<h1>1 more step, Confirm</h1>
-<form method="POST">
-
-    <label>Chair Code: <%= chairInfo.chairCode %></label><br>
-
-    <label>Price: 45000</label><br>
-    <button type="submit">Confirm Booking</button>
-</form>
+<style>
+    .button {
+      width: 100px; 
+      height: 60px;
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 8px;
+      
+    }
+</style>
+<div style="background-image: url('/images/uploads/slider-bg.jpg');height: 100vh;">
+    <div class="slider movie-items">
+        <div class="title-hd">
+            <h1 class="bd-hd" >One more step, Confirm</h1>
+        </div>
+        <div class="movie-item" style="margin-left: 50vh;">
+            <form method="POST">
+                
+                <label style="color: white; font-size: 16px;">Chair Code: <%= chairInfo.chairCode %></label><br>
+                
+                <label style="color: white; font-size: 16px;">Price: 45000</label><br>
+                <button type="submit" class="button">Confirm Booking</button>
+            </form>
+        </div>
+    </div>
+        
+</div>
