@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     }
     else {
         BookingRepo.getAll().then((bookings) => {
-            res.render('Booking/admin/booking', {bookings});
+            res.render('Booking/admin/booking', {bookings,layout: 'dashboard/layout'});
         }).catch((err) => {
             res.render('error/error');
         });

@@ -20,7 +20,7 @@ router.get("/", (req, res) => {
   } else {
     ShowTimeRepo.getAll()
       .then((showtimes) => {
-        res.render("ShowTime/admin/showtime", { showtimes });
+        res.render("ShowTime/admin/showtime", { showtimes ,layout: 'dashboard/layout'});
       })
       .catch((err) => {
         res.render("error/error");
@@ -33,7 +33,7 @@ router.get("/add-showtime", (req, res) => {
     .then((cinemas) => {
       FilmRepo.getAll()
         .then((films) => {
-          res.render("ShowTime/admin/add-showtime", { cinemas, films });
+          res.render("ShowTime/admin/add-showtime", { cinemas, films ,layout: 'dashboard/layout'});
         })
         .catch((err) => {
           res.render("error/error");
@@ -78,7 +78,7 @@ router.get("/update-showtime", (req, res) => {
               res.render("ShowTime/admin/update-showtime", {
                 showtimeMatch,
                 cinemas,
-                films,
+                films,layout: 'dashboard/layout'
               });
             })
             .catch((err) => {

@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     }
     else {
         CinemaClusterRepo.getAll().then((cinema_clusters) => {
-            res.render('CinemaCluster/admin/cinema-cluster', {cinema_clusters});
+            res.render('CinemaCluster/admin/cinema-cluster', {cinema_clusters ,layout: 'dashboard/layout'});
         }).catch((err) => {
             res.render('error/error');
         });
@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/add-cluster', (req, res) => {
-    res.render('CinemaCluster/admin/add-cluster');
+    res.render('CinemaCluster/admin/add-cluster', {layout:'dashboard/layout'});
 });
 
 router.post('/add-cluster', (req, res) => {

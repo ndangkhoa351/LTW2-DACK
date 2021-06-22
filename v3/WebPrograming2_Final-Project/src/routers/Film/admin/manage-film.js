@@ -24,7 +24,7 @@ router.get("/", (req, res) => {
   else {
     FilmRepo.getAll()
       .then((films) => {
-        res.render("Film/admin/manage-film", { films });
+        res.render("Film/admin/manage-film", { films ,layout: 'dashboard/layout'});
       })
       .catch((err) => {
         res.render("error/error");
@@ -34,7 +34,7 @@ router.get("/", (req, res) => {
 
 // ------------------------ Add Film ------------------------
 router.get("/add-film", (req, res) => {
-  res.render("Film/admin/add-film");
+  res.render("Film/admin/add-film" , {layout: 'dashboard/layout'});
 });
 
 router.post("/add-film", upload.single("film_poster"), async (req, res) => {

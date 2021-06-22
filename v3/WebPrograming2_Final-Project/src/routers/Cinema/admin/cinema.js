@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
   } else {
     CinemaRepo.getAll()
       .then((cinemas) => {
-        res.render("Cinema/admin/cinema", { cinemas });
+        res.render("Cinema/admin/cinema", { cinemas ,layout: 'dashboard/layout' });
       })
       .catch((err) => {
         res.render("error/error");
@@ -30,7 +30,7 @@ router.get("/", (req, res) => {
 router.get("/add-cinema", (req, res) => {
   CinemaClusterRepo.getAll()
     .then((clusters) => {
-      res.render("Cinema/admin/add-cinema", { clusters });
+      res.render("Cinema/admin/add-cinema", { clusters , layout: 'dashboard/layout'});
     })
     .catch((err) => console.log(err));
 });
