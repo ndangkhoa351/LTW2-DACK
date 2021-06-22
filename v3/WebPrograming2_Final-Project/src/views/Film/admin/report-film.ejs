@@ -1,0 +1,28 @@
+<style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+</style>
+<form method="POST">
+    <label for="fromDate">fromDate:</label>
+    <input type="date" id="fromDate" name="fromDate" value="<%- fromDate?fromDate:'' %>">
+    <label for="toDate">toDate:</label>
+    <input type="date" id="toDate" name="toDate"  value="<%- toDate?toDate:'' %>">
+    <input type="submit" value="Check">
+  </form>
+
+  <table style="width:100%">
+    <tr>
+      <th>Name</th>
+      <th>View</th>
+      <th>Total_Revenue </th>
+    </tr>
+    <% reportFilms.forEach(element => { %>
+        <tr>
+            <td><%= element.displayName %></td>
+            <td><%= element.view %></td>
+            <td><%= element.Total_Revenue %></td>
+        </tr>
+    <% }) %>
+</table>

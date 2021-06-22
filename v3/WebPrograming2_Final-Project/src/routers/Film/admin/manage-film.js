@@ -37,6 +37,30 @@ router.get("/add-film", (req, res) => {
   res.render("Film/admin/add-film" , {layout: 'dashboard/layout'});
 });
 
+router.get("/report", (req, res) => {
+  res.render("Film/admin/report" , {layout: 'dashboard/layout'});
+});
+router.get("/report-film", (req, res) => {
+  res.locals.fromDate=req.body.fromDate;
+  res.locals.toDate=req.body.toDate;
+  res.render("Film/admin/report-film" , {layout: 'dashboard/layout'});
+});
+router.post("/report",async (req,res)=>{
+  res.locals.fromDate=req.body.fromDate;
+  res.locals.toDate=req.body.toDate;
+  const fromDate = Date(req.body.fromDate);
+  const toDate = Date(req.body.toDate);
+  console.log(fromDate); 
+  FilmRepo.report(req.body.fromDate,req.body.toDate)
+  .then((reportFilms) => {
+    console.log(reportFilms);
+    res.render("Film/admin/report-film" , {reportFilms, layout: 'dashboard/layout'});
+  })
+  .catch((err) => {
+    res.render("error/error");
+  });
+});
+
 router.post("/add-film", upload.single("film_poster"), async (req, res) => {
   const { film_name, film_pdate,film_overview,film_trailer, film_time } = req.body;
 

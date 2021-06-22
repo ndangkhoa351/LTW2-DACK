@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
 
         //nav to home page
         if(authUtils.isAdmin(req.currentUser)){
-          res.render("dashboard/report",{layout: 'dashboard/layout'})
+          res.redirect("/admin/manage-film/report");
         }
         else{
           res.redirect("/");
