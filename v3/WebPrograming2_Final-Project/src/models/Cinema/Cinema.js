@@ -1,6 +1,8 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const db = require('../../config/database');
 const CinemaCluster = require('../CinemaCluster/CinemaCluster');
+const CinemaType = require('../CinemaType/CinemaType');
+
 
 db.authenticate();
 
@@ -14,10 +16,6 @@ const Cinema = db.define(
             allowNull: false,
         },
         displayName: {
-            type: Sequelize.STRING,
-            allowNull: false,
-        },
-        type: {
             type: Sequelize.STRING,
             allowNull: false,
         },
@@ -38,6 +36,12 @@ const Cinema = db.define(
 
 Cinema.belongsTo(CinemaCluster, {
     foreignKey: 'ownerCluster_id',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
+
+Cinema.belongsTo(CinemaType, {
+    foreignKey: 'type_id',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
 });

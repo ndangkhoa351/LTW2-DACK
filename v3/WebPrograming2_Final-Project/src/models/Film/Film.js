@@ -13,6 +13,7 @@ const Film = db.define(
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
             allowNull: false,
+            unique: true,
         },
         displayName: {
             type: Sequelize.STRING,

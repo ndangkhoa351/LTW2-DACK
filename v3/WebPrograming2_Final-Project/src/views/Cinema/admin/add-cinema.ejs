@@ -6,9 +6,12 @@
   <!-- Type -->
   <label for="cinema_type">Type</label><br />
   <select name="cinema_type">
-    <option value="2D">2D</option>
-    <option value="3D">3D</option>
-    <option value="4DX">4DX</option>
+    <% for(let cType = 1; cType <= 3; ++cType) { %>
+    <%    if(cType === cinema.type_id) { %>
+    <option value="1">2D</option>
+    <option value="2">3D</option>
+    <option value="3">4DX</option>
+    <% }} %>
   </select>
   <br />
   <!-- Horizontal Size -->

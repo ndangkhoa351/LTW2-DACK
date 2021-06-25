@@ -17,11 +17,11 @@ router.get("/", (req, res) => {
         const showtimeCopy = {};
 
         showtimeCopy.uuid = showtime.uuid;
-        showtimeCopy.time = dateUtils.reduceDateFormat(showtime.startTime, showtime.endTime);
+        showtimeCopy.time = dateUtils.reduceDateFormat(showtime.startTime);
 
         return showtimeCopy;
       });
-      console.log(showTimeAfterFormatDate);
+
       res.render("ShowTime/ShowTime", { showTimeAfterFormatDate });
     })
     .catch((err) => {

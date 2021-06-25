@@ -31,6 +31,9 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
+
+
+
 @media print {
   *,
   *:before,
@@ -5308,7 +5311,8 @@ ul {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  width: 35%;
+  width: 13%;
+  height: 15%;
 }
 @media (max-width: 767px) {
   .blog-item-style-1 {
@@ -5358,6 +5362,9 @@ ul {
   -o-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
 }
+
+
+
 .blog-item-style-2:hover .blog-it-infor h3 a {
   color: #dcf836;
 }
@@ -6614,6 +6621,7 @@ ul {
   font-size: 8px;
 }
 .user-pro {
+  margin-left: 35vh;
   padding: 30px;
 }
 .user-pro h4 {
@@ -6628,6 +6636,7 @@ ul {
   -webkit-border-radius: 50px !important;
   -moz-border-radius: 50px !important;
   border-radius: 50px !important;
+  margin-top: 12px;
 }
 .user-pro .user {
   padding-bottom: 30px;

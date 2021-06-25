@@ -53,8 +53,36 @@ User.belongsTo(Permission, {
     onUpdate: 'CASCADE',
 });
 
-Cinema.belongsToMany(Film, { through: ShowTime, foreignKey: 'cinema_id' });
-Film.belongsToMany(Cinema, { through: ShowTime, foreignKey: 'film_id' });
+// Cinema.belongsToMany(Film, { through: ShowTime, foreignKey: 'cinema_id' });
+// Film.belongsToMany(Cinema, { through: ShowTime, foreignKey: 'film_id' });
+
+// Film.hasMany(ShowTime, {
+//     foreignKey: { name: 'film_id', allowNull: true },
+//     onDelete: 'CASCADE',
+//     hooks: true,
+// });
+
+// Cinema.hasMany(ShowTime, {
+//     foreignKey: { name: 'cinema_id', allowNull: true },
+//     onDelete: 'CASCADE',
+//     hooks: true,
+// });
+
+// ShowTime.belongsTo(Film, {foreignKey: 'film_id'});
+// ShowTime.belongsTo(Cinema, {foreignKey: 'cinema_id'});
+
+Cinema.hasMany(ShowTime, {
+    foreignKey: 'cinema_id',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
+
+Film.hasMany(ShowTime, {
+    foreignKey: 'film_id',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+});
+
 
 User.belongsToMany(ShowTime, { through: Booking, foreignKey: 'user_id' });
 ShowTime.belongsToMany(User, { through: Booking, foreignKey: 'showtime_id' });

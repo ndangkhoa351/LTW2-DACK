@@ -6,9 +6,10 @@ const TicketRepo = require("../../repositories/Ticket/TicketRepo");
 router.get("/choose-seat", (req, res) => {
   //To get available horizontal, verticle address
 
-    const qFilmID = req.query.filmID;
+  const qFilmID = req.query.filmID;
+  const showtimeID = req.query.showtimeID;
 
-  TicketRepo.getAllSeatUnvailable(qFilmID)
+  TicketRepo.getAllSeatUnvailableInShowTime(qFilmID, showtimeID)
     .then((seatUnavailable) => {
         console.log(seatUnavailable);
       res.render("Booking/choose-seat", { seatUnavailable});
@@ -26,6 +27,7 @@ router.get("/confirm-booking", (req, res) => {
     }
 
     res.render("Booking/confirm-booking", {chairInfo});
+    
 });
 
 router.post("/confirm-booking", (req, res) => {

@@ -8,12 +8,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
-                <% if(bookingHistory) { %> <% bookingHistory.forEach(booking =>
+                <% if(bookingHistoryAfterFormatDate) { %> <% bookingHistoryAfterFormatDate.forEach(booking =>
                 { %>
                 <div class="blog-item-style-1 blog-item-style-3">
                     <img
                         src="/admin/manage-film/poster/<%- booking.id_Film %>"
-                        alt=""
+                        alt="Film Image"
                     />
                     <div class="blog-it-infor">
                         <div class="container">

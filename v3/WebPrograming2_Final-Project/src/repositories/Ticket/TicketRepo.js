@@ -46,9 +46,9 @@ Ticket.updateRecord = async function (ticket_update) {
   }
 };
 
-Ticket.getAllSeatUnvailable = async function (filmID, showtimeID) {
+Ticket.getAllSeatUnvailableInShowTime = async function (filmID, showtimeID) {
   const ticketsHaveSeatUnavailable = sequelize.query(
-    `SELECT t.* FROM tickets t JOIN bookings b ON t.booking_id = b.uuid JOIN showtimes s ON s.uuid = b.showtime_id WHERE s.film_id = '${filmID}'`,
+    `SELECT t.* FROM tickets t JOIN bookings b ON t.booking_id = b.uuid JOIN showtimes s ON s.uuid = b.showtime_id WHERE s.film_id = '${filmID}' AND s.uuid='${showtimeID}'`,
     {
       type: QueryTypes.SELECT,
     }

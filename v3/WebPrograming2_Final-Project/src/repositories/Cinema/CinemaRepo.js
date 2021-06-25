@@ -13,7 +13,7 @@ Cinema.getAll = async function () {
 Cinema.add = async function (new_cinema) {
   const newCinema = await Cinema.create({
     displayName: new_cinema.displayName,
-    type: new_cinema.type,
+    type_id: new_cinema.type_id,
     horizontalSize: new_cinema.horizontalSize,
     verticleSize: new_cinema.verticleSize,
     ownerCluster_id: new_cinema.ownerCluster_id,
@@ -32,7 +32,7 @@ Cinema.updateRecord = async function (cinema_update) {
   try {
     const newCinemaDetail = {
       displayName: cinema_update.displayName,
-      type: cinema_update.type,
+      type_id: cinema_update.type_id,
       horizontalSize: cinema_update.horizontalSize,
       verticleSize: cinema_update.verticleSize,
       ownerCluster_id: cinema_update.ownerCluster_id,
