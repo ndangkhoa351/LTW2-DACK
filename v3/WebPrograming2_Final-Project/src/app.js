@@ -9,6 +9,7 @@ const cookieSession = require("cookie-session");
 const loginRouter = require("./routers/User/auth/login");
 const loginFbRouter = require("./routers/User/auth/loginWithFacebook");
 
+
 const logoutRouter = require("./routers/User/auth/logout");
 const signupRouter = require("./routers/User/auth/signup");
 const authenticationMiddleware = require("./middlewares/authentication");
@@ -20,6 +21,9 @@ const profileRouter = require("./routers/User/profile/profile");
 
 // - HOME PAGE
 const homePageRouter = require("./routers/HomePage/HomePage");
+
+// - SEARCH
+const searchRouter = require("./routers/HomePage/search");
 
 // - FILM DETAIL
 const filmDetailRouter = require("./routers/Film/Film");
@@ -89,6 +93,9 @@ app.use("/", homePageRouter);
 
 // Profile
 app.use("/profile", profileRouter);
+
+// search
+app.use("/search", searchRouter);
 
 // Film Detail
 app.use("/film", filmDetailRouter);

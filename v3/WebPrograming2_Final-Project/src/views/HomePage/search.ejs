@@ -1,0 +1,37 @@
+
+    <div class="slider movie-items">
+        <div class="container">
+            <div class="title-hd">
+                <h2>Search results for keyword: <u><%= filmName %></u></h2>
+              </div>
+          <div class="row">
+            <div class="slick-multiItemSlider">
+              <% films.forEach(film => { %>
+              <div class="movie-item">
+                <div class="mv-img">
+                  <a href="#"
+                    ><img
+                      src="/admin/manage-film/poster/<%= film.uuid %>"
+                      alt=""
+                      max-width="285"
+                      max-height="437"
+                      width="auto"
+                      height="auto"
+                  /></a>
+                </div>
+                <div class="title-in">
+                  <h6><a href="/search/cluster?film_Id=<%= film.uuid %>&film_Name=<%= film.displayName %>"><%= film.displayName %></a></h6>
+                  <p>
+                    <% let date = film.publishDate.toString().split(" "); %>
+                    <%=`${date[1]} ${date[2]} ${date[3]}`%>
+                  </p>
+                </div>
+              </div>
+              <% }); %>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+  
