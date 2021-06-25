@@ -82,5 +82,31 @@ Film.report = async function (fromDate,toDate) {
 
   return reportFilm;
 };
+
+Film.getByName = async function (name) {
+  const film = sequelize.query(
+    `SELECT f.* FROM films f WHERE LOWER(f."displayName") LIKE N'%${name.toLowerCase()}%'`,
+    { type: QueryTypes.SELECT }
+  );
+  return film;
+};
+
+Film.getCinemaCluster = async function (id) {
+  const film = sequelize.query(
+    `SELECT DISTINCT cs.* FROM films f JOIN showtimes s ON f.uuid = s.film_id JOIN cinemas c ON c.uuid = s.cinema_id JOIN cinema_clusters cs ON cs.uuid = c."ownerCluster_id" WHERE f."uuid" = '${id}'`,
+    { type: QueryTypes.SELECT }
+  );
+  return film;
+};
+
+Film.getShowtimes = async function (filmID, clusterID) {
+  const film = sequelize.query(
+    `SELECT DISTINCT s.*, c.* FROM showtimes s JOIN cinemas c ON c.uuid = s.cinema_id WHERE s."film_id" = '${filmID}' and c."ownerCluster_id" = '${clusterID}'`,
+    { type: QueryTypes.SELECT }
+  );
+  return film;
+};
+
+
 // WHERE t.createdAt BETWEEN '${fromDate}' AND '${toDate}'
 module.exports = Film;
