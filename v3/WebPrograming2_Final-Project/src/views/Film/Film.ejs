@@ -1,22 +1,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-<div>
- 
-  <script>
-    $(function () {
-      $("#watchTrailer").click(function () {
-        //window.location.href = "/cinema?filmID=<%= filmChoosen.uuid %>";
-      });
-    });
-
-    $(function () {
-      $("#trailer").click(function () {
-        //window.location.href = "/film/trailer?filmID=<%= filmChoosen.uuid %>";
-      });
-    });
-  </script>
-</div>
-
     
     <!-- END | Header -->
 
@@ -40,23 +23,34 @@
             <div class="movie-img sticky-sb">
               <img src="/admin/manage-film/poster/<%- filmChoosen.uuid %>" alt="" />
               <div class="movie-btn">
+                <div class="btn-transform transform-vertical red">
+                  <div>
+                    <a class="item item-1 redbtn">
+                      <i class="ion-play"></i> Watch Trailer</a>
+                  </div>
+                  <div data-toggle="collapse" data-target="#watchTrailer" class="scroll">
+                    <a class="item item-2 redbtn">
+                      <i class="ion-play"></i>
+                    </a>
+                  </div>
+                </div>
                 <div class="btn-transform transform-vertical">
                   <div>
                     <a href="#" class="item item-1 yellowbtn">
-                      <i class="ion-card"></i> Buy ticket</a
-                    >
+                      <i class="ion-card"></i> Buy ticket</a>
                   </div>
                   <div>
-                    <a href="/cinema?filmID=<%= filmChoosen.uuid %>" class="item item-2 yellowbtn"
-                      ><i class="ion-card"></i
-                    ></a>
+                    <a href="/cinema?filmID=<%= filmChoosen.uuid %>" class="item item-2 yellowbtn">
+                      <i class="ion-card"></i></a>
                   </div>
                 </div>
+                
               </div>
             </div>
           </div>
           <div class="col-md-8 col-sm-12 col-xs-12">
-            <iframe width="560" height="315" src="<%= filmChoosen.trailer %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="560" height="315" class="collapse" id="watchTrailer"
+                    src="<%= filmChoosen.trailer %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <div class="movie-single-ct main-content">
               <h1 class="bd-hd"><%= filmChoosen.displayName %></h1>
               <div class="social-btn">
@@ -98,3 +92,4 @@
       </div>
     </div>
 
+  
