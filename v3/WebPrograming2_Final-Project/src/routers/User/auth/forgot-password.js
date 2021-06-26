@@ -42,7 +42,7 @@ router.post('/re-enter-email', (req, res) => {
             transporter
                 .sendMail(mailOptions)
                 .then((respond) => {
-                    res.send('Please Check your email');
+                    res.render('successMessage/check-email');
                 })
                 .catch((err) => res.send('Error: ' + err));
         })

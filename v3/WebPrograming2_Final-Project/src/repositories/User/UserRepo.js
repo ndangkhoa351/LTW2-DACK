@@ -21,6 +21,7 @@ User.add = async function (new_user) {
         password: encryptedPassword,
         displayName: new_user.displayName,
         phone: new_user.phone,
+        wallet: 500000,
         permission_id: 2, // 2 represent id = 2 (user) in permission table
     });
     await newUser.save();
@@ -64,6 +65,20 @@ User.updateRecord = async function (user_update) {
         console.log(error);
     }
 };
+
+User.updateWallet = async function(userID, wallet) {
+    try {
+        const updateDetail = {
+            wallet: wallet
+        };
+
+        User.update(updateDetail, {
+            where: { uuid: userID },
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 User.updatePasswordByEmail = async function (email_to_update, password_update) {
     try {

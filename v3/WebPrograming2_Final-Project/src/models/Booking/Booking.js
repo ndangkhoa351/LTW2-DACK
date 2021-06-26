@@ -21,6 +21,12 @@
             type: Sequelize.INTEGER,
             allowNull: false,
         },
+        user_id: {
+            type: Sequelize.UUID,
+        },
+        showtime_id: {
+            type: Sequelize.UUID,
+        }
     },{
         freezeTableName: true,
         tableName: "bookings",
