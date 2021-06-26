@@ -38,7 +38,7 @@ router.get("/confirm-booking", (req, res) => {
         // If chairCodes array have:
         //    @ only one element, that element will be a string, access it by: chairCodes.
         //    @ more than one element, it will be an element -> access it by: chairCodes[0].
-        chairCode: totalChair == 1 ? chairCodes : chairCodes[0],
+        chairCode: totalChair == 1 ? chairCodes : chairCodes[index],
         horizontalAddress:  h_addresses[index],
         verticleAddress: v_addresses[index],
       }
