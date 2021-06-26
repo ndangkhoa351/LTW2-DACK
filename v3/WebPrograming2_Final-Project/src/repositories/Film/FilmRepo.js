@@ -107,6 +107,14 @@ Film.getShowtimes = async function (filmID, clusterID) {
   return film;
 };
 
+Film.getShowtimesByCinema = async function (cinemaID) {
+  const film = await sequelize.query(
+    `SELECT s.*, c.*, f."displayName"AS "name" , f."uuid" AS "filmId", s."uuid" AS "showId" FROM showtimes s JOIN cinemas c ON c.uuid = s.cinema_id JOIN films f ON f.uuid = s.film_id WHERE c."uuid" = '${cinemaID}'`,
+    { type: QueryTypes.SELECT }
+  );
+  return film;
+};
+
 
 // WHERE t.createdAt BETWEEN '${fromDate}' AND '${toDate}'
 module.exports = Film;

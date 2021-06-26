@@ -1,0 +1,53 @@
+
+    <div class="slider movie-items">
+        <div class="container">
+            <div class="title-hd">
+                <h2>Danh sách tất cả cụm rạp</u></u></a></h2>
+              </div>
+          <div class="row">
+            <div class="slick-multiItemSlider">
+              <% clusters.forEach(clus => { %>
+              <div class="movie-item">
+                <div class="mv-img">
+                  <a href="#"
+                    ><img
+                      src="https://png2.cleanpng.com/sh/585754c02b851fd6fa41f8d267fedf8a/L0KzQYm3VsIxN5h2h5H0aYP2gLBuTfxwb5Cye9t3ZX3kPbfwjP0uaqNmhtY2aX7nhcT7kwkua5pzfd9qLXzyd7E0VfIzamE8faMDY3TlRYq1UcY3QGI9T6c6NUK8RYW9V8IyPWg8RuJ3Zx==/kisspng-logo-cinema-film-brand-industry-cinema-logo-5b2b07e18cdb59.166818751529546721577.png"
+                      alt=""
+                      max-width="285"
+                      max-height="437"
+                      width="auto"
+                      height="auto"
+                  /></a>
+                </div>
+                <div class="title-in">
+                  <h6><a href="/filter/cinemas?cluster_Id=<%= clus.uuid %>"><%= clus.displayName %></a></h6>
+                  <p>
+                    Address: <%= clus.address %>
+                  </p>                
+                </div>
+              </div>
+              <% }); %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                   
+               <!--    <div class="blog-item-style-1 blog-item-style-3">
+                        <div class="blog-it-infor">
+                            <div class="container">
+                                <h3>
+                                    <a href="#" aria-disabled="true">Xem tất cả suất chiếu của phim </a>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>--> 
+              
+                </div>
+            </div>
+        </div>
+    </div>

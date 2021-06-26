@@ -25,6 +25,9 @@ const homePageRouter = require("./routers/HomePage/HomePage");
 // - SEARCH
 const searchRouter = require("./routers/HomePage/search");
 
+// - SEARCH
+const filterRouter = require("./routers/HomePage/filter");
+
 // - FILM DETAIL
 const filmDetailRouter = require("./routers/Film/Film");
 
@@ -96,6 +99,9 @@ app.use("/profile", profileRouter);
 
 // search
 app.use("/search", searchRouter);
+
+// filter
+app.use("/filter", filterRouter);
 
 // Film Detail
 app.use("/film", filmDetailRouter);
