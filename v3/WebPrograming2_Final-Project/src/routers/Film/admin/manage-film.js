@@ -50,10 +50,10 @@ router.post("/report",async (req,res)=>{
   res.locals.toDate=req.body.toDate;
   const fromDate = Date(req.body.fromDate);
   const toDate = Date(req.body.toDate);
-  console.log(fromDate); 
+  //console.log(fromDate); 
   FilmRepo.report(req.body.fromDate,req.body.toDate)
   .then((reportFilms) => {
-    console.log(reportFilms);
+    //console.log(reportFilms);
     res.render("Film/admin/report-film" , {reportFilms, layout: 'dashboard/layout'});
   })
   .catch((err) => {

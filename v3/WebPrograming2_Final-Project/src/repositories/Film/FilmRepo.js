@@ -76,10 +76,10 @@ Film.report = async function (fromDate,toDate) {
   const reportFilm = sequelize.query(
     `SELECT f.*, COUNT(f.uuid) AS "view", SUM(t.price) AS "Total_Revenue" FROM films f JOIN showtimes s ON f.uuid = s.film_id 
     JOIN bookings b ON b.showtime_id = s.uuid JOIN tickets t on t.booking_id = b.uuid 
-     GROUP BY f.uuid`,
+    WHERE t."createdAt" BETWEEN '${fromDate}' AND '${toDate}' GROUP BY f.uuid`,
     { type: QueryTypes.SELECT }
   );
-
+    // WHERE t.createdAt BETWEEN '${fromDate}' AND '${toDate}'
   return reportFilm;
 };
 
@@ -115,6 +115,4 @@ Film.getShowtimesByCinema = async function (cinemaID) {
   return film;
 };
 
-
-// WHERE t.createdAt BETWEEN '${fromDate}' AND '${toDate}'
 module.exports = Film;
