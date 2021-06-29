@@ -79,7 +79,6 @@ Film.report = async function (fromDate,toDate) {
     WHERE t."createdAt" BETWEEN '${fromDate}' AND '${toDate}' GROUP BY f.uuid`,
     { type: QueryTypes.SELECT }
   );
-    // WHERE t.createdAt BETWEEN '${fromDate}' AND '${toDate}'
   return reportFilm;
 };
 

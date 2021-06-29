@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
                     // Find 5 films was most viewed all the time
                     FilmRepo.getMostViewed()
                         .then((mostViewedFilms) => {
+                            console.log(films.length)
                             res.render('HomePage/HomePage', {
                                 mostViewedFilms,
                                 films,

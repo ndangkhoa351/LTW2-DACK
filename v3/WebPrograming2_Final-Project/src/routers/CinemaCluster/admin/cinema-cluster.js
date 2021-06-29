@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 
     if(action == "delete") {
         CinemaClusterRepo.delete(CINEMA_CLUSTER_ID_CHOOSEN).then(result => {
-            res.redirect('/admin/manage-cluster');
+            res.redirect('/admin/manage-cluster', {layout:'dashboard/layout'});
         })
         .catch(err => { res.render('error/error'); });
     }
@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
             res.render('error/error');
         });
     }
-})
+});
 
 router.get('/add-cluster', (req, res) => {
     res.render('CinemaCluster/admin/add-cluster', {layout:'dashboard/layout'});
@@ -36,12 +36,12 @@ router.post('/add-cluster', (req, res) => {
 
     CinemaClusterRepo.add(newCluster)
     .then(result => {
-        res.redirect('/admin/manage-cluster');
+        res.redirect('/admin/manage-cluster', {layout:'dashboard/layout'});
     })
     .catch(err => {
-        res.render('error/error');
+        res.render('error/error', {layout:'dashboard/layout'});
     })
-})
+});
 
 // Update
 
@@ -49,7 +49,7 @@ router.get('/update-cluster', (req, res) => {
     CINEMA_CLUSTER_ID_CHOOSEN = req.query.clusterID;
     
     CinemaClusterRepo.getByID(CINEMA_CLUSTER_ID_CHOOSEN).then(cinema_cluster => {
-        res.render("CinemaCluster/admin/update-cluster", {cinema_cluster});
+        res.render("CinemaCluster/admin/update-cluster", {cinema_cluster, layout:'dashboard/layout'});
     })
     .catch(err => {
         res.render('error/error');

@@ -12,8 +12,8 @@ const session = require('express-session');
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const { use } = require('passport');
-
-const FACEBOOK_APP_ID = '287977536365879';
+ 
+const FACEBOOK_APP_ID = '287977536365879';  
 const FACEBOOK_APP_SECRET = 'cdd19f212f68c152c7ae68da715bd8a6';
 
 passport.use(new FacebookStrategy({

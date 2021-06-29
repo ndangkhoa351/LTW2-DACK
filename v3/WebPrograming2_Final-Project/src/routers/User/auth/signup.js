@@ -36,14 +36,14 @@ router.post('/', (req, res) => {
     const {
         register_email,
         register_password,
-        register_full_name,
+        register_fullname, 
         register_confirm_password,
         register_phone,
     } = req.body;
 
     EMAIL = register_email;
     PASSWORD = register_password;
-    FULLNAME = register_full_name;
+    FULLNAME = register_fullname;
     PHONE = register_phone;
 
     if (
@@ -58,8 +58,8 @@ router.post('/', (req, res) => {
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: process.env.GMAIL, // Real email
-                    pass: process.env.PASSWORD, // Real Email Password
+                    user: process.env.GMAIL || 'ltweb222021@gmail.com', // Real email
+                    pass: process.env.PASSWORD || 'ABCxyz123~', // Real Email Password
                 },
             });
 
