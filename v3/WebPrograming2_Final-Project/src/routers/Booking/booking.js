@@ -3,6 +3,12 @@ const router = express.Router();
 const BookingRepo = require("../../repositories/Booking/BookingRepo");
 const TicketRepo = require("../../repositories/Ticket/TicketRepo");
 const UserRepository = require("../../repositories/User/UserRepo");
+const ShowTimeRepo = require("../../repositories/ShowTime/ShowTimeRepo");
+const CinemaRepo = require("../../repositories/Cinema/CinemaRepo");
+const nodemailer = require('nodemailer');
+require('dotenv').config();
+let EMAIL;
+let PASSWORD;
 
 router.get("/choose-seat", (req, res) => {
   //To get available horizontal, verticle address
@@ -12,7 +18,7 @@ router.get("/choose-seat", (req, res) => {
 
   TicketRepo.getAllSeatUnvailableInShowTime(qFilmID, showtimeID)
     .then((seatUnavailable) => {
-        console.log(seatUnavailable);
+        //console.log(seatUnavailable);
       res.render("Booking/choose-seat", { seatUnavailable});
     })
     .catch((err) => {
@@ -98,7 +104,28 @@ router.post("/confirm-booking", async (req, res) => {
 
         remainAmount = req.currentUser.wallet - total_money;
         UserRepository.updateWallet(req.currentUser.uuid, remainAmount).then(result => {
-          res.redirect("/booking-history");
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.GMAIL , // Real email
+                pass: process.env.PASSWORD , // Real Email Password
+            },
+        });
+        ShowTimeRepo.getCinema(newBooking.showtime_id).then((showTime) =>{
+          console.log("sssssssssssssss",showTime);
+            const mailOptions = {
+              from: process.env.GMAIL,
+              to: req.currentUser.email,
+              subject: 'Verify Booking',
+              html: `<h1>Booking success</h1> <h3>Cinema: ${showTime[0].displayName}  </h3> <h3>Showtime: ${showTime[0].startTime} to ${showTime[0].endTime} </h3> <h3>You seat: ${chairCodes} </h3>`,
+          };
+            transporter
+                    .sendMail(mailOptions)
+                    .then((respond) => {
+                      res.redirect("/booking-history");
+                    })
+                    .catch((err) => res.send('Error: ' + err));
+            });
         })
         .catch(error => res.render("error/error"));
       }

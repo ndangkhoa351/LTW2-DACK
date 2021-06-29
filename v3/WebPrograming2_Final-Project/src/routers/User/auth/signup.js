@@ -58,8 +58,8 @@ router.post('/', (req, res) => {
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: process.env.GMAIL || 'ltweb222021@gmail.com', // Real email
-                    pass: process.env.PASSWORD || 'ABCxyz123~', // Real Email Password
+                    user: process.env.GMAIL , // Real email
+                    pass: process.env.PASSWORD , // Real Email Password
                 },
             });
 

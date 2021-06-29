@@ -36,6 +36,14 @@ ShowTime.getAllWithCinemaAndFilm = async function (cinema_id, film_id) {
   return showtimes;
 };
 
+ShowTime.getCinema = async function (showtime_id) {
+  const showtimes = await sequelize.query(
+    `SELECT st.*, c."displayName" AS "displayName" FROM showtimes st JOIN cinemas c on st."cinema_id" = c."uuid" LIMIT 1`,
+    { type: QueryTypes.SELECT }
+  );
+  return showtimes;
+};
+
 ShowTime.updateRecord = async function (showtime_update) {
   try {
     const newShowTimeDetail = {
