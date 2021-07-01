@@ -8,6 +8,7 @@ const cookieSession = require("cookie-session");
 // - AUTH
 const loginRouter = require("./routers/User/auth/login");
 const loginFbRouter = require("./routers/User/auth/loginWithFacebook");
+const loginGgRouter = require("./routers/User/auth/loginWithGg/auth");
 
 
 const logoutRouter = require("./routers/User/auth/logout");
@@ -87,6 +88,7 @@ app.use(authenticationMiddleware);
 // Authentication
 app.use("/login", loginRouter);
 app.use('/auth', loginFbRouter)
+app.use('/authGg', loginGgRouter);
 app.use("/signup", signupRouter);
 app.use("/logout", logoutRouter);
 app.use("/forgot-password", forgotPasswordRouter);

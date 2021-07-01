@@ -45,6 +45,22 @@ User.addFacebook = async function (id, email, displayName) {
     return newUser;
 };
 
+User.authGoogle = async function (id) {
+    return await User.findOne({ where: { password: id } });
+};
+User.addGoogle = async function (id, email, displayName) {
+    const newUser = await User.create({
+        password: id,
+        email: email,
+        displayName: displayName,
+        phone: 'google',
+        permission_id: 2,
+    });
+
+    await newUser.save();
+    return newUser;
+};
+
 User.delete = async function (uid_delete) {
     await User.destroy({
         where: { id: uid_delete },
