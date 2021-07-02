@@ -3,9 +3,10 @@ const router = express.Router();
 const BookingRepo = require("../../repositories/Booking/BookingRepo");
 const TicketRepo = require("../../repositories/Ticket/TicketRepo");
 const UserRepository = require("../../repositories/User/UserRepo");
-const ShowTimeRepo = require("../../repositories/ShowTime/ShowTimeRepo");
 const CinemaRepo = require("../../repositories/Cinema/CinemaRepo");
-const nodemailer = require('nodemailer');
+const accountSid = 'AC106d5a61f90c26454ddb36c61f7bde9a';
+const authToken = 'b4d0e1d6ddca695ecc41f096a3928e8d';
+const client = require('twilio')(accountSid, authToken)
 require('dotenv').config();
 let EMAIL;
 let PASSWORD;
@@ -91,15 +92,18 @@ router.post("/confirm-booking", async (req, res) => {
 
       if(req.currentUser.wallet >= total_money)      
       {
+        let chairList = '';
         for(let index = 0; index < totalChair; ++index) {
           const newTicket = {
-            chairCode: chairCodes[index],
+            chairCode: totalChair == 1 ? chairCodes : chairCodes[0],
             horizontalAddress: h_addresses[index],
             verticleAddress: v_addresses[index],
             price: 45000,
             booking_id: bookingAdded.uuid,
           };
     
+          chairList += "Seat: " + ((index !== totalChair - 1) ? `${newTicket.chairCode} - ` : `${newTicket.chairCode} - hsize: ${newTicket.horizontalAddress} - vsize: ${newTicket.verticleAddress}`) + "\r\n";
+
           TicketRepo.add(newTicket).then(result => {
 
           })
@@ -108,27 +112,18 @@ router.post("/confirm-booking", async (req, res) => {
 
         remainAmount = req.currentUser.wallet - total_money;
         UserRepository.updateWallet(req.currentUser.uuid, remainAmount).then(result => {
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.GMAIL , // Real email
-                pass: process.env.PASSWORD , // Real Email Password
-            },
-        });
-        ShowTimeRepo.getCinema(newBooking.showtime_id).then((showTime) =>{
-            const mailOptions = {
-              from: process.env.GMAIL,
-              to: req.currentUser.email,
-              subject: 'Verify Booking',
-              html: `<h1>Booking success</h1> <h3>Cinema: ${showTime[0].displayName}  </h3> <h3>Showtime: ${showTime[0].startTime} to ${showTime[0].endTime} </h3> <h3>Your seat: ${chairCodes} </h3>`,
-          };
-            transporter
-                    .sendMail(mailOptions)
-                    .then((respond) => {
-                      res.redirect("/booking-history");
-                    })
-                    .catch((err) => res.send('Error: ' + err));
-            });
+          client.messages.create({
+            body: `======= Ticket(s) Info =======
+                  ${chairList}
+                  - Total Money: ${total_money}`,
+            from: "+19892624261",      
+            to: "+12066561175",     // replace custom phone in link: https://www.receivesms.co/us-phone-numbers/us/
+          })
+          .then(message => {
+            console.log(message);
+            res.redirect('/booking-history');
+          })
+          .catch(error => res.render("error/error"));
         })
         .catch(error => res.render("error/error"));
       }
