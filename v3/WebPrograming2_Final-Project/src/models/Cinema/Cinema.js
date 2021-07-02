@@ -24,7 +24,7 @@ const Cinema = db.define(
             allowNull: false,
         },
         verticleSize: {
-            type: Sequelize.STRING,
+            type: Sequelize.INTEGER,
             allowNull: false,
         },
     },

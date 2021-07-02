@@ -18,8 +18,12 @@ router.get("/choose-seat", (req, res) => {
 
   TicketRepo.getAllSeatUnvailableInShowTime(qFilmID, showtimeID)
     .then((seatUnavailable) => {
-        //console.log(seatUnavailable);
-      res.render("Booking/choose-seat", { seatUnavailable});
+      CinemaRepo.getWithShowTimeID(showtimeID).then(cinemaMatch => {
+        res.render("Booking/choose-seat", { seatUnavailable, cinemaMatch });
+      }).catch(error => {
+        console.log(err);
+        res.render("error/error");
+      })
     })
     .catch((err) => {
       console.log(err);
@@ -112,12 +116,11 @@ router.post("/confirm-booking", async (req, res) => {
             },
         });
         ShowTimeRepo.getCinema(newBooking.showtime_id).then((showTime) =>{
-          console.log("sssssssssssssss",showTime);
             const mailOptions = {
               from: process.env.GMAIL,
               to: req.currentUser.email,
               subject: 'Verify Booking',
-              html: `<h1>Booking success</h1> <h3>Cinema: ${showTime[0].displayName}  </h3> <h3>Showtime: ${showTime[0].startTime} to ${showTime[0].endTime} </h3> <h3>You seat: ${chairCodes} </h3>`,
+              html: `<h1>Booking success</h1> <h3>Cinema: ${showTime[0].displayName}  </h3> <h3>Showtime: ${showTime[0].startTime} to ${showTime[0].endTime} </h3> <h3>Your seat: ${chairCodes} </h3>`,
           };
             transporter
                     .sendMail(mailOptions)

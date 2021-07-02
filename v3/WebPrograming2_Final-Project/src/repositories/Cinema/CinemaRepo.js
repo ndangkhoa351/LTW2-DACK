@@ -54,4 +54,12 @@ Cinema.getAllCinemaWithFilmID = async function (film_id) {
   return cinemas;
 };
 
+Cinema.getWithShowTimeID = async function (showtime_id) {
+  const cinemas = sequelize.query(
+    `SELECT DISTINCT c.* FROM cinemas c JOIN showtimes s on c.uuid = s.cinema_id WHERE s.uuid = '${showtime_id}'`,
+    { type: QueryTypes.SELECT }
+  );
+  return cinemas;
+};
+
 module.exports = Cinema;

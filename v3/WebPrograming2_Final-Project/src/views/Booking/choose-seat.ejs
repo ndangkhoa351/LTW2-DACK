@@ -85,8 +85,8 @@
         </div>
         <div class="movie-item" style="margin-left: 50vh;">
             <!-- Plus 65 mean increase it to specify ascii value from 'A' -> 'Z' -->
-            <% for(let row = 0; row < 26; ++row) { %>
-            <%      for(let col = 0; col < 12; ++col) { %>
+            <% for(let row = 0; row < cinemaMatch[0].verticleSize; ++row) { %>
+            <%      for(let col = 0; col < cinemaMatch[0].horizontalSize; ++col) { %>
             <%          if(seatUnavailable && seatUnavailable.find(seat => seat.horizontalAddress === (row).toString() && seat.verticleAddress === (col).toString())) { %>
                             <button style=" background-color: #dd003f; cursor: pointer;" class="seat button_seat" disabled="true">
                                 <%=String.fromCharCode(row + 65)%><%=col + 1%>
