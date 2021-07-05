@@ -102,7 +102,7 @@ router.post("/confirm-booking", async (req, res) => {
             booking_id: bookingAdded.uuid,
           };
     
-          chairList += "Seat: " + ((index !== totalChair - 1) ? `${newTicket.chairCode} - ` : `${newTicket.chairCode} - hsize: ${newTicket.horizontalAddress} - vsize: ${newTicket.verticleAddress}`) + "\r\n";
+          chairList += "Seat: " + ((index !== totalChair - 1) ? `${newTicket.chairCode} - ` : `${newTicket.chairCode}`) + `- hsize: ${newTicket.horizontalAddress} - vsize: ${newTicket.verticleAddress}` + "\r\n";
 
           TicketRepo.add(newTicket).then(result => {
 
@@ -117,7 +117,7 @@ router.post("/confirm-booking", async (req, res) => {
                   ${chairList}
                   - Total Money: ${total_money}`,
             from: "+19892624261",      
-            to: "+12066561175",     // replace custom phone in link: https://www.receivesms.co/us-phone-numbers/us/
+            to: `+84${req.currentUser.phone}`,     
           })
           .then(message => {
             console.log(message);
