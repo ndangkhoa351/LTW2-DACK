@@ -1,44 +1,42 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<div style="background-image: url('images/uploads/slider-bg.jpg');height: 100vh;">
-  <div class="slider movie-items">
-    <div class="container">
-        <div class="title-hd">
-            <h2>Danh sách suất chiếu cho phim này: </h2>
-          </div>
-      <div class="">
-        <div class="slick-multiItemSlider">
-          <% cinemas.forEach(cinema => { %>
-            <div class="movie-item">
-              <div class="mv-img">
-                <a href="#"
-                  ><img
-                    src="/images/cinema.jpg"
-                    alt=""
-                    max-width="285"
-                    max-height="437"
-                    width="auto"
-                    height="auto"
-                /></a>
-              </div>
-              <div class="title-in">
-                <h6><a href="/booking/choose-seat?filmID=<%= cinema.filmId %>&showtimeID=<%= cinema.showtimeId %>"><%= cinema.displayName %></a></h6>
-                <% let date = cinema.start.toString().split(" "); %>
-                <p style="font-weight: bold;">
-                  Suất chiếu: <u> <%=`${date[1]} ${date[2]} ${date[3]} ${date[4]}`%> </u>
-                </p>                
+        <div class="slider movie-items">
+        </div>
+        <div class="page-single" >
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="flex-wrap-movielist mv-grid-fw">
+                  <% cinemas.forEach(cinema => { %>
+                    <div class="movie-item-style-2 movie-item-style-1">
+                      <div class="mv-img">
+                        <a href="#"
+                          ><img
+                            src="/images/cinema.jpg"
+                            alt=""
+                            max-width="285"
+                            max-height="437"
+                            width="auto"
+                            height="auto"
+                        /></a>
+                      </div>
+                      <div class="title-in">
+                        <h6><a href="/booking/choose-seat?filmID=<%= cinema.filmId %>&showtimeID=<%= cinema.showtimeId %>"><%= cinema.displayName %></a></h6>
+                        <% let date = cinema.start.toString().split(" "); %>
+                        <p style="font-weight: bold;">
+                          Suất chiếu: <u> <%=`${date[1]} ${date[2]} ${date[3]} ${date[4]}`%> </u>
+                        </p>                
+                      </div>
+                    </div>
+                    <% }); %>
+                </div>		
               </div>
             </div>
-            <% }); %>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
     
       
     
-  
-</div>
 
 
 
