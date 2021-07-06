@@ -113,9 +113,7 @@ router.post("/confirm-booking", async (req, res) => {
         remainAmount = req.currentUser.wallet - total_money;
         UserRepository.updateWallet(req.currentUser.uuid, remainAmount).then(result => {
           client.messages.create({
-            body: `\n======= Ticket(s) Info =======\n
-                  ${chairList}\n
-                  - Total Money: ${total_money}`,
+            body: `\n======= Ticket(s) Info =======\n${chairList}\n- Total Money: ${total_money}`,
             from: "+19892624261",      
             to: `+84${req.currentUser.phone}`,     
           })
