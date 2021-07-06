@@ -5,7 +5,7 @@ const TicketRepo = require("../../repositories/Ticket/TicketRepo");
 const UserRepository = require("../../repositories/User/UserRepo");
 const CinemaRepo = require("../../repositories/Cinema/CinemaRepo");
 const accountSid = 'AC106d5a61f90c26454ddb36c61f7bde9a';
-const authToken = 'b4d0e1d6ddca695ecc41f096a3928e8d';
+const authToken = '7e1af48910b27719953fda36a1f3ae14';
 const client = require('twilio')(accountSid, authToken)
 require('dotenv').config();
 let EMAIL;
@@ -95,14 +95,14 @@ router.post("/confirm-booking", async (req, res) => {
         let chairList = '';
         for(let index = 0; index < totalChair; ++index) {
           const newTicket = {
-            chairCode: totalChair == 1 ? chairCodes : chairCodes[0],
+            chairCode: totalChair == 1 ? chairCodes : chairCodes[index],
             horizontalAddress: h_addresses[index],
             verticleAddress: v_addresses[index],
             price: 45000,
             booking_id: bookingAdded.uuid,
           };
     
-          chairList += "Seat: " + ((index !== totalChair - 1) ? `${newTicket.chairCode} - ` : `${newTicket.chairCode}`) + `- hsize: ${newTicket.horizontalAddress} - vsize: ${newTicket.verticleAddress}` + "\r\n";
+          chairList += "Seat: " + ((index !== totalChair - 1) ? `${newTicket.chairCode} - ` : `${newTicket.chairCode}`) + `- hsize: ${newTicket.horizontalAddress} - vsize: ${newTicket.verticleAddress}` + "\n";
 
           TicketRepo.add(newTicket).then(result => {
 
@@ -113,8 +113,8 @@ router.post("/confirm-booking", async (req, res) => {
         remainAmount = req.currentUser.wallet - total_money;
         UserRepository.updateWallet(req.currentUser.uuid, remainAmount).then(result => {
           client.messages.create({
-            body: `======= Ticket(s) Info =======
-                  ${chairList}
+            body: `\n======= Ticket(s) Info =======\n
+                  ${chairList}\n
                   - Total Money: ${total_money}`,
             from: "+19892624261",      
             to: `+84${req.currentUser.phone}`,     
@@ -123,7 +123,10 @@ router.post("/confirm-booking", async (req, res) => {
             console.log(message);
             res.redirect('/booking-history');
           })
-          .catch(error => res.render("error/error"));
+          .catch(error => {
+            console.log(error);
+            res.render("error/error")
+          });
         })
         .catch(error => res.render("error/error"));
       }
