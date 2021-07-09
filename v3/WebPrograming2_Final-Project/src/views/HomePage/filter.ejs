@@ -7,11 +7,11 @@
             <div class="flex-wrap-movielist mv-grid-fw">
               <% clusters.forEach(clus => { %>
               <div class="movie-item-style-2 movie-item-style-1">
-                <a href="/filter/cinemas?cluster_Id=<%= clus.uuid %>">
+                <a href="/filter/cinemas?cluster_Id=<%= clus.uuid %>&lat=<%= clus.lat %>&lng=<%= clus.lng %>">
                     <img src="/images/Cluster.jpg">
                 </a>
                 <div class="mv-item-infor">
-                  <h6><a href="/filter/cinemas?cluster_Id=<%= clus.uuid %>"><%= clus.displayName || "comingsoon.displayName" %></a></h6>
+                  <h6><a href="/filter/cinemas?cluster_Id=<%= clus.uuid %>&lat=<%= clus.lat %>&lng=<%= clus.lng %>"><%= clus.displayName || "comingsoon.displayName" %></a></h6>
                 </div>
               </div>					
               <% }); %>

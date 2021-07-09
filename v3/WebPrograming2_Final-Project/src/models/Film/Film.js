@@ -40,6 +40,10 @@ const Film = db.define(
             type: Sequelize.STRING,
             allowNull: true,
         },
+        view: {
+            type: Sequelize.INTEGER,
+            defaultValue: 0,
+        },
     },
     {
         freezeTableName: true,

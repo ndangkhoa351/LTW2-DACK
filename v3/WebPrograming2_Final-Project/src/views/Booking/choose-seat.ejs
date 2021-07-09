@@ -116,6 +116,8 @@
         }
 
         const showtimeID = getParameterURLByName("showtimeID");
+        const filmID = getParameterURLByName("filmID");
+
 
         const seats = [];
 
@@ -162,7 +164,7 @@
                 queryString += `&chairCode=${seat.chairCode}&h_address=${seat.horizontalAddress}&v_address=${seat.verticleAddress}`;
             });
 
-            window.location.href = `/booking/confirm-booking?showtimeID=${showtimeID}&totalChair=${seats.length}${queryString}`;
+            window.location.href = `/booking/confirm-booking?filmID=${filmID}&showtimeID=${showtimeID}&totalChair=${seats.length}${queryString}`;
         });
     });
 </script>

@@ -20,6 +20,8 @@
             type: Sequelize.STRING,
             allowNull: false,
         },
+        lat: Sequelize.FLOAT,
+        lng: Sequelize.FLOAT,
     },{
         freezeTableName: true,
         tableName: "cinema_clusters"

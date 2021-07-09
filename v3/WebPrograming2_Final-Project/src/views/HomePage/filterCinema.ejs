@@ -1,12 +1,25 @@
+<style>
+    #map {
+        height: 500px;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+</style>
+
+
 <div class="hero common-hero">
     <div class="hero-ct">
-        <h1>My tickets</h1>
+        <h1><%= cluster.displayName %></h1>
     </div>
 </div>
 <!-- blog list section-->
 <div class="page-single">
     <div class="container">
         <div class="row">
+            <div id="map"></div>
+            <h1>Các rạp có trong Cụm</h1>
+            <br />
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <% var i = 0; cinemas.forEach(cinema => { %>
                 <div class="blog-item-style-1 blog-item-style-3">
@@ -42,3 +55,42 @@
         </div>
     </div>
 </div>
+
+<script>
+    function getParameterURLByName(name, url = window.location.href) {
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return "";
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    let lat = getParameterURLByName("lat");
+    let lng = getParameterURLByName("lng");
+
+    lat = Number.parseFloat(lat);
+    lng = Number.parseFloat(lng);
+
+    function initMap() {
+        const mapLocation = {lat: 10.8231, lng: -106.6297 };
+
+        const options = {
+            zoom: 8,
+            center: mapLocation,
+        }
+
+        const map = new google.maps.Map(document.getElementById("map"), options);
+
+        const marker = new google.map.Marker({
+            position: mapLocation,
+            map: map,
+        });
+
+    }
+
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz4hZ84GtkIrUkBbDlNH2qmEGeV3rgFPI&callback=initMap"
+>
+</script>
