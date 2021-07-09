@@ -3,6 +3,7 @@ const router = express.Router();
 const BookingRepo = require('../../repositories/Booking/BookingRepo');
 const TicketRepo = require('../../repositories/Ticket/TicketRepo');
 const UserRepository = require('../../repositories/User/UserRepo');
+const ShowTimeRepo = require('../../repositories/ShowTime/ShowTimeRepo');
 const CinemaRepo = require('../../repositories/Cinema/CinemaRepo');
 const FilmRepo = require('../../repositories/Film/FilmRepo');
 const accountSid = 'AC106d5a61f90c26454ddb36c61f7bde9a';
@@ -17,7 +18,6 @@ router.get('/choose-seat', (req, res) => {
 
     const qFilmID = req.query.filmID;
     const showtimeID = req.query.showtimeID;
-
     TicketRepo.getAllSeatUnvailableInShowTime(qFilmID, showtimeID)
         .then((seatUnavailable) => {
             CinemaRepo.getWithShowTimeID(showtimeID)
@@ -38,12 +38,13 @@ router.get('/choose-seat', (req, res) => {
         });
 });
 
-router.get('/confirm-booking', (req, res) => {
+router.get('/confirm-booking', async (req, res) => {
     const totalChair = req.query.totalChair;
     const chairCodes = req.query.chairCode;
     const h_addresses = req.query.h_address;
     const v_addresses = req.query.v_address;
-
+    const showid = req.query.showtimeID;
+    const SelectedShowtime = await ShowTimeRepo.getByID(req.query.showtimeID);
     let seatChoosenList = '';
 
     console.log(chairCodes);
@@ -66,7 +67,7 @@ router.get('/confirm-booking', (req, res) => {
                 : `${seat.chairCode}`;
     }
 
-    const totalMoney = totalChair * 45000;
+    const totalMoney = totalChair * SelectedShowtime.price;
 
     res.render('Booking/confirm-booking', { totalMoney, seatChoosenList });
 });

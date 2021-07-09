@@ -73,7 +73,7 @@ Film.getNewest = async function () {
         where: {
             publishDate: {
                 // new Date() return the current date.
-                [Op.gte]: new Date() - 7 * 24 * 60 * 60 * 1000, //7 days
+                [Op.gte]: new Date() - 30 * 24 * 60 * 60 * 1000, //30 days
             },
         },
     });
