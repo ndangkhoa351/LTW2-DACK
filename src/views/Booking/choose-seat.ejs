@@ -1,0 +1,169 @@
+<style>
+    .button_seat {
+      width: 40px; 
+      height: 40px;
+      background-color: #4CAF50; /* Green */
+      border: 1px solid gray;
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    .button_title {
+      width: 40px; 
+      height: 40px;
+      background-color: #4CAF50; /* Green */
+      border: 1px solid gray;
+      display: inline-block;
+      font-size: 16px;
+      margin-right: 3px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    #screen {
+        width: auto;
+        height: 35px;
+        background-color: #dd003f;
+        margin-left: 50vh;
+        margin-right: 50vh;
+        font-weight: bold;
+        font-size: 25px;
+        text-align: center;
+        color: white;
+        margin-bottom: 20px;
+    }
+
+    .selecting {
+        background-color: green;
+    }
+
+    #confirm-btn {
+        background-color: #dd003f;
+        width: 150px;
+        height: 50px;
+        border: 0.5px solid rgb(80, 74, 74);
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        float: right;
+        margin-right: 5vh;
+        border-radius: 10px;
+    }
+
+    #confirm-btn:hover {
+        background-color: rgb(100, 13, 13);
+
+        color: black;
+
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <div class="slider movie-items">
+        <div class="movie-items">
+            <div class="container">
+              <button id="confirm-btn">Confirm &#8594;</button>
+                <div class="title-hd">
+                    <h2 style="margin-left: 65vh;">Choose Your Seat</h2>
+                </div>
+              <div class="title-hd" style="width: 400px; margin-left: 50vh;">
+                <button style="background-color: #dd003f" class="button_title" disabled="true"></button>
+                <label style="color: white; font-size: 16px;">: Unavailable</label> 
+                <button style="background-color: transparent; border: white; border-style:solid;" class="button_title" disabled="true"></button>
+                <label style="color: white; font-size: 16px;">: Available</label>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div style="background-image: url('/images/uploads/slider-bg.jpg');">
+        <div id="screen" class="movie-item">
+            SCREEN
+        </div>
+        <div class="movie-item" style="margin-left: 50vh;">
+            <!-- Plus 65 mean increase it to specify ascii value from 'A' -> 'Z' -->
+            <% for(let row = 0; row < cinemaMatch[0].verticleSize; ++row) { %>
+            <%      for(let col = 0; col < cinemaMatch[0].horizontalSize; ++col) { %>
+            <%          if(seatUnavailable && seatUnavailable.find(seat => seat.horizontalAddress === (row).toString() && seat.verticleAddress === (col).toString())) { %>
+                            <button style=" background-color: #dd003f; cursor: pointer;" class="seat button_seat" disabled="true">
+                                <%=String.fromCharCode(row + 65)%><%=col + 1%>
+                            </button>
+            <%          } else { %>
+                            <button style="background-color: transparent; cursor: pointer;"  class="seat button_seat" value="<%=String.fromCharCode(row + 65)%><%=col + 1%>" data-id="<%=row%>,<%=col%>">
+                                <%=String.fromCharCode(row + 65)%><%=col + 1%>
+                            </button>
+            <%          }           %>
+            <%      }               %>
+            <br/>
+            <%} %>
+            <br>
+            
+        </div>
+    </div>
+
+<script>
+    $(function() {
+        function getParameterURLByName(name, url = window.location.href) {
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return "";
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        const showtimeID = getParameterURLByName("showtimeID");
+        const filmID = getParameterURLByName("filmID");
+
+
+        const seats = [];
+
+        const seat = document.getElementsByClassName("seat");
+        $(".seat").click(function() {
+            /** Get index of seat selected equal with the value of button of seat.
+            *       @ Use findIndex to search the chair code correspond with seat value (Like: A7)
+            *       @ if index == -1 mean: the seat not exist in array `seats` yet -> Add to array
+            *       @ if index !== -1 mean: the seat already exist in array -> Delete it with index.
+            */
+            const index = seats.findIndex(seat => seat.chairCode === $(this).val());
+
+            if (index === -1)       // not choosen yet
+            {
+                const chairInfo = $(this).data("id").split(",");
+                const horizontalAddress = chairInfo[0];
+                const verticleAddress = chairInfo[1];
+                const chairCode = $(this).val();        //value of the seat selected. Ex: A7, B1,...
+                const seat = {
+                    horizontalAddress: horizontalAddress,
+                    verticleAddress: verticleAddress,
+                    chairCode: chairCode,
+                }
+
+                seats.push(seat);
+                $(this).css("background-color", "green");
+
+            }
+
+            else
+            {
+                seats.splice(index, 1);
+                $(this).css("background-color", "transparent");
+            }
+            
+        });
+
+        $('#confirm-btn').click(function() {
+            let queryString = '';
+            // get each item in array out to pass in param.
+
+            seats.forEach(seat => {
+                queryString += `&chairCode=${seat.chairCode}&h_address=${seat.horizontalAddress}&v_address=${seat.verticleAddress}`;
+            });
+
+            window.location.href = `/booking/confirm-booking?filmID=${filmID}&showtimeID=${showtimeID}&totalChair=${seats.length}${queryString}`;
+        });
+    });
+</script>

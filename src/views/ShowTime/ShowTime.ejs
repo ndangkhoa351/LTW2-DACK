@@ -1,0 +1,52 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="css/style.css">
+<div style="background-image: url('images/uploads/slider-bg.jpg');height: 100vh;">
+<div class="slider movie-items">
+    <div class="title-hd">
+      <h1 class="bd-hd">Book The Time You Can Go</h1>
+    </div>
+</div>
+<div class="movie-item" style="margin-left: 50vh;">
+<% showTimeAfterFormatDate.forEach(showtime => { %>
+<button
+  class="item"
+  data-id="<%= showtime.uuid %>"
+  style="
+        display: inline-block;
+        cursor: pointer;
+        width: 300px;
+        height: 50px;
+        color: white;
+        background-color: rgb(94, 93, 206);
+        border: 1px solid black;
+        margin-top: 12px;
+        text-align: center;
+        border-radius: 10px;
+  "
+>
+  <h2 style="font-size: 12px;"><%= showtime.time %></h2>
+</button>
+<% }) %>
+</div>
+</div>
+
+<script>
+  $(function () {
+    function getParameterURLByName(name, url = window.location.href) {
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return "";
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    const filmID = getParameterURLByName("film_id");
+
+    $(".item").click(function () {
+      window.location.href = `/booking/choose-seat?filmID=${filmID}&showtimeID=${$(
+        this
+      ).data("id")}`;
+    });
+  });
+</script>

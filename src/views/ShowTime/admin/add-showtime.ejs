@@ -1,0 +1,36 @@
+<form method="POST">
+    <!-- Start Time -->
+    <label for="start_time">Start Time</label><br />
+    <input type="text" value="<%= new Date() %>" name="start_time" /><br />
+  
+    <!-- End Time -->
+    <label for="end_time">Verticle Size</label><br />
+    <input type="text" value="<%= new Date() %>" name="end_time" /><br />
+
+    <!-- Price -->
+    <label for="price">Price</label><br />
+    <input type="text" name="price" /><br />
+  
+    <!-- Cinema Owner -->
+    <label for="cinemaId">Cinema</label>
+    <br />
+    <select name="cinemaId">
+      <% cinemas.forEach(cinema => { %>
+      <option value="<%=cinema.uuid%>"><%=cinema.displayName%></option>
+      <%}); %>
+    </select>
+    <br />
+
+    <!-- Film Owner -->
+    <label for="filmId">Cinema</label>
+    <br />
+    <select name="filmId">
+      <% films.forEach(film => { %>
+      <option value="<%=film.uuid%>"><%=film.displayName%></option>
+      <%}); %>
+    </select>
+    <br />
+  
+    <input type="submit" value="Add" />
+  </form>
+  

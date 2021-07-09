@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+    <head>
+        <!-- Basic need -->
+        <title>Cinemas Vietnam</title>
+        <meta charset="UTF-8" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <meta name="author" content="" />
+        <link rel="profile" href="#" />
+
+        <!--Google Font-->
+        <link
+            rel="stylesheet"
+            href="http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600"
+        />
+        <!-- Mobile specific meta -->
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="format-detection" content="telephone-no" />
+        <link rel="icon" href="images/title-logo-2.jpg"/>
+        <!-- CSS files -->
+        <link rel="stylesheet" href="/css/plugins.css" />
+        <link rel="stylesheet" href="/css/style.css" />
+    </head>
+    <body style="background-image: url('/images/uploads/slider-bg.jpg');">
+        <div class="login-wrapper" id="login-content">
+            <div class="login-content">
+                <a href="#" class="close">x</a>
+                <h3>Login</h3>
+                <form method="post" action="/login">
+                    <div class="row">
+                        <label for="user_email">
+                            Email:
+                            <input
+                                type="email"
+                                name="user_email"
+                                id="username"
+                                placeholder="Email"
+                                required="required"
+                            />
+                        </label>
+                    </div>
+
+                    <div class="row">
+                        <label for="user_password">
+                            Password:
+                            <input
+                                type="password"
+                                name="user_password"
+                                id="password"
+                                placeholder="******"
+                                required="required"
+                            />
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="remember">
+                            <div>
+                                <input
+                                    type="checkbox"
+                                    name="remember"
+                                    value="Remember me"
+                                /><span>Remember me</span>
+                            </div>
+                            <a class="forgotPasswordLink" href="#"
+                                >Forget password ?</a
+                            >
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button type="submit">Login</button>
+                    </div>
+                </form>
+                <div class="row">
+                    <p>Or via social</p>
+                    <div class="social-btn-2">
+                        <a class="fb" href="/auth/facebook"
+                            ><i class="ion-social-facebook"></i>Facebook</a
+                        >
+                        <a class="tw" href="/authGg/google"
+                            ><i class="ion-social-google"></i>Google</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end of login form popup-->
+        <!--signup form popup-->
+        <div class="login-wrapper" id="signup-content">
+            <div class="login-content">
+                <a href="#" class="close">x</a>
+                <h3>sign up</h3>
+                <form method="post" action="/signup">
+                    <div class="row">
+                        <label for="register_fullname">
+                            Username:
+                            <input
+                                type="text"
+                                name="register_fullname"
+                                id="username-2"
+                                placeholder="Your Name..."
+                                required="required"
+                            />
+                        </label>
+                    </div>
+
+                    <div class="row">
+                        <label for="register_email">
+                            your email:
+                            <input
+                                type="email"
+                                name="register_email"
+                                id="email-2"
+                                placeholder="Email..."
+                                required="required"
+                            />
+                        </label>
+                    </div>
+
+                    <div class="row">
+                        <label for="register_phone">
+                            Phone:
+                            <input
+                                type="text"
+                                name="register_phone"
+                                id="phone-2"
+                                placeholder="Phone..."
+                                required="required"
+                            />
+                        </label>
+                    </div>
+
+                    <div class="row">
+                        <label for="register_password">
+                            Password:
+                            <input
+                                type="password"
+                                name="register_password"
+                                id="password-2"
+                                placeholder="Password..."
+                                required="required"
+                            />
+                        </label>
+                    </div>
+                    <div class="row">
+                        <label for="register_confirm_password">
+                            re-type Password:
+                            <input
+                                type="password"
+                                name="register_confirm_password"
+                                id="repassword-2"
+                                placeholder="Confirm Password..."
+                                required="required"
+                            />
+                        </label>
+                    </div>
+                    <div class="row">
+                        <button type="submit">sign up</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--end of signup form popup-->
+
+        <!-- start of forgot password form popup -->
+        <div class="login-wrapper" id="forgot-password-content">
+            <div class="login-content">
+                <a href="#" class="close">x</a>
+                <h3>Get your account back</h3>
+                <form method="POST" action="/forgot-password/re-enter-email">
+                    <div class="row">
+                        <label for="re-enter-email">
+                            your email:
+                            <input
+                                type="email"
+                                name="re_enter_email"
+                                id="email-2"
+                                placeholder="Email..."
+                                required="required"
+                            />
+                        </label>
+                    </div>
+                    <div class="row">
+                        <button type="submit">Confirm</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <header class="ht-header">
+            <div class="container">
+                <nav class="navbar navbar-default navbar-custom">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header logo">
+                        <div
+                            class="navbar-toggle"
+                            data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1"
+                        >
+                            <span class="sr-only">Toggle navigation</span>
+                            <div id="nav-icon1">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <a href="/"
+                            ><img
+                                class="logo"
+                                src="/images/logo1.png"
+                                alt=""
+                                width="119"
+                                height="58"
+                        /></a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div
+                        class="collapse navbar-collapse flex-parent"
+                        id="bs-example-navbar-collapse-1"
+                    >
+                        <ul
+                            class="nav navbar-nav flex-child-menu menu-left"
+                        ></ul>
+                        <ul class="nav navbar-nav flex-child-menu menu-right">
+                            <li>
+                                <a href="/filter">Danh sách cụm rạp</a>
+                            </li>
+                            <% if(!currentUser) { %>
+                            <li class="loginLink">
+                                <a href="/login">LOG IN</a>
+                            </li>
+                            <li class="btn signupLink">
+                                <a href="/signup">sign up</a>
+                            </li>
+                            <% } else { %>
+                            <li>
+                                <a href="/booking-history">Booking History</a>
+                            </li>
+                            <li>
+                                <a href="/profile"
+                                    ><%= currentUser.displayName %></a
+                                >
+                            </li>
+                            <li>
+                                <a><%= currentUser.wallet%> (VND)</a
+                                >
+                            </li>
+                            <li class="btn"><a href="/logout">Logout</a></li>
+                            <% } %>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </nav>
+                <!-- top search form -->
+                <div class="top-search">
+                    <select>
+                        <option value="united">MOVIES</option>
+                        <option value="saab">...</option>
+                    </select>
+                    <input
+                        class="search-params"
+                        type="text" id="searchInput"
+                        name="searchInput"
+                        placeholder="Search"
+                    />
+                </div>
+            </div>
+        </header>
+
+        <%- body %>
+
+        <footer>
+            <p>225 Nguyen Van Cu, HCMC</p>
+        </footer>
+        <script src="/js/jquery.js"></script>
+        <script src="/js/plugins.js"></script>
+        <script src="/js/plugins2.js"></script>
+        <script src="/js/custom.js"></script>
+        <script>
+            $('.search-params').bind("enterKey",function(e){
+                var keyw = $('#searchInput').val();
+                if(keyw.trim() == "")
+                {
+                    alert("Hãy nhập tên phim bạn muốn tìm");
+                }
+                else{
+                    window.location.href = `/search?film_name=${keyw}`;
+                }
+                
+            });
+            $('.search-params').keyup(function(e){        
+                if(e.keyCode == 13)
+                {
+                    $(this).trigger("enterKey"); 
+                }
+            });
+        </script>
+    </body>
+</html>

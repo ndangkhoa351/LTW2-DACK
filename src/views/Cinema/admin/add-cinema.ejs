@@ -1,0 +1,33 @@
+<form method="POST">
+  <!-- Display Name -->
+  <label for="cinema_name">Display Name:</label><br />
+  <input type="text" name="cinema_name" required /><br />
+
+  <!-- Type -->
+  <label for="cinema_type">Type</label><br />
+  <select name="cinema_type">
+    <option value="1">2D</option>
+    <option value="2">3D</option>
+    <option value="3">4DX</option>
+  </select>
+  <br />
+  <!-- Horizontal Size -->
+  <label for="cinema_hsize">Horizontal Size</label><br />
+  <input type="text" name="cinema_hsize" required /><br />
+
+  <!-- Verticle Size -->
+  <label for="cinema_vsize">Verticle Size</label><br />
+  <input type="text" name="cinema_vsize" required /><br />
+
+  <!-- Type -->
+  <label for="cinema_owner_cluster">Belong to</label>
+  <br />
+  <select name="cinema_owner_cluster">
+    <% clusters.forEach(cluster => { %>
+    <option value="<%=cluster.uuid%>"><%=cluster.displayName%></option>
+    <%}); %>
+  </select>
+  <br />
+
+  <input type="submit" value="Add" />
+</form>

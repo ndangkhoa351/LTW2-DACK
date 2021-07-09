@@ -1,0 +1,52 @@
+
+    <div class="slider movie-items">
+        <div class="container">
+            <div class="title-hd">
+                <h2>Danh sách cụm rạp có suất chiếu cho phim:  <a href="/film?filmID=<%= filmID %>" aria-disabled="true"><u><%= filmName %></u></u></a></h2>
+              </div>
+          <div class="row">
+            <div class="slick-multiItemSlider">
+              <% cluster.forEach(clus => { %>
+              <div class="movie-item">
+                <div class="mv-img">
+                  <a href="#"
+                    ><img
+                      src="/images/Cluster.jpg"
+                      max-width="285"
+                      max-height="437"
+                      width="auto"
+                      height="auto"
+                  /></a>
+                </div>
+                <div class="title-in">
+                  <h6><a href="/search/showtimes?film_Id=<%= filmID %>&cluster_Id=<%= clus.uuid %>"><%= clus.displayName %></a></h6>
+                  <p>
+                    Address: <%= clus.address %>
+                  </p>                
+                </div>
+              </div>
+              <% }); %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                   
+                    <div class="blog-item-style-1 blog-item-style-3">
+                        <div class="blog-it-infor">
+                            <div class="container">
+                                <h3>
+                                    <a href="/cinema?filmID=<%= filmID %>" aria-disabled="true">Xem tất cả suất chiếu của phim <u><%= filmName %></u></a>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+              
+                </div>
+            </div>
+        </div>
+    </div>

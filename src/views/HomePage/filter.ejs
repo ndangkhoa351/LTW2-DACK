@@ -1,0 +1,41 @@
+    <div class="slider movie-items">
+        <div class="container">
+            <div class="title-hd">
+                <h2>Danh sách tất cả cụm rạp</u></u></a></h2>
+            </div>
+          <div class="row">
+            <div class="flex-wrap-movielist mv-grid-fw">
+              <% clusters.forEach(clus => { %>
+              <div class="movie-item-style-2 movie-item-style-1">
+                <a href="/filter/cinemas?cluster_Id=<%= clus.uuid %>&lat=<%= clus.lat %>&lng=<%= clus.lng %>">
+                    <img src="/images/Cluster.jpg">
+                </a>
+                <div class="mv-item-infor">
+                  <h6><a href="/filter/cinemas?cluster_Id=<%= clus.uuid %>&lat=<%= clus.lat %>&lng=<%= clus.lng %>"><%= clus.displayName || "comingsoon.displayName" %></a></h6>
+                </div>
+              </div>					
+              <% }); %>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                   
+               <!--    <div class="blog-item-style-1 blog-item-style-3">
+                        <div class="blog-it-infor">
+                            <div class="container">
+                                <h3>
+                                    <a href="#" aria-disabled="true">Xem tất cả suất chiếu của phim </a>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>--> 
+              
+                </div>
+            </div>
+        </div>
+    </div>
