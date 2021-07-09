@@ -63,7 +63,7 @@ const databaseConfig = require("./config/database");
 
 // ------------------------------------- DECLARE VARIABLE -------------------------------------
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 // ------------------------------------- SETTINGS -------------------------------------
 app.set("view engine", "ejs");
