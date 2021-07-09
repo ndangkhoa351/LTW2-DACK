@@ -21,7 +21,7 @@
                         /></a>
                       </div>
                       <div class="title-in">
-                        <h6><a href="/booking/choose-seat?filmID=<%= cinema.filmId %>&showtimeID=<%= cinema.showtimeId %>"><%= cinema.displayName %></a></h6>
+                        <h6 ><a href="/booking/choose-seat?filmID=<%= cinema.filmId %>&showtimeID=<%= cinema.showtimeId %>"><%= cinema.displayName %></a></h6>
                         <% let date = cinema.start.toString().split(" "); %>
                         <p style="font-weight: bold;">
                           Suất chiếu: <u> <%=`${date[1]} ${date[2]} ${date[3]} ${date[4]}`%> </u>
@@ -36,13 +36,6 @@
           </div>
         </div>
     
-      
-    
-
-
-
-
-
 <script>
   function getParameterURLByName(name, url = window.location.href) {
     name = name.replace(/[\[\]]/g, "\\$&");

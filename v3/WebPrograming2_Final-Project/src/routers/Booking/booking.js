@@ -9,6 +9,7 @@ const FilmRepo = require('../../repositories/Film/FilmRepo');
 const accountSid = 'AC106d5a61f90c26454ddb36c61f7bde9a';
 const authToken = '7e1af48910b27719953fda36a1f3ae14';
 const client = require('twilio')(accountSid, authToken);
+const nodemailer = require('nodemailer');
 require('dotenv').config();
 let EMAIL;
 let PASSWORD;
@@ -118,7 +119,35 @@ router.post('/confirm-booking', async (req, res) => {
                         '\n';
 
                     TicketRepo.add(newTicket)
-                        .then((result) => {})
+                        .then((result) => {
+                            // gửi mail
+                        const transporter = nodemailer.createTransport({
+                            service: 'gmail',
+                            auth: {
+                                user: process.env.GMAIL , // Real email
+                                pass: process.env.PASSWORD , // Real Email Password
+                            },
+                        });
+                        ShowTimeRepo.getCinema(newBooking.showtime_id).then((showTime) =>{
+                            const mailOptions = {
+                              from: process.env.GMAIL,
+                              to: req.currentUser.email,
+                              subject: 'Verify Booking',
+                              html: `
+                              <h1 style="color: blue;" >Booking success</h1> 
+                              <h3>Cinema: ${showTime[0].displayName}  </h3> 
+                              <h3 style="font-style: italic;">Showtime: ${showTime[0].startTime} to ${showTime[0].endTime} </h3> 
+                              <h3 style="color: darkorange;" >You seat: ${chairCodes} </h3>
+                              
+                              `,
+                          };
+                            transporter
+                                    .sendMail(mailOptions)
+                                    .then((respond) => {
+                                    })
+                                    .catch((err) => res.send('Error: ' + err));
+                            });
+                        })
                         .catch((error) => console.log(error));
                 }
 
@@ -127,6 +156,7 @@ router.post('/confirm-booking', async (req, res) => {
                 remainAmount = req.currentUser.wallet - total_money;
                 UserRepository.updateWallet(req.currentUser.uuid, remainAmount)
                     .then((result) => {
+                            // gủi sms
                         client.messages
                             .create({
                                 body: `\n======= Ticket(s) Info =======\n${chairList}\n- Total Money: ${total_money}`,
@@ -135,12 +165,13 @@ router.post('/confirm-booking', async (req, res) => {
                             })
                             .then((message) => {
                                 console.log(message);
-                                res.redirect('/booking-history');
+                                //res.redirect('/booking-history');
                             })
                             .catch((error) => {
                                 console.log(error);
-                                res.render('error/error');
+                                //res.render('error/error');
                             });
+                            res.redirect('/booking-history');
                     })
                     .catch((error) => res.render('error/error'));
             } else {
