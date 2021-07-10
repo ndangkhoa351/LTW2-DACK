@@ -8,11 +8,11 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="flex-wrap-movielist mv-grid-fw">
                   <% cinemas.forEach(cinema => { %>
-                    <div class="movie-item-style-2 movie-item-style-1">
+                    <div class="movie-item-style-2 movie-item-style-1" style="height: 320px;">
                       <div class="mv-img">
                         <a href="/booking/choose-seat?filmID=<%= cinema.filmId %>&showtimeID=<%= cinema.showtimeId %>"
-                          ><img
-                            src="/images/cinema.jpg"
+                          ><img style="height: 170px;"
+                            src="/admin/manage-film/avatarCinema/<%= cinema.uuid %>"
                             alt=""
                             max-width="285"
                             max-height="437"
@@ -21,12 +21,15 @@
                         /></a>
                       </div>
                       <div class="title-in">
-                        <h6 ><a href="/booking/choose-seat?filmID=<%= cinema.filmId %>&showtimeID=<%= cinema.showtimeId %>"><%= cinema.displayName %></a></h6>
+                        <h6 style="height: 35px;"><a href="/booking/choose-seat?filmID=<%= cinema.filmId %>&showtimeID=<%= cinema.showtimeId %>"><%= cinema.displayName %></a></h6>
                         <% let date = cinema.start.toString().split(" "); %>
                         <p style="font-weight: bold;">
-                          Suất chiếu: <u> <%=`${date[1]} ${date[2]} ${date[3]} ${date[4]}`%> </u>
-                          <u style="color: teal;">VNĐ: <%=cinema.price%> </u>
-                        </p>             
+                          Suất chiếu:<br/> <u> <%=`${date[1]} ${date[2]} ${date[3]} ${date[4]}`%> </u>
+                         
+                        </p>
+                        <p style="font-weight: bold; color: teal;">
+                          Giá vé: <u> <%=cinema.price%> VNĐ</u>
+                        </p>              
                       </div>
                     </div>
                     <% }); %>

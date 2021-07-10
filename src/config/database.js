@@ -4,9 +4,9 @@ const sequelize = new Sequelize( process.env.DATABASE_URL || "postgres://postgre
     {
         dialect: 'postgres',
         dialectOptions: {
-            ssl: {
+            /*ssl: {
                 rejectUnauthorized: false,
-            }
+            }*/
         },
     }
 );
