@@ -1,58 +1,61 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <div class="slider movie-items">
-        </div>
-        <div class="page-single" >
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="flex-wrap-movielist mv-grid-fw">
-                  <% cinemas.forEach(cinema => { %>
-                    <div class="movie-item-style-2 movie-item-style-1">
-                      <div class="mv-img">
-                        <a href="/booking/choose-seat?filmID=<%= cinema.filmId %>&showtimeID=<%= cinema.showtimeId %>"
-                          ><img
-                            src="/images/cinema.jpg"
-                            alt=""
-                            max-width="285"
-                            max-height="437"
-                            width="auto"
-                            height="auto"
-                        /></a>
-                      </div>
-                      <div class="title-in">
-                        <h6 ><a href="/booking/choose-seat?filmID=<%= cinema.filmId %>&showtimeID=<%= cinema.showtimeId %>"><%= cinema.displayName %></a></h6>
-                        <% let date = cinema.start.toString().split(" "); %>
-                        <p style="font-weight: bold;">
-                          Suất chiếu: <u> <%=`${date[1]} ${date[2]} ${date[3]} ${date[4]}`%> </u>
-                          <u style="color: teal;">VNĐ: <%=cinema.price%> </u>
-                        </p>             
-                      </div>
-                    </div>
-                    <% }); %>
-                </div>		
+<div class="slider movie-items">
+</div>
+<div class="page-single" >
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="flex-wrap-movielist mv-grid-fw">
+          <% cinemas.forEach(cinema => { %>
+            <div class="movie-item-style-2 movie-item-style-1" style="height: 320px;">
+              <div class="mv-img">
+                <a href="/booking/choose-seat?filmID=<%= cinema.filmId %>&showtimeID=<%= cinema.showtimeId %>"
+                  ><img style="height: 170px;"
+                    src="/admin/manage-film/avatarCinema/<%= cinema.uuid %>"
+                    alt=""
+                    max-width="285"
+                    max-height="437"
+                    width="auto"
+                    height="auto"
+                /></a>
+              </div>
+              <div class="title-in">
+                <h6 style="height: 35px;"><a href="/booking/choose-seat?filmID=<%= cinema.filmId %>&showtimeID=<%= cinema.showtimeId %>"><%= cinema.displayName %></a></h6>
+                <% let date = cinema.start.toString().split(" "); %>
+                <p style="font-weight: bold;">
+                  Suất chiếu:<br/> <u> <%=`${date[1]} ${date[2]} ${date[3]} ${date[4]}`%> </u>
+                 
+                </p>
+                <p style="font-weight: bold; color: teal;">
+                  Giá vé: <u> <%=cinema.price%> VNĐ</u>
+                </p>              
               </div>
             </div>
-          </div>
-        </div>
-    
+            <% }); %>
+        </div>		
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-  function getParameterURLByName(name, url = window.location.href) {
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-      results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return "";
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
-  }
+function getParameterURLByName(name, url = window.location.href) {
+name = name.replace(/[\[\]]/g, "\\$&");
+var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+results = regex.exec(url);
+if (!results) return null;
+if (!results[2]) return "";
+return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
 
-  const filmID = getParameterURLByName("filmID");
+const filmID = getParameterURLByName("filmID");
 
-  $(function () {
-    $(".item").click(function () {
-      window.location.href = `/showtime?cinema_id=${$(this).data(
-        "id"
-      )}&film_id=${filmID}`;
-    });
-  });
+$(function () {
+$(".item").click(function () {
+window.location.href = `/showtime?cinema_id=${$(this).data(
+"id"
+)}&film_id=${filmID}`;
+});
+});
 </script>

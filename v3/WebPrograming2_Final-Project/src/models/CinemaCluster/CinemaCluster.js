@@ -16,6 +16,11 @@
             type: Sequelize.STRING,
             allowNull: false,
         },
+        avatar: {
+            type: DataTypes.BLOB,
+            defaultValue: null,
+            allowNull: true,
+        },
         address: {
             type: Sequelize.STRING,
             allowNull: false,
