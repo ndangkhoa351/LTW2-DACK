@@ -24,12 +24,12 @@
                 <% var i = 0; cinemas.forEach(cinema => { %>
                 <div class="blog-item-style-1 blog-item-style-3">
                     <img
-                        src="/admin/manage-film/avatarCinema/<%= cinema.uuid %>"
+                        src="/images/Cluster2.jpg"
                         alt="Film Image"/>
                     <div class="blog-it-infor">
                         <div class="container" style="margin-bottom: 20px;">
                             <h3>
-                                <a href="#" aria-disabled="true">Rạp: <%= cinema.displayName %></a>
+                                <a href="#" aria-disabled="true"><%= cinema.displayName %></a>
                             </h3>
                             <p>Ghế phòng chiếu: <%= cinema.verticleSize %> x <%= cinema.horizontalSize %></p>
                         </div>
