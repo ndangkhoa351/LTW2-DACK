@@ -33,8 +33,9 @@ const filterRouter = require("./routers/HomePage/filter");
 const filmDetailRouter = require("./routers/Film/Film");
 
 // - BOOKING
-const bookingRouter = require("./routers/Booking/Booking");
+
 const bookingHistoryRouter = require('./routers/Booking/booking-history');
+const bookingRouter = require("./routers/Booking/Booking");
 
 // - CINEMA
 const cinemaRouter = require("./routers/Cinema/Cinema");
