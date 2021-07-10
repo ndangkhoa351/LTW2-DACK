@@ -1,7 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const db = require('../../config/database');
-const Cinema = require('../Cinema/Cinema');
-const ShowTime = require('../ShowTime/Showtime');
 
 db.authenticate();
 
