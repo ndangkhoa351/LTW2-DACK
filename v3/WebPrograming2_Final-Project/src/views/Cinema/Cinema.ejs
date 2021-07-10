@@ -12,7 +12,7 @@
                       <div class="mv-img">
                         <a href="/booking/choose-seat?filmID=<%= cinema.filmId %>&showtimeID=<%= cinema.showtimeId %>"
                           ><img style="height: 170px;"
-                            src="/images/cinema.jpg"
+                            src="/admin/manage-film/avatarCinemaClus/<%= cinema.clusAvatar %>"
                             alt=""
                             max-width="285"
                             max-height="437"
@@ -21,7 +21,7 @@
                         /></a>
                       </div>
                       <div class="title-in">
-                        <h6 style="height: 35px;"><a href="/booking/choose-seat?filmID=<%= cinema.filmId %>&showtimeID=<%= cinema.showtimeId %>"><%= cinema.displayName %></a></h6>
+                        <h6 style="height: 52px;"><a href="/booking/choose-seat?filmID=<%= cinema.filmId %>&showtimeID=<%= cinema.showtimeId %>"> <%= cinema.clusName %><br/><u><%= cinema.displayName %></u> </a></h6>
                         <% let date = cinema.start.toString().split(" "); %>
                         <p style="font-weight: bold;">
                           Suất chiếu:<br/> <u> <%=`${date[1]} ${date[2]} ${date[3]} ${date[4]}`%> </u>

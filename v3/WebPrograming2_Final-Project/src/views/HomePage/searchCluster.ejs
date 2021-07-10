@@ -5,24 +5,24 @@
                 <h2>Danh sách cụm rạp có suất chiếu cho phim:  <a href="/film?filmID=<%= filmID %>" aria-disabled="true"><u><%= filmName %></u></u></a></h2>
               </div>
           <div class="row">
-            <div class="slick-multiItemSlider">
+            <div class="flex-wrap-movielist mv-grid-fw">
               <% cluster.forEach(clus => { %>
-              <div class="movie-item">
-                <div class="mv-img">
+              <div class="movie-item-style-2 movie-item-style-1">
+               
                   <a href="#"
                     ><img
-                      src="/images/Cluster.jpg"
+                      style="height: 150px;" src="/admin/manage-film/avatarCinemaClus/<%= clus.uuid %>"
                       max-width="285"
                       max-height="437"
                       width="auto"
                       height="auto"
                   /></a>
-                </div>
-                <div class="title-in">
+               
+                <div class="mv-item-infor">
                   <h6><a href="/search/showtimes?film_Id=<%= filmID %>&cluster_Id=<%= clus.uuid %>"><%= clus.displayName %></a></h6>
                   <p>
                     Address: <%= clus.address %>
-                  </p>                
+                  </p> 
                 </div>
               </div>
               <% }); %>

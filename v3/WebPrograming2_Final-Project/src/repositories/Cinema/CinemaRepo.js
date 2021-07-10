@@ -48,7 +48,7 @@ Cinema.updateRecord = async function (cinema_update) {
 
 Cinema.getAllCinemaWithFilmID = async function (film_id) {
   const cinemas = sequelize.query(
-    `SELECT c.*, s."startTime" AS "start", f."uuid" AS "filmId", c."uuid" AS "cinemaId", s."uuid" AS "showtimeId",s."price"  FROM cinemas c JOIN showtimes s on c.uuid = s.cinema_id JOIN films f ON f.uuid = s.film_id WHERE film_id = '${film_id}'`,
+    `SELECT cc."uuid" as "clusAvatar" ,cc."displayName" as "clusName", c.*, s."startTime" AS "start", f."uuid" AS "filmId", c."uuid" AS "cinemaId", s."uuid" AS "showtimeId",s."price"  FROM cinemas c JOIN showtimes s on c.uuid = s.cinema_id JOIN films f ON f.uuid = s.film_id join cinema_clusters cc ON cc.uuid = c."ownerCluster_id" WHERE film_id = '${film_id}'`,
     { type: QueryTypes.SELECT }
   );
   return cinemas;
