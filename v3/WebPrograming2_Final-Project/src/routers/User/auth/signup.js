@@ -67,7 +67,7 @@ router.post('/', (req, res) => {
                 from: process.env.GMAIL,
                 to: register_email,
                 subject: 'Verify Email',
-                html: `Please enter <a href="http://localhost:3000/signup/${tokenVerify}">this</a> link to verify account`,
+                html: `Please enter <a href="https://booking-movie-tickets.herokuapp.com/signup/${tokenVerify}">this</a> link to verify account`,
             };
 
             transporter

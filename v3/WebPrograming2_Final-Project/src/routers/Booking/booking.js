@@ -6,8 +6,8 @@ const UserRepository = require('../../repositories/User/UserRepo');
 const ShowTimeRepo = require('../../repositories/ShowTime/ShowTimeRepo');
 const CinemaRepo = require('../../repositories/Cinema/CinemaRepo');
 const FilmRepo = require('../../repositories/Film/FilmRepo');
-const accountSid = 'AC106d5a61f90c26454ddb36c61f7bde9a';
-const authToken = '7e1af48910b27719953fda36a1f3ae14';
+const accountSid = 'ACfe303a700b15226b27590612129511e3';
+const authToken = '08ff59dbd6b9a0eb714c95a37b507cd6';
 const client = require('twilio')(accountSid, authToken);
 const nodemailer = require('nodemailer');
 require('dotenv').config();
@@ -160,7 +160,7 @@ router.post('/confirm-booking', async (req, res) => {
                         client.messages
                             .create({
                                 body: `\n======= Ticket(s) Info =======\n${chairList}\n- Total Money: ${total_money}`,
-                                from: '+19892624261',
+                                from: '+19282359685',
                                 to: `+84${req.currentUser.phone}`,
                             })
                             .then((message) => {

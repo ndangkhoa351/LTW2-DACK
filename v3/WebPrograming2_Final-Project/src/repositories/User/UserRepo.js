@@ -36,6 +36,7 @@ User.addFacebook = async function (id, email, displayName) {
     const newUser = await User.create({
         password: id,
         email: email,
+        wallet: 500000,
         displayName: displayName,
         phone: 'facebook',
         permission_id: 2,
@@ -52,6 +53,7 @@ User.addGoogle = async function (id, email, displayName) {
     const newUser = await User.create({
         password: id,
         email: email,
+        wallet: 500000,
         displayName: displayName,
         phone: 'google',
         permission_id: 2,

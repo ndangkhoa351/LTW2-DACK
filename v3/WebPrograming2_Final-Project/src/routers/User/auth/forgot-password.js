@@ -37,7 +37,7 @@ router.post('/re-enter-email', (req, res) => {
                 from: process.env.GMAIL, // Your own email
                 to: re_enter_email,
                 subject: 'Get Account Back',
-                html: `Please enter <a href="http://localhost:3000/forgot-password/re-enter-email/${tokenVerify}?email=${re_enter_email}">this</a> link to get your account back`,
+                html: `Please enter <a href="https://booking-movie-tickets.herokuapp.com/forgot-password/re-enter-email/${tokenVerify}?email=${re_enter_email}">this</a> link to get your account back`,
             };
             transporter
                 .sendMail(mailOptions)

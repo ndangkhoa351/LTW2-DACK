@@ -13,13 +13,14 @@ const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const { use } = require('passport');
  
-const FACEBOOK_APP_ID = '287977536365879';  
+
 const FACEBOOK_APP_SECRET = 'cdd19f212f68c152c7ae68da715bd8a6';
+const FACEBOOK_APP_ID = '287977536365879';
 
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/callback",
+    callbackURL: "https://booking-movie-tickets.herokuapp.com/auth/facebook/callback",
     profileFields: ['id', 'emails', 'name', 'displayName'],
   },
   async function(accessToken, refreshToken, profile, done) {
