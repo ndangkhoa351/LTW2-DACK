@@ -1,54 +1,62 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<div style="background-image: url('images/uploads/slider-bg.jpg');height: 100vh;">
-  <div class="slider movie-items">
-    <div class="title-hd">
-      <h1 class="bd-hd">Xuất chiếu của phim <a href="/film?filmID=<%= filmID %>"><u><%= FilmName.displayName %></u></a> tại cụm rạp <a href="#"><u><%= clusterName.displayName %></u></a></h1>
-    </div>
-  </div>
-  <div class="movie-item" style="margin-left: 50vh;">
-    <% cinemas.forEach(cinema => { %>
-    <button
-      class="item"
-      data-id="<%= cinema.uuid %>"
-      style="
-        display: block;
-        cursor: pointer;
-        width: 300px;
-        height: 80px;
-        color: white;
-        background-color: rgb(94, 93, 206);
-        border: 1px solid black;
-        margin-top: 12px;
-        text-align: center;
-        border-radius: 10px;
-      "
-    >
-      <h2 style="font-size: 15px;"><%= cinema.displayName %> <br><br> Thời gian chiếu <% let date = cinema.startTime.toString().split(" "); %>
-                                                                                    <%=`${date[0]} ${date[1]} ${date[2]} ${date[3]} ${date[4]}`%></h2>
-      <% }) %>
-    </button>
+<div class="slider movie-items">
+  <div class="title-hd">
+    <h1 class="bd-hd">Xuất chiếu của phim <a href="/film?filmID=<%= filmID %>"><u><%= FilmName.displayName %></u></a> tại cụm rạp <a href="#"><u><%= clusterName.displayName %></u></a></h1>
   </div>
 </div>
-
+<div class="page-single" >
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="flex-wrap-movielist mv-grid-fw">
+          <% cinemas.forEach(cinema => { %>
+            <div class="movie-item-style-2 movie-item-style-1" style="height: 320px;">
+              <div class="mv-img">
+                <a href="/booking/choose-seat?filmID=<%= cinema.filmId %>&showtimeID=<%= cinema.showtimeId %>"
+                  ><img style="height: 170px;"
+                    src="/admin/manage-film/avatarCinemaClus/<%= cinema.clusAvatar %>"
+                    alt=""
+                    max-width="285"
+                    max-height="437"
+                    width="auto"
+                    height="auto"
+                /></a>
+              </div>
+              <div class="title-in">
+                <h6 style="height: 52px;"><a href="/booking/choose-seat?filmID=<%= cinema.filmId %>&showtimeID=<%= cinema.showtimeId %>"> <%= cinema.clusName %><br/><u><%= cinema.displayName %></u> </a></h6>
+                <% let date = cinema.start.toString().split(" "); %>
+                <p style="font-weight: bold;">
+                  Suất chiếu:<br/> <u> <%=`${date[1]} ${date[2]} ${date[3]} ${date[4]}`%> </u>
+                 
+                </p>
+                <p style="font-weight: bold; color: teal;">
+                  Giá vé: <u> <%=cinema.price%> VNĐ</u>
+                </p>              
+              </div>
+            </div>
+            <% }); %>
+        </div>		
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
   function getParameterURLByName(name, url = window.location.href) {
     name = name.replace(/[\[\]]/g, "\\$&");
     var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-      results = regex.exec(url);
+    results = regex.exec(url);
     if (!results) return null;
     if (!results[2]) return "";
     return decodeURIComponent(results[2].replace(/\+/g, " "));
-  }
+}
 
-  const filmID = getParameterURLByName("film_Id");
+const filmID = getParameterURLByName("filmID");
 
-  $(function () {
-    $(".item").click(function () {
-      window.location.href = `/showtime?cinema_id=${$(this).data(
-        "id"
-      )}&film_id=${filmID}`;
-    });
+$(function () {
+  $(".item").click(function () {
+    window.location.href = `/showtime?cinema_id=${$(this).data("id")}&film_id=${filmID}`;
   });
+});
 </script>

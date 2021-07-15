@@ -1,5 +1,6 @@
 const express = require('express');
 const FilmRepo = require('../../repositories/Film/FilmRepo');
+const CinemaRepo = require('../../repositories/Cinema/CinemaRepo');
 const clusterRepo = require('../../repositories/CinemaCluster/CinemaClusterRepo');
 const router = express.Router();
 
@@ -60,7 +61,7 @@ router.get('/showtimes', async (req, res) => {
     const clusterName = await clusterRepo.getByID(clusterID);
     const FilmName = await FilmRepo.getByID(filmID);
 
-    FilmRepo.getShowtimes(filmID, clusterID)
+    CinemaRepo.getAllCinemaWithFilmIDAndClusID(filmID, clusterID)
         .then((cinemas) => {
             res.render('HomePage/searchShowtime', { 
                 filmID,
