@@ -2,6 +2,7 @@ const { promisify } = require("util");
 const express = require("express");
 const rename = promisify(require("fs").rename);
 const FilmRepo = require("../../../repositories/Film/FilmRepo");
+const CinemaClusterRepo = require("../../../repositories/CinemaCluster/CinemaClusterRepo");
 const multer = require("multer");
 let FILM_ID_CHOOSEN;
 const upload = multer({ storage: multer.memoryStorage() });
@@ -54,11 +55,12 @@ router.post("/report",async (req,res)=>{
   res.locals.toDate=req.body.toDate;
   const fromDate = Date(req.body.fromDate);
   const toDate = Date(req.body.toDate);
-  //console.log(fromDate); 
   FilmRepo.report(req.body.fromDate,req.body.toDate)
   .then((reportFilms) => {
-    //console.log(reportFilms);
-    res.render("Film/admin/report-film" , {reportFilms, layout: 'dashboard/layout'});
+    CinemaClusterRepo.report(req.body.fromDate,req.body.toDate)
+     .then ((reportCinemaClus)=>{
+      res.render("Film/admin/report-film" , {reportFilms,reportCinemaClus, layout: 'dashboard/layout'});
+     })
   })
   .catch((err) => {
     res.render("error/error");

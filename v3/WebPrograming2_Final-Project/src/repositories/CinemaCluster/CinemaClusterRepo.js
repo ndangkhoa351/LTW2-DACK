@@ -48,5 +48,17 @@ CinemaCluster.getCinemas = async function (id) {
   );
   return cinemas;
 };
+// `SELECT cs.*, COUNT(s.uuid) AS "Number_Showtime", COUNT(b.uuid) AS "Number_Booking", SUM(b.totalMoney) AS "Total_Revenue" FROM cinema_clusters cs JOIN cinemas c ON cs."uuid" = c."ownerCluster_id" 
+//   JOIN showtimes s ON s."cinema_id" = c."uuid" JOIN bookings b on b."showtime_id" = s."uuid" 
+//   WHERE b."createdAt" BETWEEN '${fromDate}' AND '${toDate}' GROUP BY cs.uuid`,
+CinemaCluster.report = async function (fromDate, toDate) {
+  const reportCluster = sequelize.query(
+      `Select cs.*, COUNT(s.uuid) AS "Number_Showtime", COUNT(b.uuid) AS "Number_Booking", SUM(b."totalMoney") AS "Total_Revenue" from cinema_clusters cs JOIN cinemas c ON cs."uuid" = c."ownerCluster_id" 
+      JOIN showtimes s ON s."cinema_id" = c."uuid" JOIN bookings b on b."showtime_id" = s."uuid" 
+      WHERE b."createdAt" BETWEEN '${fromDate}' AND '${toDate}'  GROUP BY cs.uuid `,
+      { type: QueryTypes.SELECT }
+  );
+  return reportCluster;
+};
 
 module.exports = CinemaCluster;

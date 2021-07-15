@@ -11,18 +11,37 @@
     <input type="date" id="toDate" name="toDate"  value="<%- toDate?toDate:'' %>">
     <input type="submit" value="Check">
   </form>
-
+  <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+  <h2>REPORT FOR FILM</h2>
   <table style="width:100%">
     <tr>
       <th>Name</th>
-      <th>View</th>
-      <th>Total_Revenue </th>
+      <th>Ticket</th>
+      <th>Total Revenue </th>
     </tr>
     <% reportFilms.forEach(element => { %>
         <tr>
             <td><%= element.displayName %></td>
-            <td><%= element.view %></td>
+            <td><%= element.NumberTicket %></td>
             <td><%= element.Total_Revenue %></td>
         </tr>
     <% }) %>
+</table>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+<h2>REPORT FOR CINEMA CLUSTER</h2>
+<table style="width:100%">
+  <tr>
+    <th>Name Cluster</th>
+    <th>Address</th>
+    <th>Number Booking</th>
+    <th>Total Revenue </th>
+  </tr>   
+   <% reportCinemaClus.forEach(element => { %>
+    <tr>
+        <td><%= element.displayName %></td>
+        <td><%= element.address %></td>
+        <td><%= element.Number_Booking %></td>
+        <td><%= element.Total_Revenue %></td>
+    </tr>
+  <% }) %>
 </table>

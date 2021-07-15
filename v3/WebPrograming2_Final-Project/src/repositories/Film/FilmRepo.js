@@ -90,7 +90,7 @@ Film.getMostViewed = async function () {
 
 Film.report = async function (fromDate, toDate) {
     const reportFilm = sequelize.query(
-        `SELECT f.*, COUNT(f.uuid) AS "view", SUM(t.price) AS "Total_Revenue" FROM films f JOIN showtimes s ON f.uuid = s.film_id 
+        `SELECT f.*, COUNT(f.uuid) AS "view",  COUNT(b.uuid) AS "NumberBooking",COUNT(t.uuid) AS "NumberTicket",SUM(b."totalMoney") AS "Total_Revenue" FROM films f JOIN showtimes s ON f.uuid = s.film_id 
     JOIN bookings b ON b.showtime_id = s.uuid JOIN tickets t on t.booking_id = b.uuid 
     WHERE t."createdAt" BETWEEN '${fromDate}' AND '${toDate}' GROUP BY f.uuid`,
         { type: QueryTypes.SELECT }
