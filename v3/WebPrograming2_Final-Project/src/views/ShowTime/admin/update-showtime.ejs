@@ -1,42 +1,54 @@
-<form method="POST">
-    <!-- Start Time -->
-    <label for="start_time">Start Time</label><br />
-    <input type="text" value="<%= showtimeMatch.startTime %>" name="start_time" /><br />
-  
-    <!-- End Time -->
-    <label for="end_time">Verticle Size</label><br />
-    <input type="text" value="<%= showtimeMatch.endTime %>" name="end_time" /><br />
 
-    <!-- Price -->
-    <label for="price">Price</label><br />
-    <input type="text" value="<%= showtimeMatch.price %>" name="price" /><br />
-  
-    <!-- Cinema Owner -->
-    <label for="cinemaId">Cinema</label>
-    <br />
-    <select name="cinemaId">
-      <% cinemas.forEach(cinema => { %>
-        <% if(cinema.uuid === showtimeMatch.cinema_id) { %>
-            <option value="<%=cinema.uuid%>" selected><%=cinema.displayName%></option>
-            <%} else { %>
-      <option value="<%=cinema.uuid%>"><%=cinema.displayName%></option>
-      <%}}); %>
-    </select>
-    <br />
+  <div class="content-wrapper">
+    <div class="row">
 
-    <!-- Film Owner -->
-    <label for="filmId">Cinema</label>
-    <br />
-    <select name="filmId">
-      <% films.forEach(film => { %>
-        <% if(film.uuid === showtimeMatch.film_id) { %>
-            <option value="<%=film.uuid%>" selected><%=film.displayName%></option>
-            <%} else { %>
-      <option value="<%=film.uuid%>"><%=film.displayName%></option>
-      <%}}); %>
-    </select>
-    <br />
-  
-    <input type="submit" value="Update" />
-  </form>
+      <div class="col-lg-5 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Điền thông suất chiếu</h4>
+                <form class="forms-sample" method="POST">
+                    <% showtimeMatch.startTime.setHours(showtimeMatch.startTime.getHours() - 5 + 12);
+                       showtimeMatch.endTime.setHours(showtimeMatch.endTime.getHours() - 5 + 12); %>
+                    <div class="form-group">
+                      <label for="start_time">Start Time</label><br />
+
+                      <input type="datetime-local" class="form-control" value="<%= showtimeMatch.startTime.toISOString().slice(0,-1); %>" name="start_time" />
+                    </div>
+                    <div class="form-group">
+                      <label for="end_time">End Time</label>
+                      <input type="datetime-local" class="form-control" value="<%= showtimeMatch.endTime.toISOString().slice(0,-1); %>" name="end_time" />
+                    </div>
+                    <div class="form-group">
+                      <label for="price">Price</label>
+                      <input type="text" class="form-control" value="<%= showtimeMatch.price %>" name="price" />
+                    </div>
+                    <div class="form-group">
+                      <label for="cinemaId">Cinema</label>
+                      <select name="cinemaId" class="form-control">
+                        <% cinemas.forEach(cinema => { %>
+                          <% if(cinema.uuid === showtimeMatch.cinema_id) { %>
+                              <option value="<%=cinema.uuid%>" selected><%=cinema.displayName%> - <%= cinema.clusName %></option>
+                              <%} else { %>
+                        <option value="<%=cinema.uuid%>"><%=cinema.displayName%> - <%= cinema.clusName %></option>
+                        <%}}); %>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="filmId">Film</label>
+                      <select name="filmId" class="form-control">
+                        <% films.forEach(film => { %>
+                          <% if(film.uuid === showtimeMatch.film_id) { %>
+                              <option value="<%=film.uuid%>" selected><%=film.displayName%></option>
+                              <%} else { %>
+                        <option value="<%=film.uuid%>"><%=film.displayName%></option>
+                        <%}}); %>
+                      </select>
+                    </div>
+                    <input type="submit" value="Update" class="btn btn-success mr-2"/>
+                  </form>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
   

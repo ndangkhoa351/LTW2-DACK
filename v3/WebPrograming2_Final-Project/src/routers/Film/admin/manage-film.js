@@ -39,7 +39,14 @@ router.get("/", (req, res) => {
 
 // ------------------------ Add Film ------------------------
 router.get("/add-film", (req, res) => {
-  res.render("Film/admin/add-film" , {layout: 'dashboard/layout'});
+  FilmRepo.getAll()
+      .then((films) => {
+        res.render("Film/admin/add-film" , {films, layout: 'dashboard/layout'});
+      })
+      .catch((err) => {
+        res.render("error/error");
+      });
+  
 });
 
 router.get("/report", (req, res) => {
@@ -94,7 +101,7 @@ router.get("/update-film", (req, res) => {
 
   FilmRepo.getByID(FILM_ID_CHOOSEN)
     .then((filmMatch) => {
-      res.render("Film/admin/update-film", { filmMatch });
+      res.render("Film/admin/update-film", { filmMatch, layout: 'dashboard/layout' });
     })
     .catch((err) => {
       res.render("error/error");
@@ -102,12 +109,14 @@ router.get("/update-film", (req, res) => {
 });
 
 router.post("/update-film", upload.single("film_poster"), async (req, res) => {
-  const { film_uuid, film_name, film_pdate, film_time, film_poster } = req.body;
+  const { film_uuid, film_name, film_pdate, film_time, film_poster,film_trailer,film_overview } = req.body;
 
   const imageFile = req.file ? req.file.buffer : film_poster;
 
   const oNewFilmUpdated = {
     uuid: film_uuid,
+    overview: film_overview,
+    trailer: film_trailer,
     displayName: film_name,
     publishDate: film_pdate,
     time: film_time,

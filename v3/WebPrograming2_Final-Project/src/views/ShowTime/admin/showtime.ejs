@@ -1,19 +1,56 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-<h1>Manage Showtime</h1>
-
-<button id="add-btn">Add</button>
-
-<% showtimes.forEach(showtime => { %>
-    <div>
-        <label style="min-width: 300px; display: inline-block;"><%= showtime.uuid %></label>
-        <label style="min-width: 300px; display: inline-block;"><%= showtime.startTime %></label>
-        <label style="min-width: 300px; display: inline-block; margin-left: 12px;"><%= showtime.endTime %></label>
-
-        <button class="delete-btn" data-id="<%= showtime.uuid %>">Delete</button>
-        <button class="update-btn" data-id="<%= showtime.uuid %>">Update</button>
+<!---->
+<div>
+    <div class="card">
+        <div class="card-body">
+            <button style="margin-bottom: 20px; font-size: large;" class="btn btn-success mr-2" id="add-btn"> <u>Add a showtime now</u></button><br>
+            <h4 class="card-title">List of showtime</h4>
+            <table class="table table-hover" id="table">
+                <thead>
+                    <tr>
+                        <th>Start time</th>
+                        <th>End time</th>
+                        <th>Film</th>
+                        <th>Chi tiết</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <% showtimes.forEach(element => { %>
+                        <tr>
+                            <td><%= element.startTime.toLocaleDateString('pt-br'); %> - <%= element.startTime.toLocaleTimeString() %></td>
+                            <td><%= element.endTime.toLocaleDateString('pt-br'); %> - <%= element.endTime.toLocaleTimeString() %></td>
+                            <td><%= element.filmName %></td>
+                            <td><%= element.clusName %> - <%= element.cinemaName %></td>
+                            <td>
+                                <div>
+                                    <button class="btn btn-danger mr-2"
+                                            onclick="location.href='/admin/manage-showtime?showtimeID=<%=element.uuid%>&action=delete'"
+                                            data-id="<%= element.uuid %>">Delete</button>
+                                    <button class="btn btn-primary mr-5" 
+                                            onclick="location.href='/admin/manage-showtime/update-showtime?showtimeID=<%=element.uuid%>'"
+                                            data-id="<%= element.uuid %>">Update</button>
+                                </div>
+                            </td>
+                        </tr>
+                    <% }) %>
+               
+            </table>
+            
+        </div>
+        
+        <div class="card-body align-items-center d-flex justify-content-center">
+            <div class="pagination">
+                
+            </div>
+        </div>
     </div>
-<% }) %>
+</div>
+
+
+
 
 
 <script>

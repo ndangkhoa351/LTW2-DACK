@@ -36,6 +36,14 @@ ShowTime.getAllWithCinemaAndFilm = async function (cinema_id, film_id) {
   return showtimes;
 };
 
+ShowTime.getAllInfo = async function () {
+  const showtimes = await sequelize.query(
+    `SELECT DISTINCT (s.uuid), cc."displayName" as "clusName", c."displayName" as "cinemaName", f."displayName" as "filmName", s.* FROM showtimes s JOIN cinemas c ON s.cinema_id = c.uuid JOIN cinema_clusters cc ON cc.uuid = c."ownerCluster_id" join films f ON f.uuid = s.film_id ORDER BY "createdAt" desc`,
+    { type: QueryTypes.SELECT }
+  );
+  return showtimes;
+};
+
 ShowTime.getCinema = async function (showtime_id) {
   const showtimes = await sequelize.query(
     `SELECT st.*, c."displayName" AS "displayName" FROM showtimes st JOIN cinemas c on st."cinema_id" = c."uuid" LIMIT 1`,
@@ -58,6 +66,7 @@ ShowTime.updateRecord = async function (showtime_update) {
       where: { uuid: showtime_update.uuid },
     });
   } catch (error) {
+    console.log("console.log(error);console.log(error);console.log(error);console.log(error);");
     console.log(error);
   }
 };

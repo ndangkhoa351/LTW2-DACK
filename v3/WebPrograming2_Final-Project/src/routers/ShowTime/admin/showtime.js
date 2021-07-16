@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
         res.render("error/error");
       });
   } else {
-    ShowTimeRepo.getAll()
+    ShowTimeRepo.getAllInfo()
       .then((showtimes) => {
         res.render("ShowTime/admin/showtime", { showtimes ,layout: 'dashboard/layout'});
       })
@@ -29,11 +29,13 @@ router.get("/", (req, res) => {
 });
 
 router.get("/add-showtime", (req, res) => {
-  CinemaRepo.getAll()
+  CinemaRepo.getAllInfo()
     .then((cinemas) => {
       FilmRepo.getAll()
         .then((films) => {
-          res.render("ShowTime/admin/add-showtime", { cinemas, films ,layout: 'dashboard/layout'});
+          ShowTimeRepo.getAllInfo().then((showtimes) =>{
+            res.render("ShowTime/admin/add-showtime", {showtimes, cinemas, films ,layout: 'dashboard/layout'});
+          })
         })
         .catch((err) => {
           res.render("error/error");
@@ -47,6 +49,7 @@ router.get("/add-showtime", (req, res) => {
 router.post("/add-showtime", (req, res) => {
   const { start_time, end_time, price, cinemaId, filmId } = req.body;
 
+  console.log("start: " + start_time +"  end: " + end_time);
   const newShowTime = {
     startTime: start_time,
     endTime: end_time,
@@ -71,7 +74,7 @@ router.get("/update-showtime", (req, res) => {
 
   ShowTimeRepo.getByID(SHOWTIME_ID_CHOOSEN)
     .then((showtimeMatch) => {
-      CinemaRepo.getAll()
+      CinemaRepo.getAllInfo()
         .then((cinemas) => {
           FilmRepo.getAll()
             .then((films) => {

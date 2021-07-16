@@ -38,6 +38,8 @@ Film.updateRecord = async function (film_update) {
         const newFilmDetail = {
             displayName: film_update.displayName,
             publishDate: film_update.publishDate,
+            trailer: film_update.trailer,
+            overview: film_update.overview,
             time: film_update.time,
             poster: film_update.poster,
         };

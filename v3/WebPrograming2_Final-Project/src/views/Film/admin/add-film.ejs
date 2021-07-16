@@ -1,33 +1,77 @@
-<form method="POST" enctype="multipart/form-data">
-  <!-- Poster -->
-  <label for="film_poster">Poster:</label><br />
-  <input type="file" name="film_poster" required /><br />
 
-  <!-- Name -->
-  <label for="film_name">Name:</label><br />
-  <input type="text" name="film_name" required /><br />
-
-  <!-- Publish Date -->
-  <!-- Get default value is current time. -->
-  <label for="film_pdate">Publish Date</label><br />
-  <input
-    type="datetime"
-    value="<%= new Date(); %>"
-    name="film_pdate"
-    required
-  /><br />
-
-  <!-- Overview -->
-  <label for="film_name">Overview:</label><br />
-  <input type="text" name="film_overview" required /><br />
-
-  <!-- Trailer -->
-  <label for="film_name">Link trailer:</label><br />
-  <input type="text" name="film_trailer" required /><br />
-
-  <!-- Time -->
-  <label for="film_time">Time</label><br />
-  <input type="text" name="film_time" required /><br />
-
-  <input type="submit" value="Add" />
-</form>
+<div class="content-wrapper">
+  <div class="row">
+      <div class="col-lg-7 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+              
+              <h4 class="card-title">List of movies</h4>
+              <table class="table table-hover" id="table">
+                  <thead>
+                      <tr>
+                          <th>Name</th>
+                          <th>Publish Date</th>
+                          <th>Duration</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      
+                      <% films.forEach(element => { %>
+                          <tr>
+                              <td><%= element.displayName %></td>
+                              <td><%= element.publishDate.toISOString().slice(0,10) %></td>
+                              <td><%= element.time %></td>
+                          </tr>
+                      <% }) %>
+                 
+              </table>
+              
+          </div>
+          
+          <div class="card-body align-items-center d-flex justify-content-center">
+              <div class="pagination">
+                  
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 style="margin-top: 40px;" class="card-title">Điền thông tin phim</h4>
+                <form class="forms-sample" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>Poster</label>
+                        <input class="form-control" accept="image/*" type="file" name="film_poster" required />
+                    </div>
+                    <div class="form-group">
+                      <label>Name</label>
+                      <input type="text" class="form-control" name="film_name" required />
+                    </div>
+                    <div class="form-group">
+                      <label>Publish Date</label>
+                      <input
+                        type="date" class="form-control" 
+                        value="<%= new Date().toISOString().slice(0,10); %>"
+                        name="film_pdate"
+                        required/>
+                    </div>
+                    <div class="form-group">
+                      <label>Overview</label>
+                      <textarea class="form-control" name="film_overview" rows="5" required="" spellcheck="true"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label>Link Trailer</label>
+                      <input type="text" name="film_trailer" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                      <label>Time</label>
+                      <input type="text" name="film_time" class="form-control" required />
+                    </div>
+                    <input type="submit" class="btn btn-success mr-2" value="Add"/>
+                  </form>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>

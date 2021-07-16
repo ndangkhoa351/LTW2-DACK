@@ -1,36 +1,86 @@
-<form method="POST">
-    <!-- Start Time -->
-    <label for="start_time">Start Time</label><br />
-    <input type="text" value="<%= new Date() %>" name="start_time" /><br />
   
-    <!-- End Time -->
-    <label for="end_time">Verticle Size</label><br />
-    <input type="text" value="<%= new Date() %>" name="end_time" /><br />
-
-    <!-- Price -->
-    <label for="price">Price</label><br />
-    <input type="text" name="price" /><br />
-  
-    <!-- Cinema Owner -->
-    <label for="cinemaId">Cinema</label>
-    <br />
-    <select name="cinemaId">
-      <% cinemas.forEach(cinema => { %>
-      <option value="<%=cinema.uuid%>"><%=cinema.displayName%></option>
-      <%}); %>
-    </select>
-    <br />
-
-    <!-- Film Owner -->
-    <label for="filmId">Cinema</label>
-    <br />
-    <select name="filmId">
-      <% films.forEach(film => { %>
-      <option value="<%=film.uuid%>"><%=film.displayName%></option>
-      <%}); %>
-    </select>
-    <br />
-  
-    <input type="submit" value="Add" />
-  </form>
-  
+<div class="content-wrapper">
+  <div class="row">
+      <div class="col-lg-7 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+              
+              <h4 class="card-title">List of showtime</h4>
+              <table class="table table-hover" id="table">
+                  <thead>
+                      <tr>
+                          <th>Start time</th>
+                          <th>End time</th>
+                          <th>Chi tiết</th>
+                          
+                      </tr>
+                  </thead>
+                  <tbody>
+                      
+                      <% showtimes.forEach(element => { %>
+                          <tr>
+                              <td><%= element.startTime.toISOString().slice(0,16).replace("T"," - "); %></td>
+                              <td><%= element.endTime.toISOString().slice(0,16).replace("T"," - "); %></td>
+                              <td><%= element.clusName %> - <%= element.cinemaName %></td>
+                              <td>
+                                  
+                              </td>
+                          </tr>
+                      <% }) %>
+                 
+              </table>
+              
+          </div>
+          
+          <div class="card-body align-items-center d-flex justify-content-center">
+              <div class="pagination">
+                  
+              </div>
+          </div>
+      </div>
+      </div>
+      <div class="col-lg-5 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 style="margin-top: 40px;" class="card-title">Điền thông tin phim</h4>
+                <form class="forms-sample" method="POST">
+                    <div class="form-group">
+                      <label for="start_time">Start Time</label><br />
+                      <input type="datetime-local" name="start_time" class="form-control"/><br />              
+                    </div>
+                    <div class="form-group">
+                      <label for="end_time">End Time</label><br />
+                      <input type="datetime-local" name="end_time" class="form-control" /><br />
+                    </div>
+                    <div class="form-group">
+                      <label for="price">Price</label><br />
+                      <input type="text" name="price" class="form-control" /><br />
+                    </div>
+                    <div class="form-group">
+                      <label for="cinemaId">Cinema</label>
+                      <br />
+                      <select name="cinemaId" class="form-control">
+                        <% cinemas.forEach(cinema => { %>
+                        <option value="<%=cinema.uuid%>"><%=cinema.displayName%> - <%= cinema.clusName %></option>
+                        <%}); %>
+                      </select>
+                      <br />
+                    </div>
+                    <div class="form-group">
+                      <label for="filmId">Film</label>
+                      <br />
+                      <select name="filmId" class="form-control">
+                        <% films.forEach(film => { %>
+                        <option value="<%=film.uuid%>"><%=film.displayName%></option>
+                        <%}); %>
+                      </select>
+                      <br />
+                    </div>
+                    
+                    <input type="submit" class="btn btn-success mr-2" value="Add"/>
+                  </form>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>

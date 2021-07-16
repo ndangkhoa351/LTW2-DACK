@@ -1,48 +1,76 @@
-<form method="POST" enctype="multipart/form-data">
-  <!-- Poster -->
-  <label for="film_poster">Poster:</label><br />
-  <img
-    src="/admin/manage-film/poster/<%- filmMatch.uuid %>"
-    style="width: 200px; height: 200px"
-  />
-  <input type="file" value="<%= filmMatch.poster %>" name="film_poster" /><br />
-
-  <!-- UUID -->
-  <label for="film_uuid">UUID:</label><br />
-  <input
-    type="text"
-    style="background-color: rgb(168, 166, 166)"
-    value="<%= filmMatch.uuid %>"
-    name="film_uuid"
-    readonly
-  /><br />
-
-  <!-- Name -->
-  <label for="film_name">Name:</label><br />
-  <input
-    type="text"
-    value="<%= filmMatch.displayName %>"
-    name="film_name"
-    required
-  /><br />
-
-  <!-- Publish Date -->
-  <label for="film_pdate">Publish Date</label><br />
-  <input
-    type="datetime"
-    value="<%= filmMatch.publishDate %>"
-    name="film_pdate"
-    required
-  /><br />
-
-  <!-- Time -->
-  <label for="film_time">Time</label><br />
-  <input
-    type="text"
-    value="<%= filmMatch.time %>"
-    name="film_time"
-    required
-  /><br />
-
-  <input type="submit" value="Update" />
-</form>
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-lg-7 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body" >
+          <label for="film_poster">Poster:</label><br/>
+          <img
+            src="/admin/manage-film/poster/<%- filmMatch.uuid %>"
+            style="width: 70%; height: 85%; margin-left: 70px; margin-bottom: 20px;"/>
+          
+        </div>
+        
+        <div class="card-body align-items-center d-flex justify-content-center">
+            <div class="pagination">
+                
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5 grid-margin stretch-card">
+      <div class="card">
+          <div class="card-body">
+              <h4 class="card-title">Điền thông tin phim</h4>
+              <form class="forms-sample" method="POST" enctype="multipart/form-data">
+                  <div class="form-group">
+                    <label for="film_uuid">UUID:</label><br />
+                    <input
+                      type="text"
+                      style="background-color: rgb(168, 166, 166)"
+                      value="<%= filmMatch.uuid %>"
+                      name="film_uuid" class="form-control"
+                      readonly/>
+                  </div>
+                  <div class="form-group">
+                    <label for="film_poster">Poster:</label><br />
+                    <input class="form-control" type="file"  accept="image/*" value="<%= filmMatch.poster %>" name="film_poster"/>
+                  </div>
+                  <div class="form-group">
+                    <label for="film_name">Name:</label><br />
+                    <input
+                      type="text"
+                      value="<%= filmMatch.displayName %>"
+                      name="film_name" class="form-control"
+                      required/>
+                  </div>
+                  <div class="form-group">
+                    <label for="film_pdate">Publish Date</label><br />
+                    <input
+                      type="date"
+                      value="<%= filmMatch.publishDate.toISOString().slice(0,10); %>"
+                      name="film_pdate" class="form-control" 
+                      required/>
+                  </div>
+                  <div class="form-group">
+                    <label>Overview</label>
+                    <textarea class="form-control"  name="film_overview" rows="5" required="" spellcheck="true"><%= filmMatch.overview %></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>Link Trailer</label>
+                    <input type="text" name="film_trailer" value="<%= filmMatch.trailer %>" class="form-control" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="film_time">Time</label><br />
+                    <input
+                      type="text"
+                      value="<%= filmMatch.time %>"
+                      name="film_time" class="form-control"
+                      required/>
+                  </div>
+                  <input type="submit" value="Update" class="btn btn-success mr-2"/>
+                </form>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
