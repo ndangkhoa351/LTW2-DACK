@@ -61,11 +61,13 @@ router.post('/', (req, res) => {
 
             //mail to the registered email.
             const transporter = nodemailer.createTransport({
-                service: 'gmail',
+                host: "smtp.gmail.com",
+                port: 587,
+                secure: false,
                 auth: {
-                    user: 'ltweb222021@gmail.com', // Real email
-                    pass: 'ABCxyz123~', // Real Email Password
-                },
+                  user: 'ltweb222021@gmail.com',
+                  pass: 'ABCxyz123~'
+                }
             });
 
             const mailOptions = {

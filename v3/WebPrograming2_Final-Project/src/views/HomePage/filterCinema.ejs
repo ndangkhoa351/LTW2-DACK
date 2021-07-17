@@ -29,19 +29,19 @@
                     <div class="blog-it-infor">
                         <div class="container" style="margin-bottom: 20px;">
                             <h3>
-                                <a href="#" aria-disabled="true"><%= cinema.displayName %></a>
+                                <a href="#" style="font-size: larger;" aria-disabled="true"><%= cinema.displayName %></a>
                             </h3>
                             <p>Ghế phòng chiếu: <%= cinema.verticleSize %> x <%= cinema.horizontalSize %></p>
                         </div>
 
-                        <div class="container" style="margin-bottom: 20px;"><h2> Danh sách suất chiếu:</h2> </div>
+                        <div class="container" style="margin-bottom: 20px; color: blueviolet;"><h2> Danh sách suất chiếu:</h2> </div>
                         <% for (const val of showtimes[i]) { console.log(i); %>
                             <div class="container">
                                 <h5>
-                                    <a href="/booking/choose-seat?filmID=<%= val.filmId %>&showtimeID=<%= val.showId %>" aria-disabled="true"><%= val.name %></a>
+                                    <a style="color: white;" href="/booking/choose-seat?filmID=<%= val.filmId %>&showtimeID=<%= val.showId %>" aria-disabled="true"><%= val.name %></a>
                                 </h5>
                                 <% let date = val.startTime.toString().split(" "); %>
-                                <p style="margin-top: -0px; margin-bottom: 8px;">Giờ chiếu: <%=`${date[1]} ${date[2]} ${date[3]} ${date[4]}`%></p>
+                                <p style="margin-top: -0px; margin-bottom: 8px;">Giờ chiếu: <%= val.startTime.toLocaleDateString('pt-br'); %> - <%= val.startTime.toLocaleTimeString() %></p>
                             </div>
                         <% } %>
 

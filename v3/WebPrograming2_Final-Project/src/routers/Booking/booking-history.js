@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
       bookingHistoryCopy.film_name = bookingHistory.film_name;
       bookingHistoryCopy.cinema_name = bookingHistory.cinema_name;
       bookingHistoryCopy.chair = bookingHistory.chair;
-      bookingHistoryCopy.bookDate = dateUtils.reduceDateFormat(bookingHistory.bookDate);
+      bookingHistoryCopy.bookDate = bookingHistory.bookDate;
 
       return bookingHistoryCopy;
     });
