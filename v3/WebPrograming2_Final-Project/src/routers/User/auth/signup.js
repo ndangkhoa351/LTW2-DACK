@@ -56,15 +56,17 @@ router.post('/', (req, res) => {
 
             //mail to the registered email.
             const transporter = nodemailer.createTransport({
-                service: 'gmail',
+                host: "smtp.gmail.com",
+                port: 587,
+                secure: false,
                 auth: {
-                    user: process.env.GMAIL , // Real email
-                    pass: process.env.PASSWORD , // Real Email Password
-                },
+                  user: 'ltweb222021@gmail.com',
+                  pass: 'ABCxyz123~'
+                }
             });
 
             const mailOptions = {
-                from: process.env.GMAIL,
+                from: 'ltweb222021@gmail.com',
                 to: register_email,
                 subject: 'Verify Email',
                 html: `Please enter <a href="https://booking-movie-tickets.herokuapp.com/signup/${tokenVerify}">this</a> link to verify account`,

@@ -30,7 +30,7 @@ router.get("/", (req, res) => {
 router.get("/add-cinema", (req, res) => {
   CinemaClusterRepo.getAll()
     .then((clusters) => {
-        res.render("Cinema/admin/add-cinema", { clusters, cinema, layout: 'dashboard/layout'});
+        res.render("Cinema/admin/add-cinema", { clusters, layout: 'dashboard/layout'});
     })
     .catch((err) => console.log(err));
 });
