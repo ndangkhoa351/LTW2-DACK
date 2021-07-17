@@ -8,7 +8,7 @@
               <% clusters.forEach(clus => { %>
               <div class="movie-item-style-2 movie-item-style-1">
                 <a href="/filter/cinemas?cluster_Id=<%= clus.uuid %>&lat=<%= clus.lat %>&lng=<%= clus.lng %>">
-                    <img style="height: 150px;" src="/admin/manage-film/avatarCinemaClus/<%= clus.uuid %>">
+                    <img style="height: 150px;" src="/film/avatarCinemaClus/<%= clus.uuid %>">
                 </a>
                 <div class="mv-item-infor">
                   <h6><a href="/filter/cinemas?cluster_Id=<%= clus.uuid %>&lat=<%= clus.lat %>&lng=<%= clus.lng %>"><%= clus.displayName || "comingsoon.displayName" %></a></h6>

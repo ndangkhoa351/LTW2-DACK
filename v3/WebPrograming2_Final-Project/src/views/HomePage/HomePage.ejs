@@ -8,7 +8,7 @@
               <div class="mv-img">
                 <a href="#"
                   ><img
-                    src="/admin/manage-film/poster/<%= film.uuid %>"
+                    src="/film/poster/<%= film.uuid %>"
                     alt=""
                     max-width="285"
                     style="height: 400px;"
@@ -53,7 +53,7 @@
                         <div class="movie-item">
                           <div class="mv-img">
                             <img
-                              src="/admin/manage-film/poster/<%= newFilm.uuid %>"
+                              src="/film/poster/<%= newFilm.uuid %>"
                               style="height: 300px;"
                               width="185"
                               height="284"
@@ -82,7 +82,7 @@
                         <div class="movie-item">
                           <div class="mv-img">
                             <img
-                              src="/admin/manage-film/poster/<%= film.uuid %>"
+                              src="/film/poster/<%= film.uuid %>"
                               alt="<%=film.displayName%>"
                               width="185"
                               style="height: 300px;"
@@ -116,7 +116,7 @@
                         <div class="movie-item">
                           <div class="mv-img">
                             <img
-                              src="/admin/manage-film/poster/<%= film.uuid %>"
+                              src="/film/poster/<%= film.uuid %>"
                               alt=""
                               width="185"
                               height="284"
@@ -158,7 +158,7 @@
             <div class="flex-wrap-movielist mv-grid-fw">
                 <% films.forEach(film => { %>
                 <div class="movie-item-style-2 movie-item-style-1">
-                  <img src="/admin/manage-film/poster/<%= film.uuid %>" alt="<%=film.displayName%>">
+                  <img src="/film/poster/<%= film.uuid %>" alt="<%=film.displayName%>">
                   <div class="hvr-inner">
                           <a  href="/film?filmID=<%= film.uuid %>"> Xem thêm <i class="ion-android-arrow-dropright"></i> </a>
                         </div>

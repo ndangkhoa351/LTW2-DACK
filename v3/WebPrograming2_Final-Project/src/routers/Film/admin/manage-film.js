@@ -2,15 +2,19 @@ const { promisify } = require("util");
 const express = require("express");
 const rename = promisify(require("fs").rename);
 const FilmRepo = require("../../../repositories/Film/FilmRepo");
+
 const CinemaClusterRepo = require("../../../repositories/CinemaCluster/CinemaClusterRepo");
 const multer = require("multer");
 let FILM_ID_CHOOSEN;
 const upload = multer({ storage: multer.memoryStorage() });
 const router = express.Router();
 
+const middleware = require("../../../middlewares/authenticationAdmin");
 //////
 const CinemaClusRepo = require("../../../repositories/CinemaCluster/CinemaClusterRepo");
 /////
+
+router.use(middleware);
 
 router.get("/", (req, res) => {
   FILM_ID_CHOOSEN = req.query.filmID;

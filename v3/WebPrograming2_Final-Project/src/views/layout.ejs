@@ -226,7 +226,7 @@
                         ></ul>
                         <ul class="nav navbar-nav flex-child-menu menu-right">
                             <li>
-                                <a href="/filter"></a>
+                                <a href="/filter">Danh sách cụm rạp</a>
                             </li>
                             <% if(!currentUser) { %>
                             <li class="loginLink">
@@ -234,8 +234,11 @@
                             </li>
                             <li class="btn signupLink">
                                 <a href="/signup">đăng kí</a>
+                                
                             </li>
+                            
                             <% } else { %>
+
                             <li>
                                 <a href="/booking-history">Lịch sử đặt vé</a>
                             </li>
@@ -294,4 +297,5 @@
             });
         </script>
     </body>
+
 </html>
