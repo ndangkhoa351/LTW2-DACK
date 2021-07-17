@@ -84,10 +84,10 @@ User.updateRecord = async function (user_update) {
     }
 };
 
-User.updateWallet = async function(userID, wallet) {
+User.updateWallet = async function (userID, wallet) {
     try {
         const updateDetail = {
-            wallet: wallet
+            wallet: wallet,
         };
 
         User.update(updateDetail, {
@@ -96,7 +96,7 @@ User.updateWallet = async function(userID, wallet) {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 User.updatePasswordByEmail = async function (email_to_update, password_update) {
     try {

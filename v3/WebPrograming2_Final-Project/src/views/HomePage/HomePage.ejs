@@ -33,15 +33,15 @@
     <div class="movie-items">
       <div class="container">
         <div class="title-hd">
-          <h2>in theater</h2>
+          <h2>Trong rạp</h2>
         </div>
         <div class="row ipad-width">
           <div class="col-md-10">
             <div class="tabs">
               <ul class="tab-links">
-                <li class="active"><a href="#tab1">#Newest</a></li>
-                <li><a href="#tab2"> #All Film</a></li>
-                <li><a href="#tab3"> #Most Viewed</a></li>
+                <li class="active"><a href="#tab1">#Mới nhất</a></li>
+                <li><a href="#tab2"> #Tất cả</a></li>
+                <li><a href="#tab3"> #Nhiều lượt xem nhất</a></li>
               </ul>
               <br />
               <div class="tab-content">
@@ -61,7 +61,7 @@
                           </div>
                           <div class="hvr-inner">
                             <a href="/film?filmID=<%= newFilm.uuid %>">
-                              Read more
+                              Xem thêm
                               <i class="ion-android-arrow-dropright"></i>
                             </a>
                           </div>
@@ -90,7 +90,7 @@
                           </div>
                           <div class="hvr-inner">
                             <a href="/film?filmID=<%= film.uuid %>">
-                              Read more
+                              Xem thêm
                               <i class="ion-android-arrow-dropright"></i>
                             </a>
                           </div>
@@ -160,7 +160,7 @@
                 <div class="movie-item-style-2 movie-item-style-1">
                   <img src="/admin/manage-film/poster/<%= film.uuid %>" alt="<%=film.displayName%>">
                   <div class="hvr-inner">
-                          <a  href="/film?filmID=<%= film.uuid %>"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+                          <a  href="/film?filmID=<%= film.uuid %>"> Xem thêm <i class="ion-android-arrow-dropright"></i> </a>
                         </div>
                   <div class="mv-item-infor">
                     <h6><a href="/film?filmID=<%= film.uuid %>" ><%= film.displayName || "comingsoon.displayName" %></a></h6>
