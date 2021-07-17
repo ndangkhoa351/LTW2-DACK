@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
     const {
         register_email,
         register_password,
-        register_fullname, 
+        register_fullname,
         register_confirm_password,
         register_phone,
     } = req.body;
@@ -51,6 +51,11 @@ router.post('/', (req, res) => {
         authUtils.isNotEmpty(register_password) &&
         authUtils.isNotEmpty(register_confirm_password)
     ) {
+        // Check email exists
+        UserRepo.getByEmail(register_email).then((user) => {
+            res.render('error/email-has-been-taken');
+        });
+
         if (authUtils.isTheSame(register_password, register_confirm_password)) {
             //tokenVerify = bcrypt.hashSync(register_email, 10);
 
@@ -58,13 +63,13 @@ router.post('/', (req, res) => {
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: process.env.GMAIL , // Real email
-                    pass: process.env.PASSWORD , // Real Email Password
+                    user: 'ltweb222021@gmail.com', // Real email
+                    pass: 'ABCxyz123~', // Real Email Password
                 },
             });
 
             const mailOptions = {
-                from: process.env.GMAIL,
+                from: 'ltweb222021@gmail.com',
                 to: register_email,
                 subject: 'Verify Email',
                 html: `Please enter <a href="https://booking-movie-tickets.herokuapp.com/signup/${tokenVerify}">this</a> link to verify account`,
@@ -76,6 +81,8 @@ router.post('/', (req, res) => {
                     res.render('successMessage/check-email');
                 })
                 .catch((err) => res.send('Error: ' + err));
+        } else {
+            res.render('error/not-correct-password');
         }
     }
 });
