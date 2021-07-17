@@ -1,9 +1,50 @@
 <style>
-    table, th, td {
-      border: 1px solid black;
-      border-collapse: collapse;
-    }
-</style>
+  #tableFilm {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #tableFilm td, #tableFilm th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #tableFilm tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #tableFilm tr:hover {background-color: #ddd;}
+  
+  #tableFilm th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  }
+
+  #tableCluster {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #tableCluster td, #tableCluster th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #tableCluster tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #tableCluster tr:hover {background-color: #ddd;}
+  
+  #tableCluster th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  }
+  </style>
 <form method="POST">
     <label for="fromDate">fromDate:</label>
     <input type="date" id="fromDate" name="fromDate" value="<%- fromDate?fromDate:'' %>">
@@ -11,9 +52,11 @@
     <input type="date" id="toDate" name="toDate"  value="<%- toDate?toDate:'' %>">
     <input type="submit" value="Check">
   </form>
+  <br>
+  <br>
   <hr style="height:2px;border-width:0;color:gray;background-color:gray">
   <h2>REPORT FOR FILM</h2>
-  <table style="width:100%">
+  <table id="tableFilm" style="width:100%">
     <tr>
       <th>Name</th>
       <th>Ticket</th>
@@ -27,9 +70,12 @@
         </tr>
     <% }) %>
 </table>
+<br>
+<br>
+<br>
 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <h2>REPORT FOR CINEMA CLUSTER</h2>
-<table style="width:100%">
+<table id="tableCluster" style="width:100%">
   <tr>
     <th>Name Cluster</th>
     <th>Address</th>
@@ -45,3 +91,4 @@
     </tr>
   <% }) %>
 </table>
+
