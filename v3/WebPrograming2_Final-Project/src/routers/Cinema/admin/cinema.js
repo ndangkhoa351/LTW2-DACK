@@ -3,6 +3,9 @@ const CinemaRepo = require("../../../repositories/Cinema/CinemaRepo");
 const CinemaClusterRepo = require("../../../repositories/CinemaCluster/CinemaClusterRepo");
 const router = express.Router();
 let CINEMA_ID_CHOOSEN;
+const middleware = require("../../../middlewares/authenticationAdmin");
+
+router.use(middleware);
 
 router.get("/", (req, res) => {
   CINEMA_ID_CHOOSEN = req.query.cinemaID;

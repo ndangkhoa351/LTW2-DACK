@@ -5,6 +5,10 @@ const ShowTimeRepo = require("../../../repositories/ShowTime/ShowTimeRepo");
 const router = express.Router();
 let SHOWTIME_ID_CHOOSEN;
 
+const middleware = require("../../../middlewares/authenticationAdmin");
+
+router.use(middleware);
+
 router.get("/", (req, res) => {
   SHOWTIME_ID_CHOOSEN = req.query.showtimeID;
   const action = req.query.action;

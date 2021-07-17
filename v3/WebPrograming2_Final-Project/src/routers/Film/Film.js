@@ -1,5 +1,6 @@
 const express = require("express");
 const FilmRepo = require("../../repositories/Film/FilmRepo");
+const CinemaClusRepo = require("../../repositories/CinemaCluster/CinemaClusterRepo");
 const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
 const router = express.Router();
@@ -18,6 +19,26 @@ router.get("/", (req, res) => {
     .catch((err) => {
       res.render("error/error");
     });
+});
+
+router.get("/poster/:id", (req, res) => {
+  FilmRepo.getByID(req.params.id).then((film) => {
+    if (!film || !film.poster) {
+      res.status(404).send("File not found");
+    } else {
+      res.header("Content-Type", "image/jpeg").send(film.poster);
+    }
+  });
+});
+
+router.get("/avatarCinemaClus/:id", (req, res) => {
+  CinemaClusRepo.getByID(req.params.id).then((cinema) => {
+    if (!cinema || !cinema.avatar) {
+      res.status(404).send("File not found");
+    } else {
+      res.header("Content-Type", "image/jpeg").send(cinema.avatar);
+    }
+  });
 });
 
 module.exports = router;
