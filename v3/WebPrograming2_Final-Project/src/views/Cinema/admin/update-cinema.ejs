@@ -1,49 +1,55 @@
-<form method="POST">
-  <!-- Display Name -->
-  <label for="cinema_name">Display Name:</label><br />
-  <input
-    type="text"
-    value="<%= cinema.displayName %>"
-    name="cinema_name"
-    required
-  /><br />
 
-  <!-- Type -->
-  <label for="cinema_type">Type</label><br />
-  <select name="cinema_type">
-    <option value="<%= cinema.type_id %>" selected>Choose another...</option>
-    <option value="1">2D</option>
-    <option value="2">3D</option>
-    <option value="3">4DX</option>
-  </select>
-  <br />
+  <div class="content-wrapper">
+    <div class="row">
 
-  <!-- Horizontal Size -->
-  <label for="cinema_hsize">Horizontal Size</label><br />
-  <input
-    type="text"
-    value="<%= cinema.horizontalSize %>"
-    name="cinema_hsize"
-    required
-  /><br />
+      <div class="col-lg-5 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Điền thông tin Rạp</h4>
+                <form class="forms-sample" method="POST">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label>Name</label>
+                      <input type="text" class="form-control" value="<%= cinema.displayName %>" name="cinema_name" required />
+                    </div>
+                  <div class="form-group">
+                    <label for="cinema_hsize">Horizontal</label><br />
+                    <input type="text" name="cinema_hsize" value="<%= cinema.horizontalSize %>" class="form-control" /><br />
+                  </div>
+                  <div class="form-group">
+                    <label for="cinema_vsize">Verticle</label><br />
+                    <input type="text" name="cinema_vsize" value="<%= cinema.verticleSize %>" class="form-control" /><br />
+                  </div>
 
-  <!-- Verticle Size -->
-  <label for="cinema_vsize">Verticle Size</label><br />
-  <input
-    type="text"
-    value="<%= cinema.verticleSize %>"
-    name="cinema_vsize"
-    required
-  /><br />
+                  <div class="form-group">
+                    <label for="cinema_type">Type</label><br />
+                    <select name="cinema_type">
+                      <option value="<%= cinema.type_id %>" selected>Choose another...</option>
+                      <option value="1">2D</option>
+                      <option value="2">3D</option>
+                      <option value="3">4DX</option>
+                    </select>
+                  </div>
 
-  <select name="cinema_owner_cluster">
-    <% clusters.forEach(cluster => { %>
-    <% if(cinema.ownerCluster_id === cluster.uuid) { %>
-    <option value="<%=cluster.uuid%>" selected><%=cluster.displayName%></option>
-    <%} else { %>
-    <option value="<%=cluster.uuid%>"><%=cluster.displayName%></option>
-    <% }}); %>
-  </select>
-
-  <input type="submit" value="Update" />
-</form>
+                  <label for="cinema_owner_cluster">Belong to</label>
+                  <div class="form-group">
+                    <label for="cinema_owner_cluster">Film</label>
+                    <br />
+                    <select name="cinema_owner_cluster">
+                      <% clusters.forEach(cluster => { %>
+                      <% if(cinema.ownerCluster_id === cluster.uuid) { %>
+                      <option value="<%=cluster.uuid%>" selected><%=cluster.displayName%></option>
+                      <%} else { %>
+                      <option value="<%=cluster.uuid%>"><%=cluster.displayName%></option>
+                      <% }}); %>
+                    </select>
+                    <br />
+                  </div>
+                    <input type="submit" value="Update" class="btn btn-success mr-2"/>
+                  </form>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

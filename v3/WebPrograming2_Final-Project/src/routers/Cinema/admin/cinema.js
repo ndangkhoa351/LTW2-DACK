@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
         res.render("error/error");
       });
   } else {
-    CinemaRepo.getAll()
+    CinemaRepo.getAllInfo()
       .then((cinemas) => {
         res.render("Cinema/admin/cinema", { cinemas ,layout: 'dashboard/layout' });
       })
@@ -28,9 +28,12 @@ router.get("/", (req, res) => {
 });
 
 router.get("/add-cinema", (req, res) => {
-  CinemaClusterRepo.getAll()
-    .then((clusters) => {
-        res.render("Cinema/admin/add-cinema", { clusters, layout: 'dashboard/layout'});
+  CinemaRepo.getAllInfo()
+    .then((cinemas) => {
+      CinemaClusterRepo.getAll()
+      .then((clusters)=>{
+        res.render("Cinema/admin/add-cinema", { cinemas,clusters, layout: 'dashboard/layout'});
+      })
     })
     .catch((err) => console.log(err));
 });
@@ -70,7 +73,7 @@ router.get("/update-cinema", (req, res) => {
     .then((cinema) => {
       CinemaClusterRepo.getAll()
         .then((clusters) => {
-          res.render("Cinema/admin/update-cinema", { cinema, clusters });
+          res.render("Cinema/admin/update-cinema", { cinema, clusters,  layout: 'dashboard/layout'});
         })
         .catch((err) => console.log(err));
     })

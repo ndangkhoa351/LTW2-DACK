@@ -1,36 +1,51 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-<button id="add-btn">Add</button>
-
-<% cinemas.forEach(element => { %>
-    <div>
-        <label style="min-width: 300px; display: inline-block;"><%= element.displayName %></label>
-        <button class="delete-btn" data-id="<%= element.uuid %>">Delete</button>
-        <button class="update-btn" data-id="<%= element.uuid %>">Update</button>
+<!---->
+<div>
+    <div class="card">
+        <div class="card-body">
+            <button style="margin-bottom: 20px; font-size: large;" class="btn btn-success mr-2" id="add-btn"> <u>Add a cinema now</u></button><br>
+            <h4 class="card-title">List of Cinema</h4>
+            <table class="table table-hover" id="table">
+                <thead>
+                    <tr>
+                        <th>Cinema</th>
+                        <th>Horizontal</th>
+                        <th>Verticle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <% cinemas.forEach(element => { %>
+                        <tr>
+                            <td><%= element.clusName %> - <%= element.displayName %></td>
+                            <td><%= element.horizontalSize %></td>
+                            <td> <%= element.verticleSize %></td>
+                            <td>
+                                <div>
+                                    <button class="btn btn-danger mr-2"
+                                            onclick="location.href='/admin/manage-cinema?cinemaID=<%=element.uuid%>&action=delete'"
+                                            data-id="<%= element.uuid %>">Delete</button>
+                                    <button class="btn btn-primary mr-5" 
+                                            onclick="location.href='/admin/manage-cinema/update-cinema?cinemaID=<%=element.uuid%>'"
+                                            data-id="<%= element.uuid %>">Update</button>
+                                </div>
+                            </td>
+                        </tr>
+                    <% }) %>
+               
+            </table>
+            
+        </div>
+        
+        <div class="card-body align-items-center d-flex justify-content-center">
+            <div class="pagination">
+                
+            </div>
+        </div>
     </div>
-<% }) %>
+</div>
 
 
-<script>
 
-    // Get data-id field by using $(this).data("id");
 
-    $(function() {
-        $("#add-btn").click(function() {
-            window.location.href = `/admin/manage-cinema/add-cinema`;
-        });
-    });
-
-    $(function() {
-        $(".delete-btn").click(function() {
-            window.location.href = `/admin/manage-cinema?cinemaID=${$(this).data("id")}&action=delete`;
-        });
-    });
-
-    $(function() {
-        $(".update-btn").click(function() {
-            window.location.href = `/admin/manage-cinema/update-cinema?cinemaID=${$(this).data("id")}`;
-        });
-    });
-
-</script>
