@@ -40,12 +40,16 @@
         <div class="card">
             <div class="card-body">
                 <h4 style="margin-top: 40px;" class="card-title">Điền thông tin Rạp</h4>
-                <form class="forms-sample" method="POST">
+                <form class="forms-sample" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                       <div class="form-group">
                         <label>Name</label>
                         <input type="text" class="form-control" name="cinema_name" required />
                       </div>
+                      <div class="form-group">
+                        <label>Avatar</label>
+                        <input class="form-control" accept="image/*" type="file" name="avatar" id="avatar" required />
+                    </div>
                     <div class="form-group">
                       <label for="cinema_hsize">Horizontal</label><br />
                       <input type="text" name="cinema_hsize" class="form-control" /><br />
@@ -86,4 +90,6 @@
 
   </div>
 </div>
+
+
 

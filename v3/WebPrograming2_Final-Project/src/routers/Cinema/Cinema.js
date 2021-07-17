@@ -15,4 +15,14 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/avatar/:id", (req, res) => {
+  CinemaRepo.getByID(req.params.id).then((cinema) => {
+    if (!cinema || !cinema.avatar) {
+      res.status(404).send("File not found");
+    } else {
+      res.header("Content-Type", "image/jpeg").send(cinema.avatar);
+    }
+  });
+});
+
 module.exports = router;

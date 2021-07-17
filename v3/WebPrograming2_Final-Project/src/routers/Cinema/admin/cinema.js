@@ -1,6 +1,10 @@
+const { promisify } = require("util");
 const express = require("express");
+const rename = promisify(require("fs").rename);
 const CinemaRepo = require("../../../repositories/Cinema/CinemaRepo");
 const CinemaClusterRepo = require("../../../repositories/CinemaCluster/CinemaClusterRepo");
+const multer = require("multer");
+const upload = multer({ storage: multer.memoryStorage() });
 const router = express.Router();
 let CINEMA_ID_CHOOSEN;
 const middleware = require("../../../middlewares/authenticationAdmin");
@@ -41,7 +45,7 @@ router.get("/add-cinema", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-router.post("/add-cinema", (req, res) => {
+router.post("/add-cinema",upload.single("avatar"), async (req, res)  => {
   const {
     cinema_name,
     cinema_type,
@@ -56,14 +60,15 @@ router.post("/add-cinema", (req, res) => {
     horizontalSize: cinema_hsize,
     verticleSize: cinema_vsize,
     ownerCluster_id: cinema_owner_cluster,
+    avatar: req.file.buffer,
   };
-
+  console.log(newCinema);
   CinemaRepo.add(newCinema)
     .then((result) => {
-      res.redirect("/admin/manage-cinema");
+      res.status(200).redirect("/admin/manage-cinema");
     })
     .catch((err) => {
-      res.render("error/error");
+      res.status(500).render("error/error");
     });
 });
 
@@ -85,9 +90,9 @@ router.get("/update-cinema", (req, res) => {
     });
 });
 
-router.post("/update-cinema", (req, res) => {
+router.post("/update-cinema",  upload.single("avatar"), async (req, res) => {
   const { cinema_name, cinema_type, cinema_hsize, cinema_vsize, cinema_owner_cluster } = req.body;
-
+  const imageFile = req.file ? req.file.buffer : avatar;
   const cinemaUpdate = {
     uuid: CINEMA_ID_CHOOSEN,
     displayName: cinema_name,
@@ -95,6 +100,7 @@ router.post("/update-cinema", (req, res) => {
     horizontalSize: cinema_hsize,
     verticleSize: cinema_vsize,
     ownerCluster_id: cinema_owner_cluster,
+    avatar: imageFile
   };
 
   CinemaRepo.updateRecord(cinemaUpdate)
@@ -104,6 +110,16 @@ router.post("/update-cinema", (req, res) => {
     .catch((err) => {
       res.render("error/error");
     });
+});
+
+router.get("/avatar/:id", (req, res) => {
+  CinemaRepo.getByID(req.params.id).then((cinema) => {
+    if (!cinema || !cinema.avatar) {
+      res.status(404).send("File not found");
+    } else {
+      res.header("Content-Type", "image/jpeg").send(cinema.avatar);
+    }
+  });
 });
 
 module.exports = router;

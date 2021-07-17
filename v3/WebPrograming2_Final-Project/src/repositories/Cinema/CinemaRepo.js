@@ -17,6 +17,7 @@ Cinema.add = async function (new_cinema) {
     horizontalSize: new_cinema.horizontalSize,
     verticleSize: new_cinema.verticleSize,
     ownerCluster_id: new_cinema.ownerCluster_id,
+    avatar: new_cinema.avatar
   });
   await newCinema.save();
   return newCinema;
@@ -36,6 +37,7 @@ Cinema.updateRecord = async function (cinema_update) {
       horizontalSize: cinema_update.horizontalSize,
       verticleSize: cinema_update.verticleSize,
       ownerCluster_id: cinema_update.ownerCluster_id,
+      avatar: cinema_update.avatar
     };
 
     Cinema.update(newCinemaDetail, {
