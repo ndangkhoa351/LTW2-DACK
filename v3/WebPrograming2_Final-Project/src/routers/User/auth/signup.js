@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
     const {
         register_email,
         register_password,
-        register_fullname, 
+        register_fullname,
         register_confirm_password,
         register_phone,
     } = req.body;
@@ -51,6 +51,11 @@ router.post('/', (req, res) => {
         authUtils.isNotEmpty(register_password) &&
         authUtils.isNotEmpty(register_confirm_password)
     ) {
+        // Check email exists
+        UserRepo.getByEmail(register_email).then((user) => {
+            res.render('error/email-has-been-taken');
+        });
+
         if (authUtils.isTheSame(register_password, register_confirm_password)) {
             //tokenVerify = bcrypt.hashSync(register_email, 10);
 
@@ -78,6 +83,8 @@ router.post('/', (req, res) => {
                     res.render('successMessage/check-email');
                 })
                 .catch((err) => res.send('Error: ' + err));
+        } else {
+            res.render('error/not-correct-password');
         }
     }
 });
