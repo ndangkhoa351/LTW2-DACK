@@ -1,7 +1,8 @@
 const express = require('express');
 const CinemaClusterRepo = require('../../../repositories/CinemaCluster/CinemaClusterRepo');
 const router = express.Router();
-
+const multer = require("multer");
+const upload = multer({ storage: multer.memoryStorage() });
 const middleware = require("../../../middlewares/authenticationAdmin");
 
 let CINEMA_CLUSTER_ID_CHOOSEN; 
@@ -14,7 +15,7 @@ router.get('/', (req, res) => {
 
     if(action == "delete") {
         CinemaClusterRepo.delete(CINEMA_CLUSTER_ID_CHOOSEN).then(result => {
-            res.redirect('/admin/manage-cluster', {layout:'dashboard/layout'});
+            res.redirect('/admin/manage-cluster');
         })
         .catch(err => { res.render('error/error'); });
     }
@@ -28,20 +29,25 @@ router.get('/', (req, res) => {
 });
 
 router.get('/add-cluster', (req, res) => {
-    res.render('CinemaCluster/admin/add-cluster', {layout:'dashboard/layout'});
+    CinemaClusterRepo.getAll().then((cinema_clusters) =>{
+        res.render('CinemaCluster/admin/add-cluster', {cinema_clusters,layout:'dashboard/layout'});
+    });
+    
 });
 
-router.post('/add-cluster', (req, res) => {
+router.post('/add-cluster', upload.single("cluster_avatar"), (req, res) => {
     const { cluster_name, cluster_address } = req.body;
-    
+    console.log("clus: " + cluster_name + "  address: " + cluster_address);
     const newCluster = {
         displayName: cluster_name,
         address: cluster_address,
+        avatar: req.file.buffer,
     };
 
+    console.log(newCluster);
     CinemaClusterRepo.add(newCluster)
     .then(result => {
-        res.redirect('/admin/manage-cluster', {layout:'dashboard/layout'});
+        res.redirect('/admin/manage-cluster');
     })
     .catch(err => {
         res.render('error/error', {layout:'dashboard/layout'});
@@ -61,13 +67,16 @@ router.get('/update-cluster', (req, res) => {
     })
 });
 
-router.post('/update-cluster', (req, res) => {
-    const { cluster_name, cluster_address } = req.body;
+router.post('/update-cluster', upload.single("cluster_avatar"), (req, res) => {
+    const { cluster_name, cluster_address, cluster_avatar } = req.body;
     
+    const imageFile = req.file ? req.file.buffer : cluster_avatar;
+
     const clusterUpdate = {
         uuid: CINEMA_CLUSTER_ID_CHOOSEN,
         displayName: cluster_name,
         address: cluster_address,
+        avatar: imageFile,
     };
 
     CinemaClusterRepo.updateRecord(clusterUpdate)

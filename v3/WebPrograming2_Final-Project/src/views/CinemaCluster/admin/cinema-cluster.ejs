@@ -2,15 +2,51 @@
 
 <h1>Mange Cinema Cluster</h1>
 
-<button id="add-btn">Add</button>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-<% cinema_clusters.forEach(element => { %>
-    <div>
-        <label style="min-width: 300px; display: inline-block;"><%= element.displayName %></label>
-        <button class="delete-btn" data-id="<%= element.uuid %>">Delete</button>
-        <button class="update-btn" data-id="<%= element.uuid %>">Update</button>
+<div>
+    <div class="card">
+        <div class="card-body">
+            <button style="margin-bottom: 20px; font-size: large;" class="btn btn-success mr-2" id="add-btn"> <u>Add a cinema cluster now</u></button><br>
+            <h4 class="card-title">List of cinema cluster</h4>
+            <table class="table table-hover" id="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <% cinema_clusters.forEach(element => { %>
+                        <tr>
+                            <td><%= element.displayName %></td>
+                            <td><%= element.address %></td>
+                            <td>
+                                <div>
+                                    <button class="btn btn-danger mr-2"
+                                            onclick="location.href='/admin/manage-cluster?clusterID=<%=element.uuid%>&action=delete'"
+                                            data-id="<%= element.uuid %>">Delete</button>
+                                    <button class="btn btn-primary mr-5" 
+                                            onclick="location.href='/admin/manage-cluster/update-cluster?clusterID=<%=element.uuid%>'"
+                                            data-id="<%= element.uuid %>">Update</button>
+                                </div>
+                            </td>
+                        </tr>
+                    <% }) %>
+               
+            </table>
+            
+        </div>
+        
+        <div class="card-body align-items-center d-flex justify-content-center">
+            <div class="pagination">
+                
+            </div>
+        </div>
     </div>
-<% }) %>
+</div>
+
 
 
 <script>

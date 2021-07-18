@@ -1,27 +1,10 @@
 <div class="content-wrapper">
   <div class="row">
-    <div class="col-lg-7 grid-margin stretch-card">
-      <div class="card">
-        <div class="card-body" >
-          <label for="avatar">Avatar:</label><br/>
-          <img
-            src="/cinema/avatar/<%- cinema.uuid %>"
-            style="width: 70%; height: 85%; margin-left: 70px; margin-bottom: 20px;"/>
-          
-        </div>
-        
-        <div class="card-body align-items-center d-flex justify-content-center">
-            <div class="pagination">
-                
-            </div>
-        </div>
-      </div>
-    </div>
     <div class="col-lg-5 grid-margin stretch-card">
       <div class="card">
           <div class="card-body">
             <h4 class="card-title">Điền thông tin Rạp</h4>
-            <form class="forms-sample" method="POST" enctype="multipart/form-data">
+            <form class="forms-sample" method="POST" >
               <div class="form-group">
                 <label for="film_uuid">UUID:</label><br />
                 <input
@@ -31,10 +14,7 @@
                   name="film_uuid" class="form-control"
                   readonly/>
               </div>
-              <div class="form-group">
-                <label>Avatar</label>
-                <input class="form-control" accept="image/*" type="file" name="avatar" id="avatar" required />
-            </div>
+             
               <div class="form-group">
                 <div class="form-group">
                   <label>Name</label>
@@ -50,8 +30,8 @@
               </div>
 
               <div class="form-group">
-                <label for="cinema_type">Type</label><br />
-                <select name="cinema_type">
+                <label for="cinema_type">Type</label>
+                <select name="cinema_type" class="form-control">
                   <option value="<%= cinema.type_id %>" selected>Choose another...</option>
                   <option value="1">2D</option>
                   <option value="2">3D</option>
@@ -63,7 +43,7 @@
               <div class="form-group">
                 <label for="cinema_owner_cluster">Belong to</label>
                 <br>
-                <select name="cinema_owner_cluster">
+                <select name="cinema_owner_cluster" class="form-control">
                   <% clusters.forEach(cluster => { %>
                   <% if(cinema.ownerCluster_id === cluster.uuid) { %>
                   <option value="<%=cluster.uuid%>" selected><%=cluster.displayName%></option>

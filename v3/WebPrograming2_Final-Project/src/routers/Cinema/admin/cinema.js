@@ -45,7 +45,7 @@ router.get("/add-cinema", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-router.post("/add-cinema",upload.single("avatar"), async (req, res)  => {
+router.post("/add-cinema", async (req, res)  => {
   const {
     cinema_name,
     cinema_type,
@@ -60,7 +60,6 @@ router.post("/add-cinema",upload.single("avatar"), async (req, res)  => {
     horizontalSize: cinema_hsize,
     verticleSize: cinema_vsize,
     ownerCluster_id: cinema_owner_cluster,
-    avatar: req.file.buffer,
   };
   console.log(newCinema);
   CinemaRepo.add(newCinema)
@@ -90,9 +89,9 @@ router.get("/update-cinema", (req, res) => {
     });
 });
 
-router.post("/update-cinema",  upload.single("avatar"), async (req, res) => {
+router.post("/update-cinema",  async (req, res) => {
   const { cinema_name, cinema_type, cinema_hsize, cinema_vsize, cinema_owner_cluster } = req.body;
-  const imageFile = req.file ? req.file.buffer : avatar;
+
   const cinemaUpdate = {
     uuid: CINEMA_ID_CHOOSEN,
     displayName: cinema_name,
@@ -100,7 +99,7 @@ router.post("/update-cinema",  upload.single("avatar"), async (req, res) => {
     horizontalSize: cinema_hsize,
     verticleSize: cinema_vsize,
     ownerCluster_id: cinema_owner_cluster,
-    avatar: imageFile
+
   };
 
   CinemaRepo.updateRecord(cinemaUpdate)
@@ -112,14 +111,5 @@ router.post("/update-cinema",  upload.single("avatar"), async (req, res) => {
     });
 });
 
-router.get("/avatar/:id", (req, res) => {
-  CinemaRepo.getByID(req.params.id).then((cinema) => {
-    if (!cinema || !cinema.avatar) {
-      res.status(404).send("File not found");
-    } else {
-      res.header("Content-Type", "image/jpeg").send(cinema.avatar);
-    }
-  });
-});
 
 module.exports = router;

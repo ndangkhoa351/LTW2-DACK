@@ -19,11 +19,7 @@ const Cinema = db.define(
             type: Sequelize.STRING,
             allowNull: false,
         },
-        avatar: {
-            type: DataTypes.BLOB,
-            defaultValue: null,
-            allowNull: true,
-        },
+       
         horizontalSize: {
             type: Sequelize.INTEGER,
             allowNull: false,

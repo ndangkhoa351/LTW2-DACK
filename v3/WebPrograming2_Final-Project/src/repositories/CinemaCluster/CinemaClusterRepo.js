@@ -15,6 +15,7 @@ CinemaCluster.add = async function (new_cluster) {
   const newCluster = await CinemaCluster.create({
     displayName: new_cluster.displayName,
     address: new_cluster.address,
+    avatar: new_cluster.avatar,
   });
   await newCluster.save();
   return newCluster;
@@ -31,6 +32,7 @@ CinemaCluster.updateRecord = async function (cluster_update) {
     const newClusterDetail = {
       displayName: cluster_update.displayName,
       address: cluster_update.address,
+      avatar: cluster_update.avatar,
     };
 
     CinemaCluster.update(newClusterDetail, {
