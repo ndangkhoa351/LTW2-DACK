@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
           res.redirect("/");
         }
       } else {
-        res.send("Not Correct Password, Please Try Again");
+        res.render('error/login-fail');
       }
     })
     .catch((err) => {
