@@ -68,7 +68,10 @@ router.post('/enter-new-password', function (req, res) {
             })
             .catch((err) => {
                 console.log(err);
-            });
+        });
+    }
+    else {
+        res.render('error/not-correct-password');
     }
 });
 
