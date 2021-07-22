@@ -5,7 +5,7 @@ const dateUtils = require('../../utils/date');
 
 router.get("/", (req, res) => {
   const currentUser = req.currentUser;
-  // not login yet
+            // not login yet
   if (!currentUser) {
     res.redirect("/");
   }
@@ -14,6 +14,7 @@ router.get("/", (req, res) => {
     const bookingHistoryAfterFormatDate = bookingHistories.map((bookingHistory) => {
       const bookingHistoryCopy = {};
 
+      bookingHistoryCopy.clusterName = bookingHistory.clusterName;
       bookingHistoryCopy.id_Film = bookingHistory.id_Film;
       bookingHistoryCopy.film_name = bookingHistory.film_name;
       bookingHistoryCopy.cinema_name = bookingHistory.cinema_name;

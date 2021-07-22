@@ -7,7 +7,7 @@ const ShowTimeRepo = require('../../repositories/ShowTime/ShowTimeRepo');
 const CinemaRepo = require('../../repositories/Cinema/CinemaRepo');
 const FilmRepo = require('../../repositories/Film/FilmRepo');
 const accountSid = 'ACfe303a700b15226b27590612129511e3';
-const authToken = '08ff59dbd6b9a0eb714c95a37b507cd6';
+const authToken = '7a85e2407443417e30e8a95aa0735f54';
 const client = require('twilio')(accountSid, authToken);
 const nodemailer = require('nodemailer');
 require('dotenv').config();
@@ -132,7 +132,7 @@ router.post('/confirm-booking', async (req, res) => {
                             const mailOptions = {
                               from: process.env.GMAIL,
                               to: req.currentUser.email,
-                              subject: 'Verify Booking',
+                              subject: 'Booking Detail',
                               html: `
                               <h1 style="color: blue;" >Booking success</h1> 
                               <h3>Cinema: ${showTime[0].displayName}  </h3> 
@@ -160,8 +160,8 @@ router.post('/confirm-booking', async (req, res) => {
                         client.messages
                             .create({
                                 body: `\n======= Ticket(s) Info =======\n${chairList}\n- Total Money: ${total_money}`,
-                                from: '+19282359685',
-                                to: `+84${req.currentUser.phone}`,
+                                from: '+19892624261',
+                                to: `+1${req.currentUser.phone}`,
                             })
                             .then((message) => {
                                 console.log(message);

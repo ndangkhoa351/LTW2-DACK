@@ -34,7 +34,7 @@ passportGG.deserializeUser(function(id, done) {
 passportGG.use(new GoogleStrategy({
     clientID: "718111146971-7mg9v64b2og0o4a8g3b43q8vmpemm9e5.apps.googleusercontent.com",
     clientSecret: "ZJnWgxtvzhI5RnoJeMXtMuKW",
-    callbackURL: "https://booking-movie-tickets.herokuapp.com/authGg/google/callback"
+    callbackURL: "http://localhost:3000/authGg/google/callback"
   },
   async function(accessToken, refreshToken, profile, done) {
     console.log("Profile id = " + profile.id);

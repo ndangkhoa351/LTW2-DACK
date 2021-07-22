@@ -20,7 +20,7 @@ const FACEBOOK_APP_ID = '287977536365879';
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "https://booking-movie-tickets.herokuapp.com/auth/facebook/callback",
+    callbackURL: "http://localhost:3000/auth/facebook/callback",
     profileFields: ['id', 'emails', 'name', 'displayName'],
   },
   async function(accessToken, refreshToken, profile, done) {

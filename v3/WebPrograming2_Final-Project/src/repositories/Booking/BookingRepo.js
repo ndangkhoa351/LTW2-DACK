@@ -29,7 +29,7 @@ Booking.delete = async function (booking_id_delete) {
 
 Booking.getAllWithUserID = async function (userID) {
   const result = await sequelize.query(
-    `SELECT  b."createdAt" "bookDate", f."displayName" "film_name", f."uuid" "id_Film", c."displayName" "cinema_name", t."chairCode" "chair" FROM bookings b JOIN tickets t ON b.uuid = t.booking_id JOIN showtimes s ON s.uuid = b.showtime_id JOIN films f ON f.uuid = s.film_id JOIN users u ON u.uuid = b.user_id JOIN cinemas c ON c.uuid = s.cinema_id WHERE u.uuid = '${userID}' ORDER BY b."createdAt" DESC`,
+    `SELECT cl."displayName" "clusterName", b."createdAt" "bookDate", f."displayName" "film_name", f."uuid" "id_Film", c."displayName" "cinema_name", t."chairCode" "chair" FROM bookings b JOIN tickets t ON b.uuid = t.booking_id JOIN showtimes s ON s.uuid = b.showtime_id JOIN films f ON f.uuid = s.film_id JOIN users u ON u.uuid = b.user_id JOIN cinemas c ON c.uuid = s.cinema_id JOIN cinema_clusters cl ON cl.uuid = c."ownerCluster_id" WHERE u.uuid = '${userID}' ORDER BY b."createdAt" DESC`,
     { type: QueryTypes.SELECT }
   );
   return result;

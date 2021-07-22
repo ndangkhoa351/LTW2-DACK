@@ -13,7 +13,6 @@ let tokenVerify = 1;
 router.get('/:token', function (req, res) {
     var tokenRespond = req.params.token;
 
-    //const isTheSameToken = bcrypt.compareSync(EMAIL, tokenRespond);
     const isTheSameToken = tokenRespond == tokenVerify;
     if (isTheSameToken) {
         const new_user = {
@@ -53,6 +52,7 @@ router.post('/', (req, res) => {
     ) {
         // Check email exists
         UserRepo.getByEmail(register_email).then((user) => {
+            if(user !== null)
             res.render('error/email-has-been-taken');
         });
 
@@ -74,7 +74,7 @@ router.post('/', (req, res) => {
                 from: 'ltweb222021@gmail.com',
                 to: register_email,
                 subject: 'Verify Email',
-                html: `Please enter <a href="https://booking-movie-tickets.herokuapp.com/signup/${tokenVerify}">this</a> link to verify account`,
+                html: `Please enter <a href="http://localhost:3000/signup/${tokenVerify}">this</a> link to verify account`,
             };
 
             transporter
