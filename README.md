@@ -1,4 +1,4 @@
-# Thông tin nhóm:
+## Thông tin nhóm:
 
  MSSV       | Họ Tên   |
 -----------------------------------
@@ -11,11 +11,12 @@
 18600351    | Nguyễn Đăng Khoa
 
 
-# Link app deploy: https://booking-movie-tickets.herokuapp.com/
+## Link app deploy: 
+ - https://booking-movie-tickets.herokuapp.com/
 
-# Báo cáo:
+## Báo cáo:
 
-# Cách chaỵ ứng dụng:
+## Cách chaỵ ứng dụng:
 
 ```
   cd v3/WebPrograming2_Final-Project/
